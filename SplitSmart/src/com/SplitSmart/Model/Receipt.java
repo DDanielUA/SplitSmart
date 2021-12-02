@@ -2,9 +2,11 @@ package com.SplitSmart.Model;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Collection;
+import java.util.Objects;
 
 public class Receipt
 {
+
     /*
     public Receipt()
     {
@@ -18,7 +20,7 @@ public class Receipt
     public virtual ArrayList<Person> People { get; }
     */
 
-    public int RecId; //{ get; set; }
+    public int RecId;
     public String RecName;
     public String Description;
     public LocalDate Date;
@@ -47,31 +49,29 @@ public class Receipt
     public int getPayingPersonId() { return  PayingPersonId; }
     public void setPayingPersonId(int payingPersonId) { this.PayingPersonId = payingPersonId; }
 
-
-
-
-
-    /*
-    public String getName() {
-        return name;
+    @Override
+    public String toString() {
+        return "Here are the details of your receipt{" +
+                "Id: " + RecId +
+                ", Name: " + RecName + '\'' +
+                ", Description: " + Description + '\'' +
+                ", Date of purchase: " + Date +
+                ", Total cost of purchase: " + TotalCost +
+                ", Is it split equally between people: " + IsEqualSplit +
+                ", Id of the person who payed for it:" + PayingPersonId +
+                '}';
     }
 
-    public String getReservedFor() {
-        return reservedFor;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Receipt)) return false;
+        Receipt receipt = (Receipt) o;
+        return RecId == receipt.RecId && Float.compare(receipt.TotalCost, TotalCost) == 0 && IsEqualSplit == receipt.IsEqualSplit && PayingPersonId == receipt.PayingPersonId && RecName.equals(receipt.RecName) && Objects.equals(Description, receipt.Description) && Date.equals(receipt.Date);
     }
 
-    public boolean isReserved() {
-        return reserved;
+    @Override
+    public int hashCode() {
+        return Objects.hash(RecId, RecName, Description, Date, TotalCost, IsEqualSplit, PayingPersonId);
     }
-
-    public void DeleteReserved(){
-        this.reserved = false;
-    }
-
-    public void setReserved(String email) {
-        this.reserved = true;
-        this.reservedFor = email;
-    }
-     */
-
 }

@@ -1,6 +1,7 @@
 package com.SplitSmart.Model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Person
 {
@@ -21,8 +22,26 @@ public class Person
     public String getEmail() { return  Email; }
     public void setEmail(String email) { this.Email = email; }
 
+    @Override
+    public String toString() {
+        return "Information about this person:{" +
+                "Id number: " + PersonId +
+                ", Name: '" + Name + '\'' +
+                ", Phone number: " + Phone + '\'' +
+                ", Email: " + Email + '\'' +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return PersonId == person.PersonId && Name.equals(person.Name) && Phone.equals(person.Phone) && Objects.equals(Email, person.Email);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(PersonId, Name, Phone, Email);
+    }
 }
