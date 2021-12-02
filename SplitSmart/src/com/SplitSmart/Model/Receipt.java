@@ -4,29 +4,20 @@ import java.util.HashSet;
 import java.util.Collection;
 import java.util.Objects;
 
-public class Receipt
+public class Receipt implements IReceipt
 {
-
-    /*
     public Receipt()
     {
-        this.Connectors = new HashSet<Connector>();
-        this.People = new HashSet<Person>();
+
     }
 
-    
-    public virtual ArrayList<Connector> Connectors;
-
-    public virtual ArrayList<Person> People { get; }
-    */
-
-    public int RecId;
-    public String RecName;
-    public String Description;
-    public LocalDate Date;
-    public float TotalCost;
-    public boolean IsEqualSplit; //true if split is equal
-    public int PayingPersonId;
+    private int RecId;
+    private String RecName;
+    private String Description;
+    private LocalDate Date;
+    private float TotalCost;
+    private boolean IsEqualSplit; //true if split is equal
+    private int PayingPersonId;
 
     public int getRecId() { return RecId; }
     public void setRecId(int id) { this.RecId = id; }
@@ -74,4 +65,17 @@ public class Receipt
     public int hashCode() {
         return Objects.hash(RecId, RecName, Description, Date, TotalCost, IsEqualSplit, PayingPersonId);
     }
+
+    /*
+    public Receipt()
+    {
+        this.Connectors = new HashSet<Connector>();
+        this.People = new HashSet<Person>();
+    }
+
+
+    public virtual ArrayList<Connector> Connectors;
+
+    public virtual ArrayList<Person> People { get; }
+    */
 }

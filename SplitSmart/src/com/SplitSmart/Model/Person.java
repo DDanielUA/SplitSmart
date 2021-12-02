@@ -3,12 +3,17 @@ package com.SplitSmart.Model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Person
+public class Person implements IPerson
 {
-    public int PersonId;
-    public String Name;
-    public String Phone;
-    public String Email;
+    public Person()
+    {
+
+    }
+
+    private int PersonId;
+    private String Name;
+    private String Phone;
+    private String Email;
 
     public int getPersonId() { return PersonId; }
     public void setPersonId(int personId) { this.PersonId = personId; }

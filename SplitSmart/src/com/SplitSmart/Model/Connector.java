@@ -2,13 +2,18 @@ package com.SplitSmart.Model;
 
 import java.util.Objects;
 
-public class Connector
+public class Connector implements IConnector
 {
-    public int ConnId;
-    public int ReceiptId;
-    public int PersonId;
-    public float SubTotal;
-    public boolean IsPayed;
+    public Connector()
+    {
+
+    }
+
+    private int ConnId;
+    private int ReceiptId;
+    private int PersonId;
+    private float SubTotal;
+    private boolean IsPayed;
 
     public int getConnId() { return ConnId; }
     public void setConnId(int connId) { this.ConnId = connId; }
