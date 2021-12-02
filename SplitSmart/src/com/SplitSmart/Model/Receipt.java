@@ -19,6 +19,18 @@ public class Receipt implements IReceipt
     private boolean IsEqualSplit; //true if split is equal
     private int PayingPersonId;
 
+    public Receipt(int recId, String recName, LocalDate date, float totalCost, boolean isEqualSplit, int payingPersonId)
+    {
+        this.RecId = recId;
+        this.RecName = recName;
+        this.Date = date;
+        this.TotalCost = totalCost;
+        this.IsEqualSplit = isEqualSplit;
+        this.PayingPersonId = payingPersonId;
+    }
+
+
+
     public int getRecId() { return RecId; }
     public void setRecId(int id) { this.RecId = id; }
 
