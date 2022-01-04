@@ -8,7 +8,10 @@ public class Main {
     {
         System.out.println("Make your friends pay!");
 
-        BaseFrame firstFrame = new BaseFrame();
+        WelcomeView welcomeView = new WelcomeView();
+        welcomeView.DisplayView();
+
+
 
         /*
         JLabel slogan = new JLabel(); //you could just add text here

@@ -76,21 +76,21 @@ public class SplitSmartContext {
         conn1.setReceiptId(1);
         conn1.setPersonId(1);
         conn1.setSubTotal(33.60f/3);
-        conn1.setIsPlayed(true);
+        conn1.setIsPayed(true);
         ConnectorSet.add(conn1);
         Connector conn2 = new Connector();
         conn2.setConnId(2);
         conn2.setReceiptId(1);
         conn2.setPersonId(2);
         conn2.setSubTotal(33.60f/3);
-        conn2.setIsPlayed(false);
+        conn2.setIsPayed(false);
         ConnectorSet.add(conn2);
         Connector conn3 = new Connector();
         conn3.setConnId(3);
         conn3.setReceiptId(1);
         conn3.setPersonId(3);
         conn3.setSubTotal(33.60f/3);
-        conn3.setIsPlayed(false);
+        conn3.setIsPayed(false);
         ConnectorSet.add(conn3);
 
         //-----Restaurant connector
@@ -99,14 +99,14 @@ public class SplitSmartContext {
         conn4.setReceiptId(2);
         conn4.setPersonId(2);
         conn4.setSubTotal(26.50f);
-        conn4.setIsPlayed(true);
+        conn4.setIsPayed(true);
         ConnectorSet.add(conn4);
         Connector conn5 = new Connector();
         conn5.setConnId(5);
         conn5.setReceiptId(2);
         conn5.setPersonId(3);
         conn5.setSubTotal(16.00f);
-        conn5.setIsPlayed(false);
+        conn5.setIsPayed(false);
         ConnectorSet.add(conn5);
     }
 
