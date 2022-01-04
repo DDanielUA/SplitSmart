@@ -1,7 +1,14 @@
 package com.SplitSmart.Application;
-import javax.swing.JFrame;
+import com.SplitSmart.Model.Person;
+import com.SplitSmart.Repository.PersonRepository;
+import com.SplitSmart.Repository.SplitSmartContext;
+
+import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
+
+    private static SplitSmartContext ctx;
 
     public static void main(String[] args)
     {
@@ -14,5 +21,9 @@ public class Main {
         frame.setSize(1024, 640);
         frame.setVisible(true);
 
+        /*
+        ctx = SplitSmartContext.GetInstance();
+        PersonRepository perRepo = new PersonRepository(ctx);
+         */
     }
 }
