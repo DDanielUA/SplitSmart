@@ -1,5 +1,6 @@
 package com.SplitSmart.Model;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Collection;
 import java.util.Objects;
@@ -51,6 +52,8 @@ public class Receipt implements IReceipt
 
     public int getPayingPersonId() { return  PayingPersonId; }
     public void setPayingPersonId(int payingPersonId) { this.PayingPersonId = payingPersonId; }
+
+    public ArrayList<Person> People = new ArrayList<>();
 
     @Override
     public String toString() {

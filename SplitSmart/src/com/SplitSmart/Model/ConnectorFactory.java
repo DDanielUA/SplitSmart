@@ -12,7 +12,7 @@ public class ConnectorFactory
         defaultConnector.setReceiptId(receiptId);
         defaultConnector.setPersonId(personId);
         defaultConnector.setSubTotal(subTotal);
-        defaultConnector.setIsPlayed(false);
+        defaultConnector.setIsPayed(false);
 
         return defaultConnector;
     }

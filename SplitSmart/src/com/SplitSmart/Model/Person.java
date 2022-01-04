@@ -1,6 +1,7 @@
 package com.SplitSmart.Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Person implements IPerson
@@ -26,6 +27,8 @@ public class Person implements IPerson
 
     public String getEmail() { return  Email; }
     public void setEmail(String email) { this.Email = email; }
+
+    public ArrayList<Receipt> Receipts = new ArrayList<>();
 
     @Override
     public String toString() {

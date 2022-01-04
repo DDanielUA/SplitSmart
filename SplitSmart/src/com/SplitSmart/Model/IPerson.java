@@ -1,5 +1,7 @@
 package com.SplitSmart.Model;
 
+import java.util.ArrayList;
+
 public interface IPerson
 {
     public int getPersonId();
@@ -9,4 +11,5 @@ public interface IPerson
     public String getPhone();
 
     public String getEmail();
+
 }

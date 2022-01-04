@@ -10,5 +10,5 @@ public interface IConnector
 
     public float getSubTotal();
 
-    public boolean getIsPlayed();
+    public boolean getIsPayed();
 }

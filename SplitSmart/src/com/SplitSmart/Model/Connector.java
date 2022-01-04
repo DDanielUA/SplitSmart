@@ -27,8 +27,8 @@ public class Connector implements IConnector
     public float getSubTotal() { return SubTotal; }
     public void setSubTotal(float subTotal) { this.SubTotal = subTotal; }
 
-    public boolean getIsPlayed() { return IsPayed; }
-    public void setIsPlayed(boolean isPlayed) { this.IsPayed = isPlayed; }
+    public boolean getIsPayed() { return IsPayed; }
+    public void setIsPayed(boolean isPayed) { this.IsPayed = isPayed; }
 
     @Override
     public String toString() {
