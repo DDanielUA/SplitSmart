@@ -26,6 +26,7 @@ public class WelcomeView extends JFrame implements ActionListener
         //slogan label creation and settings
         JLabel slogan = new JLabel(); //you could just add text here
         slogan.setText("Make your friends pay!");
+        slogan.setFont(new Font("Consolas", Font.PLAIN, 14));
 
         //name label creation and settings
         JLabel name = new JLabel("SplitSmart"); //, SwingConstants.CENTER
@@ -35,6 +36,7 @@ public class WelcomeView extends JFrame implements ActionListener
         name.setFont(new Font("MV Boli", Font.BOLD, 20));
         name.setVerticalAlignment(JLabel.TOP);
         name.setHorizontalAlignment(JLabel.CENTER);
+        name.setFont(new Font("Consolas", Font.PLAIN, 14));
         //name.setBounds(100, 0, 250, 250);
 
         //setting basic things in the frame
@@ -50,7 +52,7 @@ public class WelcomeView extends JFrame implements ActionListener
 
         //log button
         log = new JButton();
-        log.setBounds(550, 250, 70, 30);
+        log.setBounds(550, 250, 150, 50);
         log.addActionListener(this);
         log.setText("LogIn");
         log.setFocusable(false);
@@ -59,7 +61,7 @@ public class WelcomeView extends JFrame implements ActionListener
 
         //reg button
         reg = new JButton();
-        reg.setBounds(250, 250, 150, 30);
+        reg.setBounds(250, 250, 150, 50);
         reg.addActionListener(e -> System.out.println("reg"));
         reg.setText("Register");
         reg.setFocusable(false);
@@ -94,7 +96,7 @@ public class WelcomeView extends JFrame implements ActionListener
         logPanel.add(log);
     }
 
-    public void DisplayView()
+    public void displayView()
     {
         welcomeFrame.setVisible(true);
     }
@@ -104,8 +106,9 @@ public class WelcomeView extends JFrame implements ActionListener
     {
         if(e.getSource()==log)
         {
+            welcomeFrame.dispose();
             loginView.displayLogin();
-            welcomeFrame.setVisible(false);
+            //welcomeFrame.setVisible(false);
         }
     }
 }

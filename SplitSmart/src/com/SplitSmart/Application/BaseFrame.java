@@ -21,7 +21,7 @@ public class BaseFrame extends JFrame
 
         //button
         back = new JButton();
-        back.setBounds(20, 40, 70, 30);
+        back.setBounds(30, 60, 100, 50);
         back.addActionListener(e -> System.out.println("back"));
         back.setText("Back");
         back.setFocusable(false);
@@ -31,6 +31,7 @@ public class BaseFrame extends JFrame
         //slogan label creation and settings
         JLabel slogan = new JLabel(); //you could just add text here
         slogan.setText("Make your friends pay!");
+        slogan.setFont(new Font("Consolas", Font.PLAIN, 14));
 
 
         //name label creation and settings
@@ -42,6 +43,7 @@ public class BaseFrame extends JFrame
         name.setFont(new Font("MV Boli", Font.BOLD, 20));
         name.setVerticalAlignment(JLabel.TOP);
         name.setHorizontalAlignment(JLabel.CENTER);
+        name.setFont(new Font("Consolas", Font.PLAIN, 14));
         //name.setBounds(100, 0, 250, 250);
 
         //setting basic things in the frame
