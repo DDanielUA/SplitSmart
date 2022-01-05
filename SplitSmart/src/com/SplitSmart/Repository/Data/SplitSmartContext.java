@@ -1,4 +1,4 @@
-package com.SplitSmart.Repository;
+package com.SplitSmart.Repository.Data;
 
 import com.SplitSmart.Model.Connector;
 import com.SplitSmart.Model.Person;
@@ -58,6 +58,9 @@ public class SplitSmartContext {
         groceries.setTotalCost(33.60f);
         groceries.setIsEqualSplit(true);
         groceries.setPayingPersonId(1);
+        groceries.People.add(john);
+        groceries.People.add(bill);
+        groceries.People.add(jane);
         ReceiptSet.add(groceries);
         Receipt restaurant = new Receipt();
         restaurant.setRecId(2);
@@ -67,6 +70,8 @@ public class SplitSmartContext {
         restaurant.setTotalCost(42.50f);
         restaurant.setIsEqualSplit(false);
         restaurant.setPayingPersonId(3);
+        restaurant.People.add(bill);
+        restaurant.People.add(jane);
         ReceiptSet.add(restaurant);
 
         //---Connector seed
@@ -77,6 +82,7 @@ public class SplitSmartContext {
         conn1.setPersonId(1);
         conn1.setSubTotal(33.60f/3);
         conn1.setIsPayed(true);
+        john.Connections.add(conn1);
         ConnectorSet.add(conn1);
         Connector conn2 = new Connector();
         conn2.setConnId(2);
@@ -84,6 +90,7 @@ public class SplitSmartContext {
         conn2.setPersonId(2);
         conn2.setSubTotal(33.60f/3);
         conn2.setIsPayed(false);
+        bill.Connections.add(conn2);
         ConnectorSet.add(conn2);
         Connector conn3 = new Connector();
         conn3.setConnId(3);
@@ -91,6 +98,7 @@ public class SplitSmartContext {
         conn3.setPersonId(3);
         conn3.setSubTotal(33.60f/3);
         conn3.setIsPayed(false);
+        jane.Connections.add(conn3);
         ConnectorSet.add(conn3);
 
         //-----Restaurant connector
@@ -100,6 +108,7 @@ public class SplitSmartContext {
         conn4.setPersonId(2);
         conn4.setSubTotal(26.50f);
         conn4.setIsPayed(true);
+        bill.Connections.add(conn4);
         ConnectorSet.add(conn4);
         Connector conn5 = new Connector();
         conn5.setConnId(5);
@@ -107,10 +116,26 @@ public class SplitSmartContext {
         conn5.setPersonId(3);
         conn5.setSubTotal(16.00f);
         conn5.setIsPayed(false);
+        jane.Connections.add(conn5);
         ConnectorSet.add(conn5);
     }
 
-    private void SaveContainers(){
+    public void SaveSets(){
+        ArrayList<ArrayList> sets = new ArrayList<ArrayList>();
+        sets.add(this.PersonSet);
+        sets.add(this.ReceiptSet);
+        sets.add(this.ConnectorSet);
 
+        SSML ssml = SSML.GetInstance();
+        ssml.WriteSetsToFile(sets);
+    }
+
+    public void LoadSets(){
+        SSML ssml = SSML.GetInstance();
+        ArrayList<ArrayList> sets = ssml.ReadFileToSet();
+
+        this.PersonSet = sets.get(0);
+        this.ReceiptSet = sets.get(1);
+        this.ConnectorSet = sets.get(2);
     }
 }

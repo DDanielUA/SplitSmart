@@ -1,6 +1,7 @@
 package com.SplitSmart.Repository;
 
 import com.SplitSmart.Model.Receipt;
+import com.SplitSmart.Repository.Data.SplitSmartContext;
 
 public class ReceiptRepository extends RepositoryBase<Receipt> {
 

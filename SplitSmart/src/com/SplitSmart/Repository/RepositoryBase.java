@@ -1,8 +1,6 @@
 package com.SplitSmart.Repository;
 
-import com.SplitSmart.Model.Connector;
-import com.SplitSmart.Model.Person;
-import com.SplitSmart.Model.Receipt;
+import com.SplitSmart.Repository.Data.SplitSmartContext;
 import com.SplitSmart.Repository.Interface.IRepositoryBase;
 
 import java.util.ArrayList;

@@ -28,7 +28,7 @@ public class Person implements IPerson
     public String getEmail() { return  Email; }
     public void setEmail(String email) { this.Email = email; }
 
-    public ArrayList<Receipt> Receipts = new ArrayList<>();
+    public ArrayList<Connector> Connections = new ArrayList<>();
 
     @Override
     public String toString() {
