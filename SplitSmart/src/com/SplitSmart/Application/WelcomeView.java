@@ -12,6 +12,7 @@ public class WelcomeView extends JFrame implements ActionListener
     JButton reg;
     JButton log;
     LoginView loginView;
+    RegView regView;
 
     WelcomeView()
     {
@@ -22,6 +23,7 @@ public class WelcomeView extends JFrame implements ActionListener
         Color background = new Color(162, 243, 185);
         Border buttonBorder = BorderFactory.createEtchedBorder();
         loginView = new LoginView();
+        regView = new RegView();
 
         //slogan label creation and settings
         JLabel slogan = new JLabel(); //you could just add text here
@@ -62,7 +64,7 @@ public class WelcomeView extends JFrame implements ActionListener
         //reg button
         reg = new JButton();
         reg.setBounds(250, 250, 150, 50);
-        reg.addActionListener(e -> System.out.println("reg"));
+        reg.addActionListener(this);
         reg.setText("Register");
         reg.setFocusable(false);
         reg.setBackground(new Color(58, 167, 92));
@@ -107,8 +109,13 @@ public class WelcomeView extends JFrame implements ActionListener
         if(e.getSource()==log)
         {
             welcomeFrame.dispose();
-            loginView.displayLogin();
-            //welcomeFrame.setVisible(false);
+            loginView.displayView();
+        }
+
+        if(e.getSource()==reg)
+        {
+            welcomeFrame.dispose();
+            regView.displayView();
         }
     }
 }

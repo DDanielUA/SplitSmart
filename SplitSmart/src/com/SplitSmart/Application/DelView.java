@@ -4,8 +4,11 @@ import javax.swing.*;
 
 public class DelView
 {
+    MainView mainView;
     DelView()
     {
+        mainView = new MainView();
+
         int answer = JOptionPane.showConfirmDialog
                 (null,
                         "Are you sure you want to delete your account?",
@@ -21,6 +24,9 @@ public class DelView
         {
             //go back to MainView
             System.out.println("back");
+
+            mainView.displayView();
         }
     }
+
 }

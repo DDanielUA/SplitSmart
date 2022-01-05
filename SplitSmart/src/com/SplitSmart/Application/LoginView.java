@@ -11,10 +11,12 @@ public class LoginView extends JFrame implements ActionListener
     JTextField name;
     JTextField id;
     JButton login;
+    MainView mainView;
 
     LoginView()
     {
         loginFrame = new BaseFrame();
+        mainView = new MainView();
 
         //name
         name = new JTextField();
@@ -58,13 +60,6 @@ public class LoginView extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        /*if(e.getSource()==back)
-        {
-            System.out.println("back");
-            //loginFrame.dispose();
-            //welcomeView.displayView();
-        } */
-
         if(e.getSource()==login)
         {
             System.out.println("logging in");
@@ -77,11 +72,11 @@ public class LoginView extends JFrame implements ActionListener
                 ex.printStackTrace();
             }
 
-            //loginFrame.dispose();
-            //mainView.displayView();
+            loginFrame.dispose();
+            mainView.displayView();
         }
 
     }
 
-    public void displayLogin() { loginFrame.setVisible(true); }
+    public void displayView() { loginFrame.setVisible(true); }
 }
