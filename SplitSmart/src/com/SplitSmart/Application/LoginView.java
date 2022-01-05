@@ -25,7 +25,7 @@ public class LoginView extends JFrame implements ActionListener
         //button
         JButton login = new JButton();
         login.setBounds(20, 40, 70, 30);
-        login.addActionListener(e -> System.out.println("back"));
+        login.addActionListener(this);
         login.setText("Back");
         login.setFocusable(false);
         login.setBackground(new Color(58, 167, 92));
@@ -35,7 +35,8 @@ public class LoginView extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-
+        System.out.println("back");
+        //loginFrame.setVisible(false);
     }
 
     public void displayLogin() { loginFrame.setVisible(true); }
