@@ -1,6 +1,7 @@
 package com.SplitSmart.Repository;
 
 import com.SplitSmart.Model.Connector;
+import com.SplitSmart.Repository.Data.SplitSmartContext;
 
 public class ConnectorRepository extends RepositoryBase<Connector> {
 

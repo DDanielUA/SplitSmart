@@ -1,6 +1,4 @@
 package com.SplitSmart.Application;
-import javax.swing.*;
-import java.awt.*;
 
 public class Main {
 
@@ -9,5 +7,8 @@ public class Main {
         WelcomeView welcomeView = new WelcomeView();
         welcomeView.DisplayView();
 
+        //SplitSmartContext ctx = SplitSmartContext.GetInstance();
+        //ctx.SaveSets();
+        //ctx.LoadSets();
     }
 }

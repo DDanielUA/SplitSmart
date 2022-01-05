@@ -1,6 +1,7 @@
 package com.SplitSmart.Repository;
 
 import com.SplitSmart.Model.Person;
+import com.SplitSmart.Repository.Data.SplitSmartContext;
 
 public class PersonRepository extends RepositoryBase<Person> {
 
