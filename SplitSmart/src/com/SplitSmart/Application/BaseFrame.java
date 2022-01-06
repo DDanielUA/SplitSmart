@@ -10,11 +10,6 @@ public class BaseFrame extends JFrame implements ActionListener
 {
     protected final Color _BackgroundColor = new Color(162, 243, 185);
 
-    protected final Border buttonBorder = BorderFactory.createEtchedBorder();
-    protected final Color buttonColor = new Color(58, 167, 92);
-
-    protected final Font baseFont = new Font("Consolas", Font.PLAIN, 14);
-
     protected final ImageIcon _Logo = new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg");
     protected final ImageIcon _SmallLogo = new ImageIcon(new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
     protected final ImageIcon _GreyLogo = new ImageIcon("src/com/SplitSmart/Images/logo.jpg");
@@ -28,16 +23,14 @@ public class BaseFrame extends JFrame implements ActionListener
     private JLabel sloganLabel;
     private JLabel nameLabel;
 
-    public BaseFrame()
-    {
+    BaseFrame(){
         FrameSettings();
         ConstructLabels();
         ConstructButtons();
         ConstructPanels();
     }
 
-    private void FrameSettings()
-    {
+    private void FrameSettings(){
         //setting basic things in the frame
         this.setTitle("SplitSmart App");
         this.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
@@ -50,28 +43,26 @@ public class BaseFrame extends JFrame implements ActionListener
         //this.setLocationRelativeTo(null);
     }
 
-    private void ConstructLabels()
-    {
+    private void ConstructLabels(){
         //slogan label creation and settings
         this.sloganLabel = new JLabel(); //you could just add text here
         sloganLabel.setText("Make your friends pay!");
-        sloganLabel.setFont(baseFont);
+        sloganLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
 
         //name label creation and settings
         this.nameLabel = new JLabel("SplitSmart"); //, SwingConstants.CENTER
-        nameLabel.setText("SplitSmart");
+        nameLabel.setText("SplitSmart"); //"<html>First line<br>Second line</html>"
         nameLabel.setIcon(this._SmallLogo);
         nameLabel.setHorizontalTextPosition(JLabel.CENTER);
         nameLabel.setVerticalTextPosition(JLabel.TOP);
         nameLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
         nameLabel.setVerticalAlignment(JLabel.TOP);
         nameLabel.setHorizontalAlignment(JLabel.CENTER);
-        nameLabel.setFont(baseFont);
+        nameLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
         //name.setBounds(100, 0, 250, 250);
     }
 
-    private void ConstructPanels()
-    {
+    private void ConstructPanels(){
         this.backPanel = new JPanel();
         this.add(backPanel);
         backPanel.setBackground(this._BackgroundColor);
@@ -93,15 +84,15 @@ public class BaseFrame extends JFrame implements ActionListener
         sloganPanel.add(sloganLabel);
     }
 
-    private void ConstructButtons()
-    {
+    private void ConstructButtons(){
+        Border buttonBorder = BorderFactory.createEtchedBorder();
 
         this.backButton = new JButton();
         backButton.setBounds(30, 60, 100, 50);
         backButton.addActionListener(this);
         backButton.setText("Back");
         backButton.setFocusable(false);
-        backButton.setBackground(buttonColor);
+        backButton.setBackground(new Color(58, 167, 92));
         backButton.setBorder(buttonBorder);
     }
 
