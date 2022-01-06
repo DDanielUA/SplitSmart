@@ -1,5 +1,8 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,11 +23,14 @@ public class WelcomeView extends BaseFrame implements ActionListener
     private JButton regButton;
     private JButton loginButton;
 
+    private ActionAgency<WelcomeAction> observer;
+
     //private LoginView loginView;
     //private RegView regView;
 
-    public WelcomeView()
+    public WelcomeView(ActionAgency<WelcomeAction> givenAgent)
     {
+        this.observer = givenAgent;
         //base
         welcomeFrame = new JFrame();
 
@@ -60,12 +66,12 @@ public class WelcomeView extends BaseFrame implements ActionListener
         nameLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
         nameLabel.setVerticalAlignment(JLabel.TOP);
         nameLabel.setHorizontalAlignment(JLabel.CENTER);
-        nameLabel.setFont(baseFont);
+        nameLabel.setFont(_BaseFont);
 
         //slogan label creation and settings
         this.sloganLabel = new JLabel(); //you could just add text here
         sloganLabel.setText("Make your friends pay!");
-        sloganLabel.setFont(baseFont);
+        sloganLabel.setFont(_BaseFont);
     }
 
     private void ConstructPanels()
@@ -107,8 +113,8 @@ public class WelcomeView extends BaseFrame implements ActionListener
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
-        loginButton.setBackground(buttonColor);
-        loginButton.setBorder(buttonBorder);
+        loginButton.setBackground(_ButtonColor);
+        loginButton.setBorder(_ButtonBorder);
 
         //registration button creation and settings
         this.regButton = new JButton();
@@ -116,8 +122,8 @@ public class WelcomeView extends BaseFrame implements ActionListener
         regButton.addActionListener(this);
         regButton.setText("Register");
         regButton.setFocusable(false);
-        regButton.setBackground(buttonColor);
-        regButton.setBorder(buttonBorder);
+        regButton.setBackground(_ButtonColor);
+        regButton.setBorder(_ButtonBorder);
     }
 
     public void displayView()
@@ -131,13 +137,13 @@ public class WelcomeView extends BaseFrame implements ActionListener
         if(e.getSource()== loginButton)
         {
             welcomeFrame.dispose();
-            //loginView.displayView();
+            this.observer.update(WelcomeAction.LogInPresssed);
         }
 
         if(e.getSource()== regButton)
         {
             welcomeFrame.dispose();
-            //regView.displayView();
+            this.observer.update(WelcomeAction.RegisterPressed);
         }
     }
 }

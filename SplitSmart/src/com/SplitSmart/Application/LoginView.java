@@ -1,7 +1,5 @@
 package com.SplitSmart.Application;
 
-import com.SplitSmart.Model.Person;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,7 +35,7 @@ public class LoginView implements ActionListener
         this.nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(250, 30));
         nameField.setBounds(150, 200, 250, 30);
-        nameField.setFont(loginFrame.baseFont);
+        nameField.setFont(loginFrame._BaseFont);
         nameField.setText("Example Ella");
         loginFrame.add(nameField);
 
@@ -45,7 +43,7 @@ public class LoginView implements ActionListener
         this.idField = new JTextField();
         idField.setPreferredSize(new Dimension(250, 30));
         idField.setBounds(150, 250, 250, 30);
-        idField.setFont(loginFrame.baseFont);
+        idField.setFont(loginFrame._BaseFont);
         idField.setText("123");
         loginFrame.add(idField);
     }
@@ -54,13 +52,13 @@ public class LoginView implements ActionListener
     {
         //name label creation and settings
         this.nameLabel = new JLabel("Name: ");
-        nameLabel.setFont(loginFrame.baseFont);
+        nameLabel.setFont(loginFrame._BaseFont);
         nameLabel.setBounds(60, 200, 150, 30);
         loginFrame.add(nameLabel);
 
         //id label creation and settings
         this.idLabel = new JLabel("ID number: ");
-        idLabel.setFont(loginFrame.baseFont);
+        idLabel.setFont(loginFrame._BaseFont);
         idLabel.setBounds(60, 250, 150, 30);
         loginFrame.add(idLabel);
     }
@@ -73,8 +71,8 @@ public class LoginView implements ActionListener
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
-        loginButton.setBackground(loginFrame.buttonColor);
-        loginButton.setBorder(loginFrame.buttonBorder);
+        loginButton.setBackground(loginFrame._ButtonColor);
+        loginButton.setBorder(loginFrame._ButtonBorder);
         loginFrame.add(loginButton);
     }
 

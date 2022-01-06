@@ -10,6 +10,11 @@ public class BaseFrame extends JFrame implements ActionListener
 {
     protected final Color _BackgroundColor = new Color(162, 243, 185);
 
+    protected final Border _ButtonBorder = BorderFactory.createEtchedBorder();
+    protected final Color _ButtonColor = new Color(58, 167, 92);
+
+    protected final Font _BaseFont = new Font("Consolas", Font.PLAIN, 14);
+
     protected final ImageIcon _Logo = new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg");
     protected final ImageIcon _SmallLogo = new ImageIcon(new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
     protected final ImageIcon _GreyLogo = new ImageIcon("src/com/SplitSmart/Images/logo.jpg");

@@ -29,8 +29,8 @@ public class BillView implements ActionListener
         payButton.addActionListener(this);
         payButton.setText("Pay");
         payButton.setFocusable(false);
-        payButton.setBackground(billFrame.buttonColor);
-        payButton.setBorder(billFrame.buttonBorder);
+        payButton.setBackground(billFrame._ButtonColor);
+        payButton.setBorder(billFrame._ButtonBorder);
         billFrame.add(payButton);
     }
 

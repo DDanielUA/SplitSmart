@@ -1,7 +1,5 @@
 package com.SplitSmart.Application;
 
-import com.SplitSmart.Model.Person;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,7 +41,7 @@ public class RegView extends JFrame implements ActionListener
         this.nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(250, 30));
         nameField.setBounds(180, 200, 250, 30);
-        nameField.setFont(regFrame.baseFont);
+        nameField.setFont(regFrame._BaseFont);
         nameField.setText("Example Ella");
         regFrame.add(nameField);
 
@@ -51,7 +49,7 @@ public class RegView extends JFrame implements ActionListener
         this.phoneField = new JTextField();
         phoneField.setPreferredSize(new Dimension(250, 30));
         phoneField.setBounds(180, 250, 250, 30);
-        phoneField.setFont(regFrame.baseFont);
+        phoneField.setFont(regFrame._BaseFont);
         phoneField.setText("+36201234567");
         regFrame.add(phoneField);
 
@@ -59,7 +57,7 @@ public class RegView extends JFrame implements ActionListener
         this.emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(250, 30));
         emailField.setBounds(180, 300, 250, 30);
-        emailField.setFont(regFrame.baseFont);
+        emailField.setFont(regFrame._BaseFont);
         emailField.setText("example.ella@gmail.com");
         regFrame.add(emailField);
     }
@@ -68,19 +66,19 @@ public class RegView extends JFrame implements ActionListener
     {
         //name label creation and settings
         this.nameLabel = new JLabel("Name: ");
-        nameLabel.setFont(regFrame.baseFont);
+        nameLabel.setFont(regFrame._BaseFont);
         nameLabel.setBounds(50, 200, 150, 30);
         regFrame.add(nameLabel);
 
         //phone label creation and settings
         this.phoneLabel = new JLabel("Phone number: ");
-        phoneLabel.setFont(regFrame.baseFont);
+        phoneLabel.setFont(regFrame._BaseFont);
         phoneLabel.setBounds(50, 250, 150, 30);
         regFrame.add(phoneLabel);
 
         //email label creation and settings
         this.emailLabel = new JLabel("Email address: ");
-        emailLabel.setFont(regFrame.baseFont);
+        emailLabel.setFont(regFrame._BaseFont);
         emailLabel.setBounds(50, 300, 150, 30);
         regFrame.add(emailLabel);
     }
@@ -93,8 +91,8 @@ public class RegView extends JFrame implements ActionListener
         regButton.addActionListener(this);
         regButton.setText("Register");
         regButton.setFocusable(false);
-        regButton.setBackground(regFrame.buttonColor);
-        regButton.setBorder(regFrame.buttonBorder);
+        regButton.setBackground(regFrame._ButtonColor);
+        regButton.setBorder(regFrame._ButtonBorder);
         regFrame.add(regButton);
     }
 

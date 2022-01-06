@@ -36,8 +36,8 @@ public class MainView implements ActionListener
         addButton.addActionListener(this);
         addButton.setText("Add");
         addButton.setFocusable(false);
-        addButton.setBackground(mainFrame.buttonColor);
-        addButton.setBorder(mainFrame.buttonBorder);
+        addButton.setBackground(mainFrame._ButtonColor);
+        addButton.setBorder(mainFrame._ButtonBorder);
         mainFrame.add(addButton);
 
         //die button creation and settings
@@ -46,8 +46,8 @@ public class MainView implements ActionListener
         dieButton.addActionListener(this);
         dieButton.setText("Die");
         dieButton.setFocusable(false);
-        dieButton.setBackground(mainFrame.buttonColor);
-        dieButton.setBorder(mainFrame.buttonBorder);
+        dieButton.setBackground(mainFrame._ButtonColor);
+        dieButton.setBorder(mainFrame._ButtonBorder);
         mainFrame.add(dieButton);
 
         //sum button creation and settings
@@ -56,8 +56,8 @@ public class MainView implements ActionListener
         sumButton.addActionListener(this);
         sumButton.setText("Sum");
         sumButton.setFocusable(false);
-        sumButton.setBackground(mainFrame.buttonColor);
-        sumButton.setBorder(mainFrame.buttonBorder);
+        sumButton.setBackground(mainFrame._ButtonColor);
+        sumButton.setBorder(mainFrame._ButtonBorder);
         mainFrame.add(sumButton);
 
     }

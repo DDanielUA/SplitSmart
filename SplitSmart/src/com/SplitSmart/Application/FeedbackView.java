@@ -3,7 +3,6 @@ package com.SplitSmart.Application;
 import com.SplitSmart.Model.Person;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,13 +32,13 @@ public class FeedbackView implements ActionListener
         String text = String.format("Your name is %s.", RegView.regName);
         this.nameLabel = new JLabel();
         nameLabel.setText(text);
-        nameLabel.setFont(feedbackFrame.baseFont);
+        nameLabel.setFont(feedbackFrame._BaseFont);
         nameLabel.setBounds(60, 200, 150, 50);
         feedbackFrame.add(nameLabel);
 
         //id label creation and settings
         this.idLabel = new JLabel(String.format("Your ID is %s.", 2));
-        idLabel.setFont(feedbackFrame.baseFont);
+        idLabel.setFont(feedbackFrame._BaseFont);
         idLabel.setBounds(60, 250, 150, 50);
         feedbackFrame.add(idLabel);
     }
@@ -52,8 +51,8 @@ public class FeedbackView implements ActionListener
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
-        loginButton.setBackground(feedbackFrame.buttonColor);
-        loginButton.setBorder(feedbackFrame.buttonBorder);
+        loginButton.setBackground(feedbackFrame._ButtonColor);
+        loginButton.setBorder(feedbackFrame._ButtonBorder);
         feedbackFrame.add(loginButton);
     }
 

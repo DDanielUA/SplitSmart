@@ -1,7 +1,5 @@
 package com.SplitSmart.Application;
 
-import com.SplitSmart.Model.Receipt;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,7 +41,7 @@ public class NewView extends JFrame implements ActionListener
         this.billNameField = new JTextField();
         billNameField.setPreferredSize(new Dimension(250, 30));
         billNameField.setBounds(170, 200, 250, 30);
-        billNameField.setFont(newFrame.baseFont);
+        billNameField.setFont(newFrame._BaseFont);
         billNameField.setText("LIDL");
         newFrame.add(billNameField);
 
@@ -51,7 +49,7 @@ public class NewView extends JFrame implements ActionListener
         this.descField = new JTextField();
         descField.setPreferredSize(new Dimension(250, 30));
         descField.setBounds(170, 250, 250, 30);
-        descField.setFont(newFrame.baseFont);
+        descField.setFont(newFrame._BaseFont);
         descField.setText("Groceries from LIDL in Antwerp");
         newFrame.add(descField);
 
@@ -59,7 +57,7 @@ public class NewView extends JFrame implements ActionListener
         this.dateField = new JTextField();
         dateField.setPreferredSize(new Dimension(250, 30));
         dateField.setBounds(170, 300, 250, 30);
-        dateField.setFont(newFrame.baseFont);
+        dateField.setFont(newFrame._BaseFont);
         dateField.setText("2022-01-03");
         newFrame.add(dateField);
 
@@ -67,7 +65,7 @@ public class NewView extends JFrame implements ActionListener
         this.totalField = new JTextField();
         totalField.setPreferredSize(new Dimension(250, 30));
         totalField.setBounds(170, 350, 250, 30);
-        totalField.setFont(newFrame.baseFont);
+        totalField.setFont(newFrame._BaseFont);
         totalField.setText("56");
         newFrame.add(totalField);
     }
@@ -76,31 +74,31 @@ public class NewView extends JFrame implements ActionListener
     {
         //label for the name of the receipt
         this.billLabel = new JLabel("Name of receipt: ");
-        billLabel.setFont(newFrame.baseFont);
+        billLabel.setFont(newFrame._BaseFont);
         billLabel.setBounds(20, 200, 150, 30);
         newFrame.add(billLabel);
 
         //label for the description of the receipt
         this.descLabel = new JLabel("Description of receipt: ");
-        descLabel.setFont(newFrame.baseFont);
+        descLabel.setFont(newFrame._BaseFont);
         descLabel.setBounds(20, 250, 150, 30);
         newFrame.add(descLabel);
 
         //label for the date of purchase
         this.dateLabel = new JLabel("Date of purchase: ");
-        dateLabel.setFont(newFrame.baseFont);
+        dateLabel.setFont(newFrame._BaseFont);
         dateLabel.setBounds(20, 300, 150, 30);
         newFrame.add(dateLabel);
 
         //label for the total amount of purchase
         this.totalLabel = new JLabel("Total amount of purchase: ");
-        totalLabel.setFont(newFrame.baseFont);
+        totalLabel.setFont(newFrame._BaseFont);
         totalLabel.setBounds(20, 350, 150, 30);
         newFrame.add(totalLabel);
 
         //label for euro symbol
         this.eurLabel = new JLabel("€");
-        eurLabel.setFont(newFrame.baseFont);
+        eurLabel.setFont(newFrame._BaseFont);
         eurLabel.setBounds(420, 350, 150, 30);
         newFrame.add(eurLabel);
     }
@@ -110,7 +108,7 @@ public class NewView extends JFrame implements ActionListener
         //checkbox for version of the bill
         this.equalCheckBox = new JCheckBox("Is the amount equally distributed?");
         equalCheckBox.setFocusable(false);
-        equalCheckBox.setFont(newFrame.baseFont);
+        equalCheckBox.setFont(newFrame._BaseFont);
         equalCheckBox.setBounds(170, 400, 300, 30);
         newFrame.add(equalCheckBox);
     }
@@ -123,8 +121,8 @@ public class NewView extends JFrame implements ActionListener
         addButton.addActionListener(this);
         addButton.setText("LogIn");
         addButton.setFocusable(false);
-        addButton.setBackground(newFrame.buttonColor);
-        addButton.setBorder(newFrame.buttonBorder);
+        addButton.setBackground(newFrame._ButtonColor);
+        addButton.setBorder(newFrame._ButtonBorder);
         newFrame.add(addButton);
     }
 

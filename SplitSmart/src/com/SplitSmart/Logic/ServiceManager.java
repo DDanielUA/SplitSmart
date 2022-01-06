@@ -4,13 +4,13 @@ import com.SplitSmart.Application.WelcomeView;
 
 public class ServiceManager {
 
-    private LogInService loginService;
-    private ReceiptService receiptService;
+    private WelcomeService welcomeService;
+    private UserService userService;
 
     private WelcomeView welcomeView;
 
     public ServiceManager(){
-        loginService = new LogInService();
+        this.welcomeService = new WelcomeService();
     }
 
 }
