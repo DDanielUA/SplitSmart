@@ -4,132 +4,156 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.zip.DataFormatException;
 
 public class NewView extends JFrame implements ActionListener
 {
-    BaseFrame newFrame;
-    JTextField billName;
-    JTextField desc;
-    JTextField date; //DATE
-    JTextField total; //DOUBLE
-    JCheckBox equal;
-    //MainView mainView;
+    private BaseFrame newFrame;
 
-    JButton add;
+    private JTextField billNameField;
+    private JTextField descField;
+    private JTextField dateField; //DATE
+    private JTextField totalField; //DOUBLE
 
-    NewView()
+    private JLabel billLabel;
+    private JLabel descLabel;
+    private JLabel dateLabel;
+    private JLabel totalLabel;
+    private JLabel eurLabel;
+
+    private JCheckBox equalCheckBox;
+
+    private JButton addButton;
+
+    public NewView()
     {
         newFrame = new BaseFrame();
-        //mainView = new MainView();
 
-        //name of the receipt
-        billName = new JTextField();
-        billName.setPreferredSize(new Dimension(250, 30));
-        billName.setBounds(170, 200, 250, 30);
-        billName.setFont(new Font("Consolas", Font.PLAIN, 14));
-        billName.setText("LIDL");
-        newFrame.add(billName);
+        ConstructFields();
+        ConstructLabels();
+        ConstructCheckboxes();
+        ConstructButtons();
+    }
 
+    private void ConstructFields()
+    {
+        //text field for the name of the receipt
+        this.billNameField = new JTextField();
+        billNameField.setPreferredSize(new Dimension(250, 30));
+        billNameField.setBounds(170, 200, 250, 30);
+        billNameField.setFont(newFrame.baseFont);
+        billNameField.setText("LIDL");
+        newFrame.add(billNameField);
 
-        JLabel billLabel = new JLabel("Name of receipt: ");
-        billLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        //text field for the description of the receipt
+        this.descField = new JTextField();
+        descField.setPreferredSize(new Dimension(250, 30));
+        descField.setBounds(170, 250, 250, 30);
+        descField.setFont(newFrame.baseFont);
+        descField.setText("Groceries from LIDL in Antwerp");
+        newFrame.add(descField);
+
+        //text field for the date of purchase
+        this.dateField = new JTextField();
+        dateField.setPreferredSize(new Dimension(250, 30));
+        dateField.setBounds(170, 300, 250, 30);
+        dateField.setFont(newFrame.baseFont);
+        dateField.setText("2022-01-03");
+        newFrame.add(dateField);
+
+        //text field for the total amount of purchase
+        this.totalField = new JTextField();
+        totalField.setPreferredSize(new Dimension(250, 30));
+        totalField.setBounds(170, 350, 250, 30);
+        totalField.setFont(newFrame.baseFont);
+        totalField.setText("56");
+        newFrame.add(totalField);
+    }
+
+    private void ConstructLabels()
+    {
+        //label for the name of the receipt
+        this.billLabel = new JLabel("Name of receipt: ");
+        billLabel.setFont(newFrame.baseFont);
         billLabel.setBounds(20, 200, 150, 30);
         newFrame.add(billLabel);
 
-        //description of the receipt
-        desc = new JTextField();
-        desc.setPreferredSize(new Dimension(250, 30));
-        desc.setBounds(170, 250, 250, 30);
-        desc.setFont(new Font("Consolas", Font.PLAIN, 14));
-        desc.setText("Groceries from LIDL in Antwerp");
-        newFrame.add(desc);
-
-        JLabel descLabel = new JLabel("Description of receipt: ");
-        descLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        //label for the description of the receipt
+        this.descLabel = new JLabel("Description of receipt: ");
+        descLabel.setFont(newFrame.baseFont);
         descLabel.setBounds(20, 250, 150, 30);
         newFrame.add(descLabel);
 
-        //date of purchase
-        date = new JTextField();
-        date.setPreferredSize(new Dimension(250, 30));
-        date.setBounds(170, 300, 250, 30);
-        date.setFont(new Font("Consolas", Font.PLAIN, 14));
-        date.setText("2022-01-03");
-        newFrame.add(date);
-
-        JLabel dateLabel = new JLabel("Date of purchase: ");
-        dateLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        //label for the date of purchase
+        this.dateLabel = new JLabel("Date of purchase: ");
+        dateLabel.setFont(newFrame.baseFont);
         dateLabel.setBounds(20, 300, 150, 30);
         newFrame.add(dateLabel);
 
-        //total amount of purchase
-        total = new JTextField();
-        total.setPreferredSize(new Dimension(250, 30));
-        total.setBounds(170, 350, 250, 30);
-        total.setFont(new Font("Consolas", Font.PLAIN, 14));
-        total.setText("56");
-        newFrame.add(total);
-
-        JLabel totalLabel = new JLabel("Total amount of purchase: ");
-        totalLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        //label for the total amount of purchase
+        this.totalLabel = new JLabel("Total amount of purchase: ");
+        totalLabel.setFont(newFrame.baseFont);
         totalLabel.setBounds(20, 350, 150, 30);
         newFrame.add(totalLabel);
 
-        JLabel eurLabel = new JLabel("€");
-        eurLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        //label for euro symbol
+        this.eurLabel = new JLabel("€");
+        eurLabel.setFont(newFrame.baseFont);
         eurLabel.setBounds(420, 350, 150, 30);
         newFrame.add(eurLabel);
+    }
 
-        equal = new JCheckBox("Is the amount equally distributed?");
-        equal.setFocusable(false);
-        equal.setFont(new Font("Consolas", Font.PLAIN, 14));
-        equal.setBounds(170, 400, 300, 30);
-        newFrame.add(equal);
+    private void ConstructCheckboxes()
+    {
+        //checkbox for version of the bill
+        this.equalCheckBox = new JCheckBox("Is the amount equally distributed?");
+        equalCheckBox.setFocusable(false);
+        equalCheckBox.setFont(newFrame.baseFont);
+        equalCheckBox.setBounds(170, 400, 300, 30);
+        newFrame.add(equalCheckBox);
+    }
 
-        //add button
-        add = new JButton();
-        add.setBounds(170, 470, 70, 30);
-        add.addActionListener(this);
-        add.setText("LogIn");
-        add.setFocusable(false);
-        add.setBackground(new Color(58, 167, 92));
-        add.setBorder(BorderFactory.createEtchedBorder());
-        newFrame.add(add);
-
+    private void ConstructButtons()
+    {
+        //add button creation and settings
+        this.addButton = new JButton();
+        addButton.setBounds(170, 470, 70, 30);
+        addButton.addActionListener(this);
+        addButton.setText("LogIn");
+        addButton.setFocusable(false);
+        addButton.setBackground(newFrame.buttonColor);
+        addButton.setBorder(newFrame.buttonBorder);
+        newFrame.add(addButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()==add)
+        if(e.getSource()== addButton)
         {
             System.out.println("adding new bill");
-            String bill = billName.getText();
-            String description = desc.getText();
+            String bill = billNameField.getText();
+            String description = descField.getText();
             try{
-                LocalDate dateVar = LocalDate.parse(date.getText());
+                LocalDate dateVar = LocalDate.parse(dateField.getText());
             }
-            catch (DateTimeException ex)
+            catch (Exception ex)
             {
                 ex.printStackTrace();
             }
 
             try{
-                double totalCost = Double.parseDouble(total.getText());
+                double totalCost = Double.parseDouble(totalField.getText());
             }
             catch (NumberFormatException ex)
             {
                 ex.printStackTrace();
             }
-            boolean isEqual = equal.isSelected();
+            boolean isEqual = equalCheckBox.isSelected();
 
-            //newFrame.dispose();
+            newFrame.setVisible(false);
             //mainView.displayView();
         }
-
     }
 
     public void displayView() { newFrame.setVisible(true); }

@@ -5,77 +5,95 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginView extends JFrame implements ActionListener
+public class LoginView implements ActionListener
 {
-    BaseFrame loginFrame;
-    JTextField name;
-    JTextField id;
-    JButton login;
-    MainView mainView;
+    private BaseFrame loginFrame;
 
-    LoginView()
+    private JTextField nameField;
+    private JTextField idField;
+
+    private JLabel nameLabel;
+    private JLabel idLabel;
+
+    private JButton loginButton;
+
+    private MainView mainView;
+
+    public LoginView()
     {
         loginFrame = new BaseFrame();
         mainView = new MainView();
 
-        //name
-        name = new JTextField();
-        name.setPreferredSize(new Dimension(250, 30));
-        name.setBounds(150, 200, 250, 30);
-        name.setFont(new Font("Consolas", Font.PLAIN, 14));
-        name.setText("Example Ella");
-        loginFrame.add(name);
+        ConstructFields();
+        ConstructLabels();
+        ConstructButtons();
+    }
 
-        JLabel nameLabel = new JLabel("Name: ");
-        nameLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+    private void ConstructFields()
+    {
+        //name field creation and settings
+        this.nameField = new JTextField();
+        nameField.setPreferredSize(new Dimension(250, 30));
+        nameField.setBounds(150, 200, 250, 30);
+        nameField.setFont(loginFrame.baseFont);
+        nameField.setText("Example Ella");
+        loginFrame.add(nameField);
+
+        //id field creation and settings
+        this.idField = new JTextField();
+        idField.setPreferredSize(new Dimension(250, 30));
+        idField.setBounds(150, 250, 250, 30);
+        idField.setFont(loginFrame.baseFont);
+        idField.setText("123");
+        loginFrame.add(idField);
+    }
+
+    private void ConstructLabels()
+    {
+        //name label creation and settings
+        this.nameLabel = new JLabel("Name: ");
+        nameLabel.setFont(loginFrame.baseFont);
         nameLabel.setBounds(60, 200, 150, 30);
         loginFrame.add(nameLabel);
 
-        //id
-        id = new JTextField();
-        id.setPreferredSize(new Dimension(250, 30));
-        id.setBounds(150, 250, 250, 30);
-        id.setFont(new Font("Consolas", Font.PLAIN, 14));
-        id.setText("123");
-        loginFrame.add(id);
-
-        JLabel idLabel = new JLabel("ID number: ");
-        idLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        //id label creation and settings
+        this.idLabel = new JLabel("ID number: ");
+        idLabel.setFont(loginFrame.baseFont);
         idLabel.setBounds(60, 250, 150, 30);
         loginFrame.add(idLabel);
+    }
 
-        //LogIn button
-        login = new JButton();
-        login.setBounds(200, 300, 70, 30);
-        login.addActionListener(this);
-        login.setText("LogIn");
-        login.setFocusable(false);
-        login.setBackground(new Color(58, 167, 92));
-        login.setBorder(BorderFactory.createEtchedBorder());
-        loginFrame.add(login);
-
-        //loginFrame.pack();
+    private void ConstructButtons()
+    {
+        //login button creation and settings
+        this.loginButton = new JButton();
+        loginButton.setBounds(200, 300, 70, 30);
+        loginButton.addActionListener(this);
+        loginButton.setText("LogIn");
+        loginButton.setFocusable(false);
+        loginButton.setBackground(loginFrame.buttonColor);
+        loginButton.setBorder(loginFrame.buttonBorder);
+        loginFrame.add(loginButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()==login)
+        if(e.getSource()== loginButton)
         {
             System.out.println("logging in");
-            String loginName = name.getText();
+            String loginName = nameField.getText();
             try{
-                int loginId = Integer.parseInt(id.getText());
+                int loginId = Integer.parseInt(idField.getText());
             }
             catch (NumberFormatException ex)
             {
                 ex.printStackTrace();
             }
 
-            loginFrame.dispose();
+            loginFrame.setVisible(false);
             mainView.displayView();
         }
-
     }
 
     public void displayView() { loginFrame.setVisible(true); }

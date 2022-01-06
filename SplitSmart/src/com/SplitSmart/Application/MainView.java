@@ -5,45 +5,50 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainView extends JFrame implements ActionListener
+public class MainView implements ActionListener
 {
-    BaseFrame mainFrame;
-    JButton add;
-    JButton die;
-    NewView newView;
+    private BaseFrame mainFrame;
 
-    MainView()
+    private JButton addButton;
+    private JButton dieButton;
+
+    private NewView newView;
+
+    public MainView()
     {
         mainFrame = new BaseFrame();
         newView = new NewView();
 
-        //add button
-        add = new JButton();
-        add.setBounds(200, 300, 70, 30);
-        add.addActionListener(this);
-        add.setText("Add");
-        add.setFocusable(false);
-        add.setBackground(new Color(58, 167, 92));
-        add.setBorder(BorderFactory.createEtchedBorder());
-        mainFrame.add(add);
+        ConstructButtons();
+    }
 
-        //die button
-        die = new JButton();
-        die.setBounds(200, 300, 70, 30);
-        die.addActionListener(this);
-        die.setText("Die");
-        die.setFocusable(false);
-        die.setBackground(new Color(58, 167, 92));
-        die.setBorder(BorderFactory.createEtchedBorder());
-        mainFrame.add(die);
+    private void ConstructButtons()
+    {
+        //add button creation and settings
+        this.addButton = new JButton();
+        addButton.setBounds(200, 300, 70, 30);
+        addButton.addActionListener(this);
+        addButton.setText("Add");
+        addButton.setFocusable(false);
+        addButton.setBackground(mainFrame.buttonColor);
+        addButton.setBorder(mainFrame.buttonBorder);
+        mainFrame.add(addButton);
 
-
+        //die button creation and settings
+        this.dieButton = new JButton();
+        dieButton.setBounds(200, 300, 70, 30);
+        dieButton.addActionListener(this);
+        dieButton.setText("Die");
+        dieButton.setFocusable(false);
+        dieButton.setBackground(mainFrame.buttonColor);
+        dieButton.setBorder(mainFrame.buttonBorder);
+        mainFrame.add(dieButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()==add)
+        if(e.getSource()== addButton)
         {
             System.out.println("adding new bill");
 
@@ -51,7 +56,7 @@ public class MainView extends JFrame implements ActionListener
             newView.displayView();
         }
 
-        if (e.getSource()==die)
+        if (e.getSource()== dieButton)
         {
             System.out.println("do you wanna die?");
 

@@ -5,48 +5,62 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FeedbackView extends JFrame implements ActionListener
+public class FeedbackView implements ActionListener
 {
-    BaseFrame feedbackFrame;
-    JButton login;
-    LoginView loginView;
+    private BaseFrame feedbackFrame;
 
-    FeedbackView()
+    private JLabel nameLabel;
+    private JLabel idLabel;
+
+    private JButton loginButton;
+
+    private LoginView loginView;
+
+    public FeedbackView()
     {
         feedbackFrame = new BaseFrame();
         loginView = new LoginView();
 
-        //name
+        ConstructLabels();
+        ConstructButtons();
+    }
+
+    private void ConstructLabels()
+    {
+        //name label creation and settings
         String text = String.format("Your name is %s.", RegView.regName);
-        JLabel nameLabel = new JLabel();
+        this.nameLabel = new JLabel();
         nameLabel.setText(text);
-        nameLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        nameLabel.setFont(feedbackFrame.baseFont);
         nameLabel.setBounds(60, 200, 150, 50);
         feedbackFrame.add(nameLabel);
 
-        //id
-        JLabel idLabel = new JLabel(String.format("Your ID is %s.", 2));
-        idLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
+        //id label creation and settings
+        this.idLabel = new JLabel(String.format("Your ID is %s.", 2));
+        idLabel.setFont(feedbackFrame.baseFont);
         idLabel.setBounds(60, 250, 150, 50);
         feedbackFrame.add(idLabel);
+    }
 
-        //login button
-        login = new JButton();
-        login.setBounds(150, 400, 150, 50);
-        login.addActionListener(this);
-        login.setText("LogIn");
-        login.setFocusable(false);
-        login.setBackground(new Color(58, 167, 92));
-        login.setBorder(BorderFactory.createEtchedBorder());
-        feedbackFrame.add(login);
+    private void ConstructButtons()
+    {
+        //login button creation and settings
+        this.loginButton = new JButton();
+        loginButton.setBounds(150, 400, 150, 50);
+        loginButton.addActionListener(this);
+        loginButton.setText("LogIn");
+        loginButton.setFocusable(false);
+        loginButton.setBackground(feedbackFrame.buttonColor);
+        loginButton.setBorder(feedbackFrame.buttonBorder);
+        feedbackFrame.add(loginButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()==login)
+        if(e.getSource()== loginButton)
         {
-            feedbackFrame.dispose();
+            feedbackFrame.setVisible(false);
             loginView.displayView();
         }
     }
