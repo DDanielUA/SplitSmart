@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public abstract class RepositoryBase<T> implements IRepositoryBase<T> {
 
+    protected int nextID;
+
     protected SplitSmartContext ctx;
 
     private ArrayList<T> set;

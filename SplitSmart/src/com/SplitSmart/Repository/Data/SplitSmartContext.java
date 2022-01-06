@@ -22,10 +22,13 @@ public class SplitSmartContext {
         return instance;
     }
 
+    public int nextPersonId;
     public ArrayList<Person> PersonSet = new ArrayList<Person>();
 
+    public int nextReceiptId;
     public ArrayList<Receipt> ReceiptSet = new ArrayList<Receipt>();
 
+    public int nextConnectorId;
     public ArrayList<Connector> ConnectorSet = new ArrayList<Connector>();
 
     private void CreateContainers(){
@@ -48,6 +51,7 @@ public class SplitSmartContext {
         jane.setPhone("704346269");
         jane.setEmail("jane@gmail.com");
         PersonSet.add(jane);
+        this.nextPersonId = 4;
 
         //Receipt seed
         Receipt groceries = new Receipt();
@@ -73,6 +77,7 @@ public class SplitSmartContext {
         restaurant.People.add(bill);
         restaurant.People.add(jane);
         ReceiptSet.add(restaurant);
+        this.nextReceiptId = 3;
 
         //---Connector seed
         //-----Groceries connector
@@ -118,6 +123,7 @@ public class SplitSmartContext {
         conn5.setIsPayed(false);
         jane.Connections.add(conn5);
         ConnectorSet.add(conn5);
+        this.nextConnectorId = 6;
     }
 
     public void SaveSets(){

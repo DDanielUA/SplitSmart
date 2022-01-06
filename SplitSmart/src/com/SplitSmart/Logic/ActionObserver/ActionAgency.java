@@ -18,7 +18,7 @@ public class ActionAgency<T extends Enum> {
     public void update(T eventHappened){
         this.event = eventHappened;
         for (ActionChannel<T> subscriber : subscribers){
-            subscriber.notify(this.event);
+            subscriber.Notify(this.event);
         }
     }
 }

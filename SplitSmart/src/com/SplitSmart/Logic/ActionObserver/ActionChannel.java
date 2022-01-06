@@ -7,7 +7,7 @@ public class ActionChannel<T extends Enum> {
         return this.event;
     }
 
-    public void notify(T happenedEvent){
+    public void Notify(T happenedEvent){
         this.event = happenedEvent;
     }
 }

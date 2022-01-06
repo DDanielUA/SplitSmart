@@ -137,13 +137,13 @@ public class WelcomeView extends BaseFrame implements ActionListener
         if(e.getSource()== loginButton)
         {
             welcomeFrame.dispose();
-            this.observer.update(WelcomeAction.LogInPresssed);
+            this.observer.update(WelcomeAction.InitiateLogIn);
         }
 
         if(e.getSource()== regButton)
         {
             welcomeFrame.dispose();
-            this.observer.update(WelcomeAction.RegisterPressed);
+            this.observer.update(WelcomeAction.InitiateRegister);
         }
     }
 }

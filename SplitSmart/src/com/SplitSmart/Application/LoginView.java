@@ -1,5 +1,9 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
+import com.SplitSmart.Model.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,10 +21,18 @@ public class LoginView implements ActionListener
 
     private JButton loginButton;
 
+    //Logic observer
+    private ActionAgency<WelcomeAction> observer;
+    //Logic data
+    private Person person;
+
     //private MainView mainView;
 
-    public LoginView()
+    public LoginView(ActionAgency<WelcomeAction> observer, Person person)
     {
+        this.observer = observer;
+        this.person = person;
+
         loginFrame = new BaseFrame();
         //mainView = new MainView();
 
@@ -82,17 +94,19 @@ public class LoginView implements ActionListener
         if(e.getSource()== loginButton)
         {
             System.out.println("logging in");
-            String loginName = nameField.getText();
+            //String loginName = nameField.getText();
             try{
-                int loginId = Integer.parseInt(idField.getText());
+                this.person.setPersonId(Integer.parseInt(idField.getText()));
             }
             catch (NumberFormatException ex)
             {
                 ex.printStackTrace();
             }
 
+            this.person.setName(nameField.getText());
+
             loginFrame.setVisible(false);
-            //mainView.displayView();
+            this.observer.update(WelcomeAction.AttemptLogIn);
         }
     }
 

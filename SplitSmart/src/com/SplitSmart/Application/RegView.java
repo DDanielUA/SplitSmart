@@ -1,5 +1,9 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
+import com.SplitSmart.Model.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,14 +23,19 @@ public class RegView extends JFrame implements ActionListener
 
     private JButton regButton;
 
+    private ActionAgency<WelcomeAction> observer;
+    private Person person;
+
     //private FeedbackView feedbackView;
 
     public static String regName;
     public static String regPhone;
     public static String regEmail;
 
-    public RegView()
+    public RegView(ActionAgency<WelcomeAction> observer, Person person)
     {
+        this.observer = observer;
+        this.person = person;
         regFrame = new BaseFrame();
         //feedbackView = new FeedbackView();
 
@@ -101,13 +110,17 @@ public class RegView extends JFrame implements ActionListener
     {
         if(e.getSource()== regButton)
         {
-            System.out.println("adding you to the system");
-            regName = nameField.getText();
-            regPhone = phoneField.getText();
-            regEmail = emailField.getText();
+            /// !!!!!
+            /// CAN'T HAVE ';' ':' '|' IN NAME!!! (Repo.Data.SSML save/read file)
+            /// !!!!!
+
+            //System.out.println("adding you to the system");
+            this.person.setName(nameField.getText());
+            this.person.setPhone(phoneField.getText());
+            this.person.setEmail(emailField.getText());
 
             regFrame.setVisible(false);
-            //feedbackView.displayView();
+            this.observer.update(WelcomeAction.AttemptRegister);
         }
     }
 
