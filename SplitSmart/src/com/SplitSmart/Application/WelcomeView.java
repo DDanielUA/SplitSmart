@@ -20,21 +20,21 @@ public class WelcomeView extends BaseFrame implements ActionListener
     private JButton regButton;
     private JButton loginButton;
 
-    private LoginView loginView;
-    private RegView regView;
+    //private LoginView loginView;
+    //private RegView regView;
 
     public WelcomeView()
     {
         //base
         welcomeFrame = new JFrame();
 
-        loginView = new LoginView();
-        regView = new RegView();
+        //loginView = new LoginView();
+        //regView = new RegView();
 
         FrameSettings();
         ConstructLabels();
-        ConstructPanels();
         ConstructButtons();
+        ConstructPanels();
     }
 
     private void FrameSettings()
@@ -131,13 +131,13 @@ public class WelcomeView extends BaseFrame implements ActionListener
         if(e.getSource()== loginButton)
         {
             welcomeFrame.dispose();
-            loginView.displayView();
+            //loginView.displayView();
         }
 
         if(e.getSource()== regButton)
         {
             welcomeFrame.dispose();
-            regView.displayView();
+            //regView.displayView();
         }
     }
 }

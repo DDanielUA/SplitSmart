@@ -1,5 +1,7 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Model.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,12 +16,12 @@ public class FeedbackView implements ActionListener
 
     private JButton loginButton;
 
-    private LoginView loginView;
+    //private LoginView loginView;
 
-    public FeedbackView()
+    public FeedbackView(Person user) //we need user.PersonId and user.Name
     {
         feedbackFrame = new BaseFrame();
-        loginView = new LoginView();
+        //loginView = new LoginView();
 
         ConstructLabels();
         ConstructButtons();
@@ -61,7 +63,7 @@ public class FeedbackView implements ActionListener
         if(e.getSource()== loginButton)
         {
             feedbackFrame.setVisible(false);
-            loginView.displayView();
+            //loginView.displayView();
         }
     }
 

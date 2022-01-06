@@ -1,5 +1,7 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Model.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +21,7 @@ public class RegView extends JFrame implements ActionListener
 
     private JButton regButton;
 
-    private FeedbackView feedbackView;
+    //private FeedbackView feedbackView;
 
     public static String regName;
     public static String regPhone;
@@ -28,7 +30,7 @@ public class RegView extends JFrame implements ActionListener
     public RegView()
     {
         regFrame = new BaseFrame();
-        feedbackView = new FeedbackView();
+        //feedbackView = new FeedbackView();
 
         ConstructFields();
         ConstructLabels();
@@ -107,7 +109,7 @@ public class RegView extends JFrame implements ActionListener
             regEmail = emailField.getText();
 
             regFrame.setVisible(false);
-            feedbackView.displayView();
+            //feedbackView.displayView();
         }
     }
 

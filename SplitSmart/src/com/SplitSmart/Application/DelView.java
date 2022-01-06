@@ -1,13 +1,15 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Model.Person;
+
 import javax.swing.*;
 
 public class DelView
 {
-    MainView mainView;
-    DelView()
+    //MainView mainView;
+    DelView(Person personToDelete) //we need to delete them
     {
-        mainView = new MainView();
+        //mainView = new MainView();
 
         int answer = JOptionPane.showConfirmDialog
                 (null,
@@ -25,7 +27,7 @@ public class DelView
             //go back to MainView
             System.out.println("back");
 
-            mainView.displayView();
+            //mainView.displayView();
         }
     }
 

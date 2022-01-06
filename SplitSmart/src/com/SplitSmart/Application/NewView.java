@@ -1,5 +1,7 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Model.Receipt;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

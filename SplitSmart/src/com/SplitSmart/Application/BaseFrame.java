@@ -3,8 +3,10 @@ package com.SplitSmart.Application;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BaseFrame extends JFrame
+public class BaseFrame extends JFrame implements ActionListener
 {
     protected final Color _BackgroundColor = new Color(162, 243, 185);
 
@@ -96,11 +98,21 @@ public class BaseFrame extends JFrame
 
         this.backButton = new JButton();
         backButton.setBounds(30, 60, 100, 50);
-        backButton.addActionListener(e -> System.out.println("back"));
+        backButton.addActionListener(this);
         backButton.setText("Back");
         backButton.setFocusable(false);
         backButton.setBackground(buttonColor);
         backButton.setBorder(buttonBorder);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource()== backButton)
+        {
+            System.out.println("back");
+
+            this.setVisible(false);
+        }
+    }
 }

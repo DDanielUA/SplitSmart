@@ -1,5 +1,7 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Model.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,12 +19,12 @@ public class LoginView implements ActionListener
 
     private JButton loginButton;
 
-    private MainView mainView;
+    //private MainView mainView;
 
     public LoginView()
     {
         loginFrame = new BaseFrame();
-        mainView = new MainView();
+        //mainView = new MainView();
 
         ConstructFields();
         ConstructLabels();
@@ -92,7 +94,7 @@ public class LoginView implements ActionListener
             }
 
             loginFrame.setVisible(false);
-            mainView.displayView();
+            //mainView.displayView();
         }
     }
 

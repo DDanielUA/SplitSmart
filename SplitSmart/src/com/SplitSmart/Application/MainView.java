@@ -1,9 +1,14 @@
 package com.SplitSmart.Application;
 
+import com.SplitSmart.Model.Connector;
+import com.SplitSmart.Model.Person;
+import com.SplitSmart.Model.Receipt;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MainView implements ActionListener
 {
@@ -11,13 +16,14 @@ public class MainView implements ActionListener
 
     private JButton addButton;
     private JButton dieButton;
+    private JButton sumButton;
 
-    private NewView newView;
+    //private NewView newView;
 
-    public MainView()
+    public MainView(ArrayList<Receipt> receiptList) //we need a specific user's receipts
     {
         mainFrame = new BaseFrame();
-        newView = new NewView();
+        //newView = new NewView();
 
         ConstructButtons();
     }
@@ -43,6 +49,17 @@ public class MainView implements ActionListener
         dieButton.setBackground(mainFrame.buttonColor);
         dieButton.setBorder(mainFrame.buttonBorder);
         mainFrame.add(dieButton);
+
+        //sum button creation and settings
+        this.sumButton = new JButton();
+        sumButton.setBounds(200, 300, 70, 30);
+        sumButton.addActionListener(this);
+        sumButton.setText("Sum");
+        sumButton.setFocusable(false);
+        sumButton.setBackground(mainFrame.buttonColor);
+        sumButton.setBorder(mainFrame.buttonBorder);
+        mainFrame.add(sumButton);
+
     }
 
     @Override
@@ -52,15 +69,22 @@ public class MainView implements ActionListener
         {
             System.out.println("adding new bill");
 
-            mainFrame.dispose();
-            newView.displayView();
+            mainFrame.setVisible(false);
+            //newView.displayView();
         }
 
         if (e.getSource()== dieButton)
         {
             System.out.println("do you wanna die?");
 
-            DelView delView = new DelView();
+            //DelView delView = new DelView();
+        }
+
+        if (e.getSource()== sumButton)
+        {
+            System.out.println("sum of your trip");
+
+            //DelView delView = new DelView();
         }
     }
 
