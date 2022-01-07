@@ -1,8 +1,9 @@
 package com.SplitSmart.Logic;
 
-import com.SplitSmart.Application.LoginView;
-import com.SplitSmart.Application.RegView;
-import com.SplitSmart.Application.WelcomeView;
+import com.SplitSmart.Application.WelcomeScene.FeedbackView;
+import com.SplitSmart.Application.WelcomeScene.LoginView;
+import com.SplitSmart.Application.WelcomeScene.RegView;
+import com.SplitSmart.Application.WelcomeScene.WelcomeView;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.ActionChannel;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
@@ -17,11 +18,13 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
     private WelcomeView welcomeView;
     private LoginView loginView;
     private RegView registerView;
+    private FeedbackView feedbackView;
+
 
     private ActionAgency<WelcomeAction> observer;
 
     private Person person;
-
+    private boolean isErrorLogIn = false;
 
     public WelcomeService(){
         this.observer = new ActionAgency<>();
@@ -34,6 +37,9 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
     public void Notify(WelcomeAction happenedEvent) {
         super.Notify(happenedEvent);
         switch (happenedEvent){
+            case Default -> {
+                provideView("Welcome");
+            }
             case InitiateLogIn -> {
                 provideView("LogIn");
             }
@@ -46,6 +52,9 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
             case AttemptRegister -> {
                 registerUser();
             }
+            case ProvideFeedback -> {
+                provideView("Feedback");
+            }
         }
     }
 
@@ -57,13 +66,17 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
             }
             case "LogIn" -> {
                 this.person = new Person();
-                this.loginView = new LoginView(this.observer, this.person);
+                this.loginView = new LoginView(this.observer, this.person, this.isErrorLogIn);
                 loginView.displayView();
             }
             case "Register" -> {
                 this.person = new Person();
                 this.registerView = new RegView(this.observer, this.person);
                 registerView.displayView();
+            }
+            case "Feedback" -> {
+                this.feedbackView = new FeedbackView(this.observer, this.person);
+                feedbackView.displayView();
             }
         }
     }
@@ -75,6 +88,8 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
         PersonRepository personRepo = new PersonRepository(ctx);
         personRepo.Insert(this.person);
         ctx.SaveSets();
+
+        provideView("Feedback");
     }
 
     private void logInUser(){
@@ -91,6 +106,9 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
         // null it out if there is no match
         if (this.person.getEmail() == null){
             this.person = new Person();
+            this.isErrorLogIn = true;
+
+            provideView("LogIn");
         }
     }
 }

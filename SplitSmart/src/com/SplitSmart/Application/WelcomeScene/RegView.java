@@ -1,5 +1,6 @@
-package com.SplitSmart.Application;
+package com.SplitSmart.Application.WelcomeScene;
 
+import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
@@ -9,10 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RegView extends JFrame implements ActionListener
+public class RegView extends WelcomeBase implements ActionListener
 {
-    private BaseFrame regFrame;
-
     private JTextField nameField;
     private JTextField phoneField;
     private JTextField emailField;
@@ -23,21 +22,9 @@ public class RegView extends JFrame implements ActionListener
 
     private JButton regButton;
 
-    private ActionAgency<WelcomeAction> observer;
-    private Person person;
-
-    //private FeedbackView feedbackView;
-
-    public static String regName;
-    public static String regPhone;
-    public static String regEmail;
-
-    public RegView(ActionAgency<WelcomeAction> observer, Person person)
+    public RegView(ActionAgency<WelcomeAction> observer, Person user)
     {
-        this.observer = observer;
-        this.person = person;
-        regFrame = new BaseFrame();
-        //feedbackView = new FeedbackView();
+        super(observer, user);
 
         ConstructFields();
         ConstructLabels();
@@ -50,46 +37,46 @@ public class RegView extends JFrame implements ActionListener
         this.nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(250, 30));
         nameField.setBounds(180, 200, 250, 30);
-        nameField.setFont(regFrame._BaseFont);
+        nameField.setFont(this._BaseFont);
         nameField.setText("Example Ella");
-        regFrame.add(nameField);
+        this.add(nameField);
 
         //phone field creation and settings
         this.phoneField = new JTextField();
         phoneField.setPreferredSize(new Dimension(250, 30));
         phoneField.setBounds(180, 250, 250, 30);
-        phoneField.setFont(regFrame._BaseFont);
+        phoneField.setFont(this._BaseFont);
         phoneField.setText("+36201234567");
-        regFrame.add(phoneField);
+        this.add(phoneField);
 
         //email field creation and settings
         this.emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(250, 30));
         emailField.setBounds(180, 300, 250, 30);
-        emailField.setFont(regFrame._BaseFont);
+        emailField.setFont(this._BaseFont);
         emailField.setText("example.ella@gmail.com");
-        regFrame.add(emailField);
+        this.add(emailField);
     }
 
     private void ConstructLabels()
     {
         //name label creation and settings
         this.nameLabel = new JLabel("Name: ");
-        nameLabel.setFont(regFrame._BaseFont);
+        nameLabel.setFont(this._BaseFont);
         nameLabel.setBounds(50, 200, 150, 30);
-        regFrame.add(nameLabel);
+        this.add(nameLabel);
 
         //phone label creation and settings
         this.phoneLabel = new JLabel("Phone number: ");
-        phoneLabel.setFont(regFrame._BaseFont);
+        phoneLabel.setFont(this._BaseFont);
         phoneLabel.setBounds(50, 250, 150, 30);
-        regFrame.add(phoneLabel);
+        this.add(phoneLabel);
 
         //email label creation and settings
         this.emailLabel = new JLabel("Email address: ");
-        emailLabel.setFont(regFrame._BaseFont);
+        emailLabel.setFont(this._BaseFont);
         emailLabel.setBounds(50, 300, 150, 30);
-        regFrame.add(emailLabel);
+        this.add(emailLabel);
     }
 
     private void ConstructButtons()
@@ -100,9 +87,11 @@ public class RegView extends JFrame implements ActionListener
         regButton.addActionListener(this);
         regButton.setText("Register");
         regButton.setFocusable(false);
-        regButton.setBackground(regFrame._ButtonColor);
-        regButton.setBorder(regFrame._ButtonBorder);
-        regFrame.add(regButton);
+        regButton.setBackground(this._ButtonColor);
+        regButton.setBorder(this._ButtonBorder);
+        this.add(regButton);
+
+        this.backButton.addActionListener(this);
     }
 
     @Override
@@ -115,14 +104,19 @@ public class RegView extends JFrame implements ActionListener
             /// !!!!!
 
             //System.out.println("adding you to the system");
-            this.person.setName(nameField.getText());
-            this.person.setPhone(phoneField.getText());
-            this.person.setEmail(emailField.getText());
+            this.user.setName(nameField.getText());
+            this.user.setPhone(phoneField.getText());
+            this.user.setEmail(emailField.getText());
 
-            regFrame.setVisible(false);
+            this.dispose();
             this.observer.update(WelcomeAction.AttemptRegister);
+        }
+
+        if (e.getSource() == backButton){
+            this.dispose();
+            this.observer.update(WelcomeAction.Default);
         }
     }
 
-    public void displayView() { regFrame.setVisible(true); }
+    public void displayView() { this.setVisible(true); }
 }

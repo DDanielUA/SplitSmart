@@ -3,10 +3,8 @@ package com.SplitSmart.Application;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class BaseFrame extends JFrame implements ActionListener
+public class BaseFrame extends JFrame
 {
     protected final Color _BackgroundColor = new Color(162, 243, 185);
 
@@ -14,12 +12,13 @@ public class BaseFrame extends JFrame implements ActionListener
     protected final Color _ButtonColor = new Color(58, 167, 92);
 
     protected final Font _BaseFont = new Font("Consolas", Font.PLAIN, 14);
+    protected final Font _ErrorFont = new Font("Consolas", Font.PLAIN, 14);
 
     protected final ImageIcon _Logo = new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg");
     protected final ImageIcon _SmallLogo = new ImageIcon(new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
     protected final ImageIcon _GreyLogo = new ImageIcon("src/com/SplitSmart/Images/logo.jpg");
 
-    private JButton backButton;
+    protected JButton backButton;
 
     private JPanel headerPanel;
     private JPanel backPanel;
@@ -28,7 +27,7 @@ public class BaseFrame extends JFrame implements ActionListener
     private JLabel sloganLabel;
     private JLabel nameLabel;
 
-    BaseFrame(){
+    public BaseFrame(){
         FrameSettings();
         ConstructLabels();
         ConstructButtons();
@@ -94,21 +93,9 @@ public class BaseFrame extends JFrame implements ActionListener
 
         this.backButton = new JButton();
         backButton.setBounds(30, 60, 100, 50);
-        backButton.addActionListener(this);
         backButton.setText("Back");
         backButton.setFocusable(false);
         backButton.setBackground(new Color(58, 167, 92));
         backButton.setBorder(buttonBorder);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getSource()== backButton)
-        {
-            System.out.println("back");
-
-            this.setVisible(false);
-        }
     }
 }

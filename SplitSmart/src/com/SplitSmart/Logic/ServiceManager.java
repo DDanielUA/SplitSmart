@@ -1,6 +1,6 @@
 package com.SplitSmart.Logic;
 
-import com.SplitSmart.Application.WelcomeView;
+import com.SplitSmart.Application.WelcomeScene.WelcomeView;
 
 public class ServiceManager {
 
@@ -12,5 +12,6 @@ public class ServiceManager {
     public ServiceManager(){
         this.welcomeService = new WelcomeService();
     }
+
 
 }

@@ -12,7 +12,8 @@ public class SplitSmartContext {
     private static SplitSmartContext instance = null;
 
     private SplitSmartContext(){
-        CreateContainers();
+        //SeedContainers();
+        LoadSets();
     }
 
     public static SplitSmartContext GetInstance(){
@@ -31,7 +32,7 @@ public class SplitSmartContext {
     public int nextConnectorId;
     public ArrayList<Connector> ConnectorSet = new ArrayList<Connector>();
 
-    private void CreateContainers(){
+    private void SeedContainers(){
         // Person seed
         Person john = new Person();
         john.setPersonId(1);
@@ -141,7 +142,10 @@ public class SplitSmartContext {
         ArrayList<ArrayList> sets = ssml.ReadFileToSet();
 
         this.PersonSet = sets.get(0);
+        this.nextPersonId = sets.get(0).size() + 1;
         this.ReceiptSet = sets.get(1);
+        this.nextReceiptId = sets.get(1).size() + 1;
         this.ConnectorSet = sets.get(2);
+        this.nextConnectorId = sets.get(2).size() + 1;
     }
 }

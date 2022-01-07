@@ -4,8 +4,8 @@ Person:
 /3/Jane/jane@gmail.com/704346269:3/5/;
 /4/Example Ella/example.ella@gmail.com/+36201234567:;
 Receipt:
-/1/Groceries/Just common stuff, nothing fancy./2021-12-23/33.6/true/1:1/2/3/;
-/2/Restaurant with da crew/Having some dinner after a long trip./2021-12-10/42.5/false/3:2/3/;
+/1/Groceries/Just common stuff, nothing fancy./2021-12-24/33.6/true/1:1/2/3/;
+/2/Restaurant with da crew/Having some dinner after a long trip./2021-12-11/42.5/false/3:2/3/;
 Connector:
 /1/1/1/11.2/true:
 /2/1/2/11.2/false:

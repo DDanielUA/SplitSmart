@@ -6,4 +6,5 @@ public enum WelcomeAction {
     AttemptLogIn,
     InitiateRegister,
     AttemptRegister,
+    ProvideFeedback,
 }

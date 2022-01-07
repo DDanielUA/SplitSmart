@@ -1,4 +1,4 @@
-package com.SplitSmart.Application;
+package com.SplitSmart.Application.WelcomeScene;
 
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WelcomeView extends BaseFrame implements ActionListener
+public class WelcomeView extends WelcomeBase implements ActionListener
 {
     private JFrame welcomeFrame;
 
@@ -23,19 +23,12 @@ public class WelcomeView extends BaseFrame implements ActionListener
     private JButton regButton;
     private JButton loginButton;
 
-    private ActionAgency<WelcomeAction> observer;
 
-    //private LoginView loginView;
-    //private RegView regView;
-
-    public WelcomeView(ActionAgency<WelcomeAction> givenAgent)
+    public WelcomeView(ActionAgency<WelcomeAction> observer)
     {
-        this.observer = givenAgent;
-        //base
-        welcomeFrame = new JFrame();
+        super(observer, null);
 
-        //loginView = new LoginView();
-        //regView = new RegView();
+        welcomeFrame = new JFrame();
 
         FrameSettings();
         ConstructLabels();
@@ -134,13 +127,13 @@ public class WelcomeView extends BaseFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()== loginButton)
+        if(e.getSource() == loginButton)
         {
             welcomeFrame.dispose();
             this.observer.update(WelcomeAction.InitiateLogIn);
         }
 
-        if(e.getSource()== regButton)
+        if(e.getSource() == regButton)
         {
             welcomeFrame.dispose();
             this.observer.update(WelcomeAction.InitiateRegister);
