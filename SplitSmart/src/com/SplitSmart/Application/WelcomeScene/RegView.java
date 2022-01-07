@@ -35,7 +35,7 @@ public class RegView extends WelcomeBase implements ActionListener
         nameField.setPreferredSize(new Dimension(250, 30));
         nameField.setBounds(180, 200, 250, 30);
         nameField.setFont(Config._BaseFont);
-        nameField.setText("Example Ella");
+        nameField.setText("Ella");
         this.baseFrame.add(nameField);
 
         //phone field creation and settings
@@ -51,7 +51,7 @@ public class RegView extends WelcomeBase implements ActionListener
         emailField.setPreferredSize(new Dimension(250, 30));
         emailField.setBounds(180, 300, 250, 30);
         emailField.setFont(Config._BaseFont);
-        emailField.setText("example.ella@gmail.com");
+        emailField.setText("ella@gmail.com");
         this.baseFrame.add(emailField);
     }
 

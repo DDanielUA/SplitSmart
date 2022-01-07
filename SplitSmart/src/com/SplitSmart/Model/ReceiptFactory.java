@@ -17,6 +17,5 @@ public class ReceiptFactory
         todayReceipt.setPayingPersonId(payingPersonId);
 
         return todayReceipt;
-
     }
 }

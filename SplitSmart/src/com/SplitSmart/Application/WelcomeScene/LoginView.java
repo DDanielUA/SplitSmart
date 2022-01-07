@@ -37,7 +37,7 @@ public class LoginView extends WelcomeBase implements ActionListener
         nameField.setPreferredSize(new Dimension(250, 30));
         nameField.setBounds(150, 200, 250, 30);
         nameField.setFont(Config._BaseFont);
-        nameField.setText("Example Ella");
+        nameField.setText("Ella");
         this.baseFrame.add(nameField);
 
         //id field creation and settings

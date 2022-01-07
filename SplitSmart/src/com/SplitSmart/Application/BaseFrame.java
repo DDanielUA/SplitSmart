@@ -76,7 +76,7 @@ public class BaseFrame extends JFrame
         Border buttonBorder = BorderFactory.createEtchedBorder();
 
         this.backButton = new JButton();
-        backButton.setBounds(30, 60, 100, 50);
+        backButton.setBounds(30, 60, 70, 30);
         backButton.setText("Back");
         backButton.setFocusable(false);
         backButton.setBackground(new Color(58, 167, 92));

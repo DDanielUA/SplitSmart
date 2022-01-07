@@ -24,6 +24,28 @@ public class MainView extends MainBase implements ActionListener
         super(observer, user, receipts, new BaseFrame());
 
         ConstructButtons();
+        ConstructList();
+    }
+
+    private void ConstructList()
+    {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Config._BackgroundColor);
+        buttonPanel.setBounds(0, 500, 500, 500);
+
+        int numOfButtons = receipts.size();
+        ButtonFactory factory = new ButtonFactory();
+
+        for (int i = 0; i < numOfButtons; i++)
+        {
+            int y = 0;
+            JButton button = factory.getButton(receipts.get(i));
+            button.setBounds(200, y, 70, 30);
+            buttonPanel.add(button);
+            y = y + 50;
+        }
+
+        baseFrame.add(buttonPanel);
     }
 
     private void ConstructButtons()
@@ -40,7 +62,7 @@ public class MainView extends MainBase implements ActionListener
 
         //die button creation and settings
         this.dieButton = new JButton();
-        dieButton.setBounds(200, 300, 70, 30);
+        dieButton.setBounds(250, 350, 70, 30);
         dieButton.addActionListener(this);
         dieButton.setText("Die");
         dieButton.setFocusable(false);
@@ -50,7 +72,7 @@ public class MainView extends MainBase implements ActionListener
 
         //sum button creation and settings
         this.sumButton = new JButton();
-        sumButton.setBounds(200, 300, 70, 30);
+        sumButton.setBounds(150, 350, 70, 30);
         sumButton.addActionListener(this);
         sumButton.setText("Sum");
         sumButton.setFocusable(false);
