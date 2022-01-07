@@ -3,7 +3,7 @@ package com.SplitSmart.Application.MainScene;
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
-import com.SplitSmart.Logic.ActionObserver.MainAction;
+import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
@@ -33,7 +33,7 @@ public class NewView extends MainBase implements ActionListener
 
     private JButton addButton;
 
-    public NewView(ActionAgency<MainAction> observer, Person user, ArrayList<Receipt> receipts)
+    public NewView(ActionAgency<UserAction> observer, Person user, ArrayList<Receipt> receipts)
     {
         super(observer, user, receipts, new BaseFrame());
 

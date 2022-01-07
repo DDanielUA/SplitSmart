@@ -1,6 +1,8 @@
 package com.SplitSmart.Logic.ActionObserver;
 
-public enum ProgramAction {
+public enum ServiceAction {
     Default,
+    Welcome,
     LoggedIn,
+    LoggedOut,
 }
