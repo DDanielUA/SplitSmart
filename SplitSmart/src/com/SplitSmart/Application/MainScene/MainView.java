@@ -2,9 +2,8 @@ package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Application.Main;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
-import com.SplitSmart.Logic.ActionObserver.MainAction;
+import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
@@ -19,7 +18,7 @@ public class MainView extends MainBase implements ActionListener
     private JButton dieButton;
     private JButton sumButton;
 
-    public MainView(ActionAgency<MainAction> observer, Person user, ArrayList<Receipt> receipts)
+    public MainView(ActionAgency<UserAction> observer, Person user, ArrayList<Receipt> receipts)
     {
         super(observer, user, receipts, new BaseFrame());
 
@@ -58,31 +57,34 @@ public class MainView extends MainBase implements ActionListener
         sumButton.setBorder(Config._ButtonBorder);
         baseFrame.add(sumButton);
 
+        this.baseFrame.backButton.setText("LogOut");
+        baseFrame.backButton.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()== addButton)
+        if(e.getSource() == addButton)
         {
-            System.out.println("adding new bill");
-
-            baseFrame.setVisible(false);
-            //newView.displayView();
+            baseFrame.dispose();
+            observer.update(UserAction.AddReceipt);
         }
 
-        if (e.getSource()== dieButton)
+        if (e.getSource() == dieButton)
         {
-            System.out.println("do you wanna die?");
-
-            //DelView delView = new DelView();
+            baseFrame.dispose();
+            observer.update(UserAction.DeleteUser);
         }
 
-        if (e.getSource()== sumButton)
+        if (e.getSource() == sumButton)
         {
-            System.out.println("sum of your trip");
+            baseFrame.dispose();
+            observer.update(UserAction.ShowSummary);
+        }
 
-            //DelView delView = new DelView();
+        if (e.getSource() == baseFrame.backButton){
+            baseFrame.dispose();
+            observer.update(UserAction.LogOut);
         }
     }
 

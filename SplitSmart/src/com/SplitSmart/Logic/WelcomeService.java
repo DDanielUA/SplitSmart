@@ -6,6 +6,7 @@ import com.SplitSmart.Application.WelcomeScene.RegView;
 import com.SplitSmart.Application.WelcomeScene.WelcomeView;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.ActionChannel;
+import com.SplitSmart.Logic.ActionObserver.ServiceAction;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Repository.Data.SplitSmartContext;
@@ -15,14 +16,18 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
 
     private final SplitSmartContext ctx = SplitSmartContext.GetInstance();
 
+    private final ActionAgency<ServiceAction> serviceObserver;
     private final ActionAgency<WelcomeAction> observer;
 
     private Person person;
     private boolean isErrorLogIn = false;
 
-    public WelcomeService(){
+    public WelcomeService(ActionAgency<ServiceAction> sObserver){
+        this.serviceObserver = sObserver;
+
         this.observer = new ActionAgency<>();
         observer.subscribe(this);
+
     }
 
     public void InitiateWelcomeService(){
@@ -95,7 +100,7 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
             provideView("LogIn");
         }
         else{
-
+            serviceObserver.update(ServiceAction.LoggedIn, this.person);
         }
     }
 }
