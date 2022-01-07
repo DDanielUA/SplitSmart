@@ -33,20 +33,20 @@ public class LoginView extends WelcomeBase implements ActionListener
     private void ConstructFields()
     {
         //name field creation and settings
-        this.nameField = new JTextField();
+        nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(250, 30));
         nameField.setBounds(150, 200, 250, 30);
         nameField.setFont(Config._BaseFont);
         nameField.setText("Example Ella");
-        baseFrame.add(nameField);
+        this.baseFrame.add(nameField);
 
         //id field creation and settings
-        this.idField = new JTextField();
+        idField = new JTextField();
         idField.setPreferredSize(new Dimension(250, 30));
         idField.setBounds(150, 250, 250, 30);
         idField.setFont(Config._BaseFont);
         idField.setText("123");
-        baseFrame.add(idField);
+        this.baseFrame.add(idField);
     }
 
     private void ConstructLabels()
@@ -55,15 +55,15 @@ public class LoginView extends WelcomeBase implements ActionListener
         JLabel nameLabel = new JLabel("Name: ");
         nameLabel.setFont(Config._BaseFont);
         nameLabel.setBounds(60, 200, 150, 30);
-        baseFrame.add(nameLabel);
+        this.baseFrame.add(nameLabel);
 
         //id label creation and settings
         JLabel idLabel = new JLabel("ID number: ");
         idLabel.setFont(Config._BaseFont);
         idLabel.setBounds(60, 250, 150, 30);
-        baseFrame.add(idLabel);
+        this.baseFrame.add(idLabel);
 
-        if (this.isError){
+        if (isError){
             //Failed login label
             JLabel errorLabel = new JLabel("Wrong username or id!");
             errorLabel.setFont(Config._ErrorFont);
@@ -76,16 +76,16 @@ public class LoginView extends WelcomeBase implements ActionListener
     private void ConstructButtons()
     {
         //login button creation and settings
-        this.loginButton = new JButton();
+        loginButton = new JButton();
         loginButton.setBounds(200, 350, 70, 30);
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
         loginButton.setBackground(Config._ButtonColor);
         loginButton.setBorder(Config._ButtonBorder);
-        baseFrame.add(loginButton);
+        this.baseFrame.add(loginButton);
 
-        baseFrame.backButton.addActionListener(this);
+        this.baseFrame.backButton.addActionListener(this);
     }
 
     @Override
@@ -94,22 +94,22 @@ public class LoginView extends WelcomeBase implements ActionListener
         if(e.getSource() == loginButton)
         {
             try{
-                this.user.setPersonId(Integer.parseInt(idField.getText()));
+                user.setPersonId(Integer.parseInt(idField.getText()));
             }
             catch (NumberFormatException ex)
             {
                 ex.printStackTrace();
             }
 
-            this.user.setName(nameField.getText());
+            user.setName(nameField.getText());
 
-            baseFrame.dispose();
-            this.observer.update(WelcomeAction.AttemptLogIn);
+            this.baseFrame.dispose();
+            observer.update(WelcomeAction.AttemptLogIn);
         }
 
         if (e.getSource() == baseFrame.backButton){
-            baseFrame.dispose();
-            this.observer.update(WelcomeAction.Default);
+            this.baseFrame.dispose();
+            observer.update(WelcomeAction.Default);
         }
     }
 

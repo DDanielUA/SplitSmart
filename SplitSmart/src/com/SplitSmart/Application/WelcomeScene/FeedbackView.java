@@ -30,28 +30,28 @@ public class FeedbackView extends WelcomeBase implements ActionListener
         nameLabel.setText(text);
         nameLabel.setFont(Config._BaseFont);
         nameLabel.setBounds(60, 200, 300, 50);
-        baseFrame.add(nameLabel);
+        this.baseFrame.add(nameLabel);
 
         //id label creation and settings
         JLabel idLabel = new JLabel(String.format("Your ID is %s.", this.user.getPersonId()));
         idLabel.setFont(Config._BaseFont);
         idLabel.setBounds(60, 250, 150, 50);
-        baseFrame.add(idLabel);
+        this.baseFrame.add(idLabel);
     }
 
     private void ConstructButtons()
     {
         //login button creation and settings
-        this.loginButton = new JButton();
+        loginButton = new JButton();
         loginButton.setBounds(150, 400, 150, 50);
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
         loginButton.setBackground(Config._ButtonColor);
         loginButton.setBorder(Config._ButtonBorder);
-        baseFrame.add(loginButton);
+        this.baseFrame.add(loginButton);
 
-        baseFrame.backButton.setVisible(false);
+        this.baseFrame.backButton.setVisible(false);
     }
 
     @Override
@@ -59,13 +59,13 @@ public class FeedbackView extends WelcomeBase implements ActionListener
     {
         if(e.getSource()== loginButton)
         {
-            baseFrame.setVisible(false);
-            this.observer.update(WelcomeAction.InitiateLogIn);
+            this.baseFrame.setVisible(false);
+            observer.update(WelcomeAction.InitiateLogIn);
         }
     }
 
     public void displayView()
     {
-        baseFrame.setVisible(true);
+        this.baseFrame.setVisible(true);
     }
 }
