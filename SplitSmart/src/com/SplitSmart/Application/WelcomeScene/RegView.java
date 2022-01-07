@@ -1,6 +1,7 @@
 package com.SplitSmart.Application.WelcomeScene;
 
 import com.SplitSmart.Application.BaseFrame;
+import com.SplitSmart.Application.Config;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
@@ -16,15 +17,11 @@ public class RegView extends WelcomeBase implements ActionListener
     private JTextField phoneField;
     private JTextField emailField;
 
-    private JLabel nameLabel;
-    private JLabel phoneLabel;
-    private JLabel emailLabel;
-
     private JButton regButton;
 
     public RegView(ActionAgency<WelcomeAction> observer, Person user)
     {
-        super(observer, user);
+        super(observer, user, new BaseFrame());
 
         ConstructFields();
         ConstructLabels();
@@ -37,46 +34,46 @@ public class RegView extends WelcomeBase implements ActionListener
         this.nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(250, 30));
         nameField.setBounds(180, 200, 250, 30);
-        nameField.setFont(this._BaseFont);
+        nameField.setFont(Config._BaseFont);
         nameField.setText("Example Ella");
-        this.add(nameField);
+        baseFrame.add(nameField);
 
         //phone field creation and settings
         this.phoneField = new JTextField();
         phoneField.setPreferredSize(new Dimension(250, 30));
         phoneField.setBounds(180, 250, 250, 30);
-        phoneField.setFont(this._BaseFont);
+        phoneField.setFont(Config._BaseFont);
         phoneField.setText("+36201234567");
-        this.add(phoneField);
+        baseFrame.add(phoneField);
 
         //email field creation and settings
         this.emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(250, 30));
         emailField.setBounds(180, 300, 250, 30);
-        emailField.setFont(this._BaseFont);
+        emailField.setFont(Config._BaseFont);
         emailField.setText("example.ella@gmail.com");
-        this.add(emailField);
+        baseFrame.add(emailField);
     }
 
     private void ConstructLabels()
     {
         //name label creation and settings
-        this.nameLabel = new JLabel("Name: ");
-        nameLabel.setFont(this._BaseFont);
+        JLabel nameLabel = new JLabel("Name: ");
+        nameLabel.setFont(Config._BaseFont);
         nameLabel.setBounds(50, 200, 150, 30);
-        this.add(nameLabel);
+        baseFrame.add(nameLabel);
 
         //phone label creation and settings
-        this.phoneLabel = new JLabel("Phone number: ");
-        phoneLabel.setFont(this._BaseFont);
+        JLabel phoneLabel = new JLabel("Phone number: ");
+        phoneLabel.setFont(Config._BaseFont);
         phoneLabel.setBounds(50, 250, 150, 30);
-        this.add(phoneLabel);
+        baseFrame.add(phoneLabel);
 
         //email label creation and settings
-        this.emailLabel = new JLabel("Email address: ");
-        emailLabel.setFont(this._BaseFont);
+        JLabel emailLabel = new JLabel("Email address: ");
+        emailLabel.setFont(Config._BaseFont);
         emailLabel.setBounds(50, 300, 150, 30);
-        this.add(emailLabel);
+        baseFrame.add(emailLabel);
     }
 
     private void ConstructButtons()
@@ -87,11 +84,11 @@ public class RegView extends WelcomeBase implements ActionListener
         regButton.addActionListener(this);
         regButton.setText("Register");
         regButton.setFocusable(false);
-        regButton.setBackground(this._ButtonColor);
-        regButton.setBorder(this._ButtonBorder);
-        this.add(regButton);
+        regButton.setBackground(Config._ButtonColor);
+        regButton.setBorder(Config._ButtonBorder);
+        baseFrame.add(regButton);
 
-        this.backButton.addActionListener(this);
+        baseFrame.backButton.addActionListener(this);
     }
 
     @Override
@@ -108,15 +105,15 @@ public class RegView extends WelcomeBase implements ActionListener
             this.user.setPhone(phoneField.getText());
             this.user.setEmail(emailField.getText());
 
-            this.dispose();
+            baseFrame.dispose();
             this.observer.update(WelcomeAction.AttemptRegister);
         }
 
-        if (e.getSource() == backButton){
-            this.dispose();
+        if (e.getSource() == baseFrame.backButton){
+            baseFrame.dispose();
             this.observer.update(WelcomeAction.Default);
         }
     }
 
-    public void displayView() { this.setVisible(true); }
+    public void displayView() { baseFrame.setVisible(true); }
 }

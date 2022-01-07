@@ -6,23 +6,7 @@ import java.awt.*;
 
 public class BaseFrame extends JFrame
 {
-    protected final Color _BackgroundColor = new Color(162, 243, 185);
-
-    protected final Border _ButtonBorder = BorderFactory.createEtchedBorder();
-    protected final Color _ButtonColor = new Color(58, 167, 92);
-
-    protected final Font _BaseFont = new Font("Consolas", Font.PLAIN, 14);
-    protected final Font _ErrorFont = new Font("Consolas", Font.PLAIN, 14);
-
-    protected final ImageIcon _Logo = new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg");
-    protected final ImageIcon _SmallLogo = new ImageIcon(new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-    protected final ImageIcon _GreyLogo = new ImageIcon("src/com/SplitSmart/Images/logo.jpg");
-
-    protected JButton backButton;
-
-    private JPanel headerPanel;
-    private JPanel backPanel;
-    private JPanel sloganPanel;
+    public JButton backButton;
 
     private JLabel sloganLabel;
     private JLabel nameLabel;
@@ -42,8 +26,8 @@ public class BaseFrame extends JFrame
         this.setSize(500, 666);
         this.setLayout(null);
         this.setVisible(false);
-        this.getContentPane().setBackground(this._BackgroundColor);
-        this.setIconImage(_Logo.getImage()); //changes the image on the frame
+        this.getContentPane().setBackground(Config._BackgroundColor);
+        this.setIconImage(Config._Logo.getImage()); //changes the image on the frame
         //this.setLocationRelativeTo(null);
     }
 
@@ -56,7 +40,7 @@ public class BaseFrame extends JFrame
         //name label creation and settings
         this.nameLabel = new JLabel("SplitSmart"); //, SwingConstants.CENTER
         nameLabel.setText("SplitSmart"); //"<html>First line<br>Second line</html>"
-        nameLabel.setIcon(this._SmallLogo);
+        nameLabel.setIcon(Config._SmallLogo);
         nameLabel.setHorizontalTextPosition(JLabel.CENTER);
         nameLabel.setVerticalTextPosition(JLabel.TOP);
         nameLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
@@ -67,23 +51,23 @@ public class BaseFrame extends JFrame
     }
 
     private void ConstructPanels(){
-        this.backPanel = new JPanel();
+        JPanel backPanel = new JPanel();
         this.add(backPanel);
-        backPanel.setBackground(this._BackgroundColor);
+        backPanel.setBackground(Config._BackgroundColor);
         backPanel.setBounds(0, 0, 100, 120);
         backPanel.add(backButton);
 
-        this.headerPanel = new JPanel();
+        JPanel headerPanel = new JPanel();
         this.add(headerPanel);
         //header.setLayout(new FlowLayout( FlowLayout.CENTER));
-        headerPanel.setBackground(this._BackgroundColor);
+        headerPanel.setBackground(Config._BackgroundColor);
         headerPanel.setBounds(100, 0, 300, 120);
         headerPanel.add(nameLabel);
 
-        this.sloganPanel = new JPanel();
+        JPanel sloganPanel = new JPanel();
         this.add(sloganPanel);
         //sloganPanel.setLayout( new GridLayout( 2 , 1 ) );  // 2 rows 1 column
-        sloganPanel.setBackground(this._BackgroundColor);
+        sloganPanel.setBackground(Config._BackgroundColor);
         sloganPanel.setBounds(0, 120, 500, 50);
         sloganPanel.add(sloganLabel);
     }

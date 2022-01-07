@@ -1,6 +1,7 @@
 package com.SplitSmart.Application.WelcomeScene;
 
 import com.SplitSmart.Application.BaseFrame;
+import com.SplitSmart.Application.Config;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
@@ -11,14 +12,11 @@ import java.awt.event.ActionListener;
 
 public class FeedbackView extends WelcomeBase implements ActionListener
 {
-    private JLabel nameLabel;
-    private JLabel idLabel;
-
     private JButton loginButton;
 
     public FeedbackView(ActionAgency<WelcomeAction> observer, Person user)
     {
-        super(observer, user);
+        super(observer, user, new BaseFrame());
 
         ConstructLabels();
         ConstructButtons();
@@ -28,17 +26,17 @@ public class FeedbackView extends WelcomeBase implements ActionListener
     {
         //name label creation and settings
         String text = String.format("Your name is %s.", this.user.getName());
-        this.nameLabel = new JLabel();
+        JLabel nameLabel = new JLabel();
         nameLabel.setText(text);
-        nameLabel.setFont(this._BaseFont);
+        nameLabel.setFont(Config._BaseFont);
         nameLabel.setBounds(60, 200, 300, 50);
-        this.add(nameLabel);
+        baseFrame.add(nameLabel);
 
         //id label creation and settings
-        this.idLabel = new JLabel(String.format("Your ID is %s.", this.user.getPersonId()));
-        idLabel.setFont(this._BaseFont);
+        JLabel idLabel = new JLabel(String.format("Your ID is %s.", this.user.getPersonId()));
+        idLabel.setFont(Config._BaseFont);
         idLabel.setBounds(60, 250, 150, 50);
-        this.add(idLabel);
+        baseFrame.add(idLabel);
     }
 
     private void ConstructButtons()
@@ -49,11 +47,11 @@ public class FeedbackView extends WelcomeBase implements ActionListener
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
-        loginButton.setBackground(this._ButtonColor);
-        loginButton.setBorder(this._ButtonBorder);
-        this.add(loginButton);
+        loginButton.setBackground(Config._ButtonColor);
+        loginButton.setBorder(Config._ButtonBorder);
+        baseFrame.add(loginButton);
 
-        backButton.setVisible(false);
+        baseFrame.backButton.setVisible(false);
     }
 
     @Override
@@ -61,13 +59,13 @@ public class FeedbackView extends WelcomeBase implements ActionListener
     {
         if(e.getSource()== loginButton)
         {
-            this.setVisible(false);
+            baseFrame.setVisible(false);
             this.observer.update(WelcomeAction.InitiateLogIn);
         }
     }
 
     public void displayView()
     {
-        this.setVisible(true);
+        baseFrame.setVisible(true);
     }
 }
