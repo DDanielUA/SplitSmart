@@ -1,4 +1,4 @@
-package com.SplitSmart.Application;
+package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Model.Person;
 

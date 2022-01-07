@@ -1,5 +1,7 @@
-package com.SplitSmart.Application;
+package com.SplitSmart.Application.MainScene;
 
+import com.SplitSmart.Application.BaseFrame;
+import com.SplitSmart.Application.Config;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
@@ -29,8 +31,8 @@ public class BillView implements ActionListener
         payButton.addActionListener(this);
         payButton.setText("Pay");
         payButton.setFocusable(false);
-        payButton.setBackground(billFrame._ButtonColor);
-        payButton.setBorder(billFrame._ButtonBorder);
+        payButton.setBackground(Config._ButtonColor);
+        payButton.setBorder(Config._ButtonBorder);
         billFrame.add(payButton);
     }
 

@@ -5,7 +5,7 @@ import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
 
-public class WelcomeBase {
+class WelcomeBase {
 
     protected BaseFrame baseFrame;
 

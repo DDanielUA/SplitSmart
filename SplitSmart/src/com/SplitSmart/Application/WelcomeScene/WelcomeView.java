@@ -1,6 +1,5 @@
 package com.SplitSmart.Application.WelcomeScene;
 
-import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;

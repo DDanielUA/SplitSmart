@@ -1,29 +1,27 @@
-package com.SplitSmart.Application;
+package com.SplitSmart.Application.MainScene;
 
-import com.SplitSmart.Model.Connector;
+import com.SplitSmart.Application.BaseFrame;
+import com.SplitSmart.Application.Config;
+import com.SplitSmart.Application.Main;
+import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.MainAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MainView implements ActionListener
+public class MainView extends MainBase implements ActionListener
 {
-    private BaseFrame mainFrame;
-
     private JButton addButton;
     private JButton dieButton;
     private JButton sumButton;
 
-    //private NewView newView;
-
-    public MainView(ArrayList<Receipt> receiptList) //we need a specific user's receipts
+    public MainView(ActionAgency<MainAction> observer, Person user, ArrayList<Receipt> receipts)
     {
-        mainFrame = new BaseFrame();
-        //newView = new NewView();
+        super(observer, user, receipts, new BaseFrame());
 
         ConstructButtons();
     }
@@ -36,9 +34,9 @@ public class MainView implements ActionListener
         addButton.addActionListener(this);
         addButton.setText("Add");
         addButton.setFocusable(false);
-        addButton.setBackground(mainFrame._ButtonColor);
-        addButton.setBorder(mainFrame._ButtonBorder);
-        mainFrame.add(addButton);
+        addButton.setBackground(Config._ButtonColor);
+        addButton.setBorder(Config._ButtonBorder);
+        baseFrame.add(addButton);
 
         //die button creation and settings
         this.dieButton = new JButton();
@@ -46,9 +44,9 @@ public class MainView implements ActionListener
         dieButton.addActionListener(this);
         dieButton.setText("Die");
         dieButton.setFocusable(false);
-        dieButton.setBackground(mainFrame._ButtonColor);
-        dieButton.setBorder(mainFrame._ButtonBorder);
-        mainFrame.add(dieButton);
+        dieButton.setBackground(Config._ButtonColor);
+        dieButton.setBorder(Config._ButtonBorder);
+        baseFrame.add(dieButton);
 
         //sum button creation and settings
         this.sumButton = new JButton();
@@ -56,9 +54,9 @@ public class MainView implements ActionListener
         sumButton.addActionListener(this);
         sumButton.setText("Sum");
         sumButton.setFocusable(false);
-        sumButton.setBackground(mainFrame._ButtonColor);
-        sumButton.setBorder(mainFrame._ButtonBorder);
-        mainFrame.add(sumButton);
+        sumButton.setBackground(Config._ButtonColor);
+        sumButton.setBorder(Config._ButtonBorder);
+        baseFrame.add(sumButton);
 
     }
 
@@ -69,7 +67,7 @@ public class MainView implements ActionListener
         {
             System.out.println("adding new bill");
 
-            mainFrame.setVisible(false);
+            baseFrame.setVisible(false);
             //newView.displayView();
         }
 
@@ -90,6 +88,6 @@ public class MainView implements ActionListener
 
     public void displayView()
     {
-        mainFrame.setVisible(true);
+        baseFrame.setVisible(true);
     }
 }

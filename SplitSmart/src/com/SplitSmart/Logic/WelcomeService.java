@@ -15,13 +15,7 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
 
     private final SplitSmartContext ctx = SplitSmartContext.GetInstance();
 
-    private WelcomeView welcomeView;
-    private LoginView loginView;
-    private RegView registerView;
-    private FeedbackView feedbackView;
-
-
-    private ActionAgency<WelcomeAction> observer;
+    private final ActionAgency<WelcomeAction> observer;
 
     private Person person;
     private boolean isErrorLogIn = false;
@@ -29,7 +23,9 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
     public WelcomeService(){
         this.observer = new ActionAgency<>();
         observer.subscribe(this);
+    }
 
+    public void InitiateWelcomeService(){
         provideView("Welcome");
     }
 
@@ -37,45 +33,33 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
     public void Notify(WelcomeAction happenedEvent) {
         super.Notify(happenedEvent);
         switch (happenedEvent){
-            case Default -> {
-                provideView("Welcome");
-            }
-            case InitiateLogIn -> {
-                provideView("LogIn");
-            }
-            case InitiateRegister -> {
-                provideView("Register");
-            }
-            case AttemptLogIn -> {
-                logInUser();
-            }
-            case AttemptRegister -> {
-                registerUser();
-            }
-            case ProvideFeedback -> {
-                provideView("Feedback");
-            }
+            case Default -> provideView("Welcome");
+            case InitiateLogIn -> provideView("LogIn");
+            case InitiateRegister -> provideView("Register");
+            case AttemptLogIn -> logInUser();
+            case AttemptRegister -> registerUser();
+            case ProvideFeedback -> provideView("Feedback");
         }
     }
 
     private void provideView(String neededView){
         switch (neededView){
             case "Welcome" -> {
-                this.welcomeView = new WelcomeView(this.observer);
+                WelcomeView welcomeView = new WelcomeView(this.observer);
                 welcomeView.displayView();
             }
             case "LogIn" -> {
                 this.person = new Person();
-                this.loginView = new LoginView(this.observer, this.person, this.isErrorLogIn);
+                LoginView loginView = new LoginView(this.observer, this.person, this.isErrorLogIn);
                 loginView.displayView();
             }
             case "Register" -> {
                 this.person = new Person();
-                this.registerView = new RegView(this.observer, this.person);
+                RegView registerView = new RegView(this.observer, this.person);
                 registerView.displayView();
             }
             case "Feedback" -> {
-                this.feedbackView = new FeedbackView(this.observer, this.person);
+                FeedbackView feedbackView = new FeedbackView(this.observer, this.person);
                 feedbackView.displayView();
             }
         }
@@ -109,6 +93,9 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
             this.isErrorLogIn = true;
 
             provideView("LogIn");
+        }
+        else{
+
         }
     }
 }
