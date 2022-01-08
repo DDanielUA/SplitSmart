@@ -55,6 +55,7 @@ public class BaseFrame extends JFrame
         this.add(backPanel);
         backPanel.setBackground(Config._BackgroundColor);
         backPanel.setBounds(0, 0, 100, 120);
+        backPanel.setLayout(null);
         backPanel.add(backButton);
 
         JPanel headerPanel = new JPanel();
@@ -76,7 +77,7 @@ public class BaseFrame extends JFrame
         Border buttonBorder = BorderFactory.createEtchedBorder();
 
         this.backButton = new JButton();
-        backButton.setBounds(30, 60, 70, 30);
+        backButton.setBounds(20, 20, 70, 30);
         backButton.setText("Back");
         backButton.setFocusable(false);
         backButton.setBackground(new Color(58, 167, 92));

@@ -8,6 +8,7 @@ import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class MainView extends MainBase implements ActionListener
     {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Config._BackgroundColor);
-        buttonPanel.setBounds(100, 300, 500, 500);
+        buttonPanel.setBounds(150, 300, 500, 500);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));    //Vertical button layout
 
         ButtonFactory factory = new ButtonFactory();
@@ -39,8 +40,10 @@ public class MainView extends MainBase implements ActionListener
         for (Receipt receipt : receipts) {
             JButton button = factory.getButton(receipt);
             button.setBounds(215, y, 70, 30);
+            button.setMaximumSize(new Dimension(200, 30));
             button.addActionListener(this);
             buttonPanel.add(button);
+            buttonPanel.add(Box.createRigidArea(new Dimension(0,20)));
             y = y + 100;
         }
 

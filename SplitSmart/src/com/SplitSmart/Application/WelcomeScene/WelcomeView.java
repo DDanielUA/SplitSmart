@@ -68,28 +68,30 @@ public class WelcomeView extends WelcomeBase implements ActionListener
         //header panel creation and settings
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(Config._BackgroundColor);
-        headerPanel.setBounds(0, 0, 500, 500);
+        headerPanel.setBounds(0, 0, 500, 450);
         headerPanel.add(nameLabel);
         welcomeFrame.add(headerPanel);
 
         //slogan panel creation and settings
         JPanel sloganPanel = new JPanel();
         sloganPanel.setBackground(Config._BackgroundColor);
-        sloganPanel.setBounds(0, 500, 500, 50);
+        sloganPanel.setBounds(0, 480, 500, 50);
         sloganPanel.add(sloganLabel);
         welcomeFrame.add(sloganPanel);
 
         //registration panel creation and settings
         JPanel regPanel = new JPanel();
         regPanel.setBackground(Config._BackgroundColor);
-        regPanel.setBounds(0, 550, 250, 200);
+        regPanel.setLayout(null);
+        regPanel.setBounds(0, 530, 250, 200);
         regPanel.add(regButton);
         welcomeFrame.add(regPanel);
 
         //login panel creation and settings
         JPanel loginPanel = new JPanel();
         loginPanel.setBackground(Config._BackgroundColor);
-        loginPanel.setBounds(250, 550, 250, 200);
+        loginPanel.setLayout(null);
+        loginPanel.setBounds(250, 530, 250, 200);
         loginPanel.add(loginButton);
         welcomeFrame.add(loginPanel);
     }
@@ -98,7 +100,7 @@ public class WelcomeView extends WelcomeBase implements ActionListener
     {
         //login button creation and settings
         this.loginButton = new JButton();
-        loginButton.setBounds(550, 250, 150, 50);
+        loginButton.setBounds(90, 0, 70, 30);
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
@@ -107,7 +109,7 @@ public class WelcomeView extends WelcomeBase implements ActionListener
 
         //registration button creation and settings
         this.regButton = new JButton();
-        regButton.setBounds(250, 250, 150, 50);
+        regButton.setBounds(90, 0, 70, 30);
         regButton.addActionListener(this);
         regButton.setText("Register");
         regButton.setFocusable(false);
