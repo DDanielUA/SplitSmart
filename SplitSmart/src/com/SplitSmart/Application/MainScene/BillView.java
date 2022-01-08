@@ -41,7 +41,7 @@ public class BillView extends MainBase implements ActionListener
             isPayedLabel.setIcon(Config._CheckMark);
             isPayedLabel.setHorizontalTextPosition(JLabel.LEFT);
             isPayedLabel.setFont(Config._BaseFont);
-            isPayedLabel.setBounds(170, 450, 150, 30);
+            isPayedLabel.setBounds(150, 450, 200, 30);
             baseFrame.add(isPayedLabel);
         }
         else {
