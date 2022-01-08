@@ -8,6 +8,7 @@ import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class BillView extends MainBase implements ActionListener
 {
     private JButton payButton;
+
+    private JLabel isPayedLabel;
 
     private final ActionAgency<UserAction> observer;
     private final ArrayList<Person> participants;
@@ -36,13 +39,16 @@ public class BillView extends MainBase implements ActionListener
         //label for the name of the receipt
         JLabel billLabel = new JLabel("Name of receipt: " + selectedReceipt.getRecName());
         billLabel.setFont(Config._BaseFont);
-        billLabel.setBounds(20, 200, 500, 30);
+        billLabel.setBounds(20, 200, 480, 30);
         baseFrame.add(billLabel);
 
         //label for the description of the receipt
-        JLabel descLabel = new JLabel("Description of receipt: " + selectedReceipt.getDescription());
+        JTextArea descLabel = new JTextArea("Description of receipt: " + selectedReceipt.getDescription());
         descLabel.setFont(Config._BaseFont);
-        descLabel.setBounds(20, 250, 500, 30);
+        descLabel.setBounds(20, 250, 450, 30);
+        descLabel.setLineWrap(true);
+        descLabel.setEditable(false);
+        descLabel.setBackground(Config._BackgroundColor);
         baseFrame.add(descLabel);
 
         //label for the date of purchase
@@ -74,7 +80,7 @@ public class BillView extends MainBase implements ActionListener
         baseFrame.add(participantsLabel);
 
         //label for showing if the bill is paid
-        JLabel isPayedLabel = new JLabel("The bill is payed");
+        this.isPayedLabel = new JLabel("The bill is payed");
         isPayedLabel.setIcon(Config._CheckMark);
         isPayedLabel.setHorizontalTextPosition(JLabel.LEFT);
         isPayedLabel.setFont(Config._BaseFont);

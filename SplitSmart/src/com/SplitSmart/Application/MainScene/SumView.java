@@ -25,7 +25,8 @@ public class SumView extends MainBase implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
 
     }
 }
