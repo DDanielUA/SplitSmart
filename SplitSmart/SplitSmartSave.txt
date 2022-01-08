@@ -3,11 +3,11 @@ Person:
 /2/Bill/bill@gmail.com/305677781:2/4/;
 /3/Jane/jane@gmail.com/704346269:3/5/;
 Receipt:
-/1/Groceries/Just common stuff, nothing fancy./2021-12-24/33.6/true/1:1/2/3/;
-/2/Restaurant with da crew/Having some dinner after a long trip./2021-12-11/42.5/false/3:2/3/;
+/1/Groceries/Just common stuff, nothing fancy./2021-12-25/33.6/true/1:1/2/3/;
+/2/Restaurant with da crew/Having some dinner after a long trip./2021-12-12/42.5/false/3:2/3/;
 Connector:
 /1/1/1/11.2/true:
 /2/1/2/11.2/false:
 /3/1/3/11.2/false:
-/4/2/2/26.5/true:
-/5/2/3/16.0/false:
+/4/2/2/26.5/false:
+/5/2/3/16.0/true:

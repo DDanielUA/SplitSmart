@@ -41,7 +41,7 @@ public class ServiceManager extends ActionChannel<ServiceAction> {
 
     private void provideMainService(Object param){
         if (param instanceof Person){
-            MainService mainService = new MainService(this.serviceObserver);
+            MainService mainService = new MainService(this.serviceObserver, (Person)param);
             mainService.InitiateService();
         }
     }

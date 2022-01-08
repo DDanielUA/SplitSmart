@@ -161,7 +161,7 @@ public class SSML {
                 person.setName(simpleValues[2]);
                 person.setEmail(simpleValues[3]);
                 person.setPhone(simpleValues[4]);
-                //Handling collection values is outsourced to the caller. (ctx.LoadSets())
+                //Handling collection values is outsourced. (this.ConnectEntities())
                 return person;
             }
             case "Receipt" -> {
@@ -210,7 +210,9 @@ public class SSML {
             int lookForReceipt = c.getReceiptId();
             for (Receipt r: (ArrayList<Receipt>)sets.get(1)) {
                 if (r.getRecId() == lookForReceipt){
-                    r.People.add(foundPerson);
+                    if (r.getPayingPersonId() != foundPerson.getPersonId()) {
+                        r.People.add(foundPerson);
+                    }
                 }
             }
         }

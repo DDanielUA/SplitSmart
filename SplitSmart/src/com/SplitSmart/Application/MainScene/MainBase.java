@@ -1,6 +1,7 @@
 package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
+import com.SplitSmart.Application.Main;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
@@ -15,11 +16,19 @@ class MainBase {
     protected Person user;
     protected ArrayList<Receipt> receipts;
 
+    protected MainBase(ActionAgency<UserAction> observer, Person user, BaseFrame frame){
+        this.baseFrame = frame;
+
+        this.observer = observer;
+        this.user = user;
+    }
+
     protected MainBase(ActionAgency<UserAction> observer, Person user, ArrayList<Receipt> receipts, BaseFrame frame){
         this.baseFrame = frame;
 
         this.observer = observer;
         this.user = user;
+
         this.receipts = receipts;
     }
 }

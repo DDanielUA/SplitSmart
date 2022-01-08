@@ -20,14 +20,6 @@ public class NewView extends MainBase implements ActionListener
     private JTextField descField;
     private JTextField dateField; //DATE
     private JTextField totalField; //DOUBLE
-    private JTextField participantsField;
-
-    private JLabel billLabel;
-    private JLabel descLabel;
-    private JLabel dateLabel;
-    private JLabel totalLabel;
-    private JLabel eurLabel;
-    private JLabel participantsLabel;
 
     private JCheckBox equalCheckBox;
 
@@ -78,7 +70,7 @@ public class NewView extends MainBase implements ActionListener
         baseFrame.add(totalField);
 
         //text field for participating users
-        this.participantsField = new JTextField();
+        JTextField participantsField = new JTextField();
         participantsField.setPreferredSize(new Dimension(350, 30));
         participantsField.setBounds(170, 450, 350, 30);
         participantsField.setFont(Config._BaseFont);
@@ -89,37 +81,37 @@ public class NewView extends MainBase implements ActionListener
     private void ConstructLabels()
     {
         //label for the name of the receipt
-        this.billLabel = new JLabel("Name of receipt: ");
+        JLabel billLabel = new JLabel("Name of receipt: ");
         billLabel.setFont(Config._BaseFont);
         billLabel.setBounds(20, 200, 150, 30);
         baseFrame.add(billLabel);
 
         //label for the description of the receipt
-        this.descLabel = new JLabel("Description of receipt: ");
+        JLabel descLabel = new JLabel("Description of receipt: ");
         descLabel.setFont(Config._BaseFont);
         descLabel.setBounds(20, 250, 150, 30);
         baseFrame.add(descLabel);
 
         //label for the date of purchase
-        this.dateLabel = new JLabel("Date of purchase: ");
+        JLabel dateLabel = new JLabel("Date of purchase: ");
         dateLabel.setFont(Config._BaseFont);
         dateLabel.setBounds(20, 300, 150, 30);
         baseFrame.add(dateLabel);
 
         //label for the total amount of purchase
-        this.totalLabel = new JLabel("Total amount of purchase: ");
+        JLabel totalLabel = new JLabel("Total amount of purchase: ");
         totalLabel.setFont(Config._BaseFont);
         totalLabel.setBounds(20, 350, 150, 30);
         baseFrame.add(totalLabel);
 
         //label for euro symbol
-        this.eurLabel = new JLabel("€");
+        JLabel eurLabel = new JLabel("€");
         eurLabel.setFont(Config._BaseFont);
         eurLabel.setBounds(420, 350, 150, 30);
         baseFrame.add(eurLabel);
 
         //label for participating users
-        this.participantsLabel = new JLabel("Names of the people who participated, in the specific format shown below:");
+        JLabel participantsLabel = new JLabel("Names of the people who participated, in the specific format shown below:");
         participantsLabel.setFont(Config._BaseFont);
         participantsLabel.setBounds(20, 400, 350, 30);
         baseFrame.add(participantsLabel);
@@ -146,6 +138,8 @@ public class NewView extends MainBase implements ActionListener
         addButton.setBackground(Config._ButtonColor);
         addButton.setBorder(Config._ButtonBorder);
         baseFrame.add(addButton);
+
+        baseFrame.backButton.addActionListener(this);
     }
 
     @Override
@@ -174,6 +168,11 @@ public class NewView extends MainBase implements ActionListener
             boolean isEqual = equalCheckBox.isSelected();
 
             baseFrame.setVisible(false);
+        }
+        if (e.getSource() == baseFrame.backButton){
+
+            baseFrame.dispose();
+            this.observer.update(UserAction.Default);
         }
     }
 

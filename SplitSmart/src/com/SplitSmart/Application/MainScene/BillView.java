@@ -2,6 +2,8 @@ package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
+import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
@@ -10,29 +12,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class BillView implements ActionListener
+public class BillView extends MainBase implements ActionListener
 {
-    private BaseFrame billFrame;
-
-    private JLabel billLabel;
-    private JLabel descLabel;
-    private JLabel dateLabel;
-    private JLabel totalLabel;
-    private JLabel eurLabel;
-    private JLabel participantsLabel;
-
-    private JLabel billLabel2;
-    private JLabel descLabel2;
-    private JLabel dateLabel2;
-    private JLabel totalLabel2;
-    private JLabel eurLabel2;
-    private JLabel participantsLabel2;
-
     private JButton payButton;
 
-    public BillView(Receipt receipt) //we will write out everything about it
+    private final ActionAgency<UserAction> observer;
+    private final ArrayList<Person> participants;
+    private final Receipt selectedReceipt;
+
+    public BillView(ActionAgency<UserAction> observer, Person user, ArrayList<Person> participants, Receipt receipt)
     {
-        billFrame = new BaseFrame();
+        super(observer, user, new BaseFrame());
+        this.observer = observer;
+        this.participants = participants;
+        this.selectedReceipt = receipt;
 
         ConstructLabels();
         ConstructButtons();
@@ -41,47 +34,44 @@ public class BillView implements ActionListener
     private void ConstructLabels()
     {
         //label for the name of the receipt
-        this.billLabel = new JLabel("Name of receipt: ");
+        JLabel billLabel = new JLabel("Name of receipt: " + selectedReceipt.getRecName());
         billLabel.setFont(Config._BaseFont);
         billLabel.setBounds(20, 200, 150, 30);
-        billFrame.add(billLabel);
-
-        /*
-        this.billLabel2 = new JLabel(BillView.receipt.getName());
-        billLabel2.setFont(Config._BaseFont);
-        billLabel2.setBounds(170, 200, 150, 30);
-        billFrame.add(billLabel2);
-        */
+        baseFrame.add(billLabel);
 
         //label for the description of the receipt
-        this.descLabel = new JLabel("Description of receipt: ");
+        JLabel descLabel = new JLabel("Description of receipt: " + selectedReceipt.getDescription());
         descLabel.setFont(Config._BaseFont);
-        descLabel.setBounds(20, 250, 150, 30);
-        billFrame.add(descLabel);
+        descLabel.setBounds(20, 250, 300, 30);
+        baseFrame.add(descLabel);
 
         //label for the date of purchase
-        this.dateLabel = new JLabel("Date of purchase: ");
+        JLabel dateLabel = new JLabel("Date of purchase: " + selectedReceipt.getDate().toString());
         dateLabel.setFont(Config._BaseFont);
-        dateLabel.setBounds(20, 300, 150, 30);
-        billFrame.add(dateLabel);
+        dateLabel.setBounds(20, 300, 300, 30);
+        baseFrame.add(dateLabel);
 
         //label for the total amount of purchase
-        this.totalLabel = new JLabel("Total amount of purchase: ");
+        JLabel totalLabel = new JLabel("Total amount of purchase: " + selectedReceipt.getTotalCost());
         totalLabel.setFont(Config._BaseFont);
-        totalLabel.setBounds(20, 350, 150, 30);
-        billFrame.add(totalLabel);
+        totalLabel.setBounds(20, 350, 300, 30);
+        baseFrame.add(totalLabel);
 
         //label for euro symbol
-        this.eurLabel = new JLabel("€");
+        JLabel eurLabel = new JLabel("€");
         eurLabel.setFont(Config._BaseFont);
         eurLabel.setBounds(420, 350, 150, 30);
-        billFrame.add(eurLabel);
+        baseFrame.add(eurLabel);
 
         //label for participating users
-        this.participantsLabel = new JLabel("Names of the people who participated:");
+        StringBuilder names = new StringBuilder();
+        for (Person p : participants){
+            names.append(p.getName()).append(", ");
+        }
+        JLabel participantsLabel = new JLabel("Names of the people who participated: " + names);
         participantsLabel.setFont(Config._BaseFont);
         participantsLabel.setBounds(20, 400, 350, 30);
-        billFrame.add(participantsLabel);
+        baseFrame.add(participantsLabel);
     }
 
     private void ConstructButtons()
@@ -94,7 +84,9 @@ public class BillView implements ActionListener
         payButton.setFocusable(false);
         payButton.setBackground(Config._ButtonColor);
         payButton.setBorder(Config._ButtonBorder);
-        billFrame.add(payButton);
+        baseFrame.add(payButton);
+
+        baseFrame.backButton.addActionListener(this);
     }
 
     @Override
@@ -102,9 +94,17 @@ public class BillView implements ActionListener
     {
         if(e.getSource()== payButton)
         {
-            System.out.println("you payed your part of the bill");
-
-            //receipt.isPayed = true;
+            baseFrame.dispose();
+            observer.update(UserAction.PayDebt);
         }
+        if (e.getSource() == baseFrame.backButton)
+        {
+            baseFrame.dispose();
+            observer.update(UserAction.Default);
+        }
+    }
+
+    public void displayView(){
+        baseFrame.setVisible(true);
     }
 }

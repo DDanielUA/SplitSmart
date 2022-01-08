@@ -22,8 +22,8 @@ public class MainView extends MainBase implements ActionListener
     {
         super(observer, user, receipts, new BaseFrame());
 
-        ConstructButtons();
         ConstructList();
+        ConstructButtons();
     }
 
     private void ConstructList()
@@ -31,17 +31,17 @@ public class MainView extends MainBase implements ActionListener
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Config._BackgroundColor);
         buttonPanel.setBounds(0, 500, 500, 500);
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));    //Vertical button layout
 
-        int numOfButtons = receipts.size();
         ButtonFactory factory = new ButtonFactory();
 
-        for (int i = 0; i < numOfButtons; i++)
-        {
-            int y = 0;
-            JButton button = factory.getButton(receipts.get(i));
+        int y = 0;
+        for (Receipt receipt : receipts) {
+            JButton button = factory.getButton(receipt);
             button.setBounds(200, y, 70, 30);
+            button.addActionListener(this);
             buttonPanel.add(button);
-            y = y + 50;
+            y = y + 100;
         }
 
         baseFrame.add(buttonPanel);
@@ -83,30 +83,49 @@ public class MainView extends MainBase implements ActionListener
         baseFrame.backButton.addActionListener(this);
     }
 
+    private boolean displayDeletePopUp(){
+        int answer = JOptionPane.showConfirmDialog
+                (null,
+                        "Are you sure you want to delete your account?",
+                        "Don't let me die",
+                        JOptionPane.YES_NO_OPTION); //0 = yes, 1 = no, -1 = x
+
+        return answer == 0;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource() == addButton)
+        JButton pressedButton = (JButton)e.getSource();
+        if(pressedButton.equals(addButton))
         {
             baseFrame.dispose();
             observer.update(UserAction.AddReceipt);
         }
-
-        if (e.getSource() == dieButton)
+        else if (pressedButton.equals(dieButton))
         {
+            boolean isDelete = displayDeletePopUp();
             baseFrame.dispose();
-            observer.update(UserAction.DeleteUser);
+            observer.update(UserAction.DeleteUser, isDelete);
         }
-
-        if (e.getSource() == sumButton)
+        else if (pressedButton.equals(sumButton))
         {
             baseFrame.dispose();
             observer.update(UserAction.ShowSummary);
         }
-
-        if (e.getSource() == baseFrame.backButton){
+        else if (pressedButton.equals(baseFrame.backButton))
+        {
             baseFrame.dispose();
             observer.update(UserAction.LogOut);
+        }
+        else
+        {
+            for (Receipt r : receipts){
+                if (pressedButton.getText().equals(r.getRecName())){
+                    baseFrame.dispose();
+                    observer.update(UserAction.ShowReceipt, r);
+                }
+            }
         }
     }
 
