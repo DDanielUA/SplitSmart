@@ -3,6 +3,7 @@ package com.SplitSmart.Logic;
 import com.SplitSmart.Application.MainScene.BillView;
 import com.SplitSmart.Application.MainScene.MainView;
 import com.SplitSmart.Application.MainScene.NewView;
+import com.SplitSmart.Application.MainScene.SumView;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.ActionChannel;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
@@ -28,7 +29,7 @@ public class MainService extends ActionChannel<UserAction> {
 
     //Runtime specific user data
     private final Person user;
-    private final ArrayList<Receipt> allReceipts;
+    private final ArrayList<Receipt> allReceipts = new ArrayList<>();
     private Receipt selectedReceipt;
     private Connector selectedConnector;    // Matches user !AND! receipt
 
@@ -38,7 +39,7 @@ public class MainService extends ActionChannel<UserAction> {
         observer.subscribe(this);
 
         this.user = user;
-        this.allReceipts = new ReceiptRepository(ctx).GetAll();
+        collectReceipts();
     }
 
     @Override
@@ -73,6 +74,21 @@ public class MainService extends ActionChannel<UserAction> {
         this.observer.update(UserAction.Default);
     }
 
+    private void collectReceipts(){
+        ReceiptRepository recRepo = new ReceiptRepository(ctx);
+        ConnectorRepository conRepo = new ConnectorRepository(ctx);
+
+        for (Connector c : conRepo.GetAll()){
+            if (c.getPersonId() == user.getPersonId()){
+                for (Receipt r : recRepo.GetAll()){
+                    if (r.getRecId() == c.getReceiptId()){
+                        this.allReceipts.add(r);
+                    }
+                }
+            }
+        }
+    }
+
     private void provideView(String neededView, Object... param){
         switch (neededView){
             case "Main" -> {
@@ -86,16 +102,31 @@ public class MainService extends ActionChannel<UserAction> {
             case "ShowReceipt" -> {
                 this.selectedReceipt = (Receipt)param[0];
                 ArrayList<Person> participants = ReceiptParticipants();
-                BillView billView = new BillView(this.observer, user, participants, (Receipt)param[0]);
+                boolean isPayed = checkIfPayed();
+                BillView billView = new BillView(this.observer, user, participants, (Receipt)param[0], isPayed);
                 billView.displayView();
             }
             case "ShowSummary" -> {
-                constructSummary();
+                ArrayList<Map.Entry<Person, Float>> summary = constructSummary();
+                SumView sumView = new SumView(this.observer, user, summary);
+                sumView.displayView();
             }
             case "LogOut" -> {
                 this.serviceObserver.update(ServiceAction.LoggedOut);
             }
         }
+    }
+
+    private boolean checkIfPayed() {
+        ConnectorRepository conRepo = new ConnectorRepository(ctx);
+
+        for (Connector c : conRepo.GetAll()){
+            if (c.getReceiptId() == this.selectedReceipt.getRecId() &&
+                c.getPersonId() == this.user.getPersonId()){
+                return c.getIsPayed();
+            }
+        }
+        return false;
     }
 
     private ArrayList<Map.Entry<Person, Float>> constructSummary(){
