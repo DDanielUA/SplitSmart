@@ -8,7 +8,6 @@ import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,21 +16,46 @@ public class BillView extends MainBase implements ActionListener
 {
     private JButton payButton;
 
-    private JLabel isPayedLabel;
-
     private final ActionAgency<UserAction> observer;
     private final ArrayList<Person> participants;
     private final Receipt selectedReceipt;
+    private final boolean isPayed;
 
-    public BillView(ActionAgency<UserAction> observer, Person user, ArrayList<Person> participants, Receipt receipt)
+    public BillView(ActionAgency<UserAction> observer, Person user, ArrayList<Person> participants, Receipt receipt, boolean isPayed)
     {
         super(observer, user, new BaseFrame());
         this.observer = observer;
         this.participants = participants;
         this.selectedReceipt = receipt;
+        this.isPayed = isPayed;
 
         ConstructLabels();
-        ConstructButtons();
+
+        DecidePayedOption();
+    }
+
+    private void DecidePayedOption() {
+        if (this.isPayed){
+            //label for showing if the bill is paid
+            JLabel isPayedLabel = new JLabel("The bill is payed");
+            isPayedLabel.setIcon(Config._CheckMark);
+            isPayedLabel.setHorizontalTextPosition(JLabel.LEFT);
+            isPayedLabel.setFont(Config._BaseFont);
+            isPayedLabel.setBounds(170, 450, 150, 30);
+            baseFrame.add(isPayedLabel);
+        }
+        else {
+            //add button creation and settings
+            this.payButton = new JButton();
+            payButton.setBounds(200, 500, 70, 30);
+            payButton.addActionListener(this);
+            payButton.setText("Pay");
+            payButton.setFocusable(false);
+            payButton.setBackground(Config._ButtonColor);
+            payButton.setBorder(Config._ButtonBorder);
+            baseFrame.add(payButton);
+        }
+        baseFrame.backButton.addActionListener(this);
     }
 
     private void ConstructLabels()
@@ -78,28 +102,6 @@ public class BillView extends MainBase implements ActionListener
         participantsLabel.setFont(Config._BaseFont);
         participantsLabel.setBounds(20, 400, 500, 30);
         baseFrame.add(participantsLabel);
-
-        //label for showing if the bill is paid
-        this.isPayedLabel = new JLabel("The bill is payed");
-        isPayedLabel.setIcon(Config._CheckMark);
-        isPayedLabel.setHorizontalTextPosition(JLabel.LEFT);
-        isPayedLabel.setFont(Config._BaseFont);
-        isPayedLabel.setBounds(170, 450, 150, 30);
-    }
-
-    private void ConstructButtons()
-    {
-        //add button creation and settings
-        this.payButton = new JButton();
-        payButton.setBounds(200, 500, 70, 30);
-        payButton.addActionListener(this);
-        payButton.setText("Pay");
-        payButton.setFocusable(false);
-        payButton.setBackground(Config._ButtonColor);
-        payButton.setBorder(Config._ButtonBorder);
-        baseFrame.add(payButton);
-
-        baseFrame.backButton.addActionListener(this);
     }
 
     @Override
@@ -109,8 +111,6 @@ public class BillView extends MainBase implements ActionListener
         {
             baseFrame.dispose();
             observer.update(UserAction.PayDebt);
-            //baseFrame.add(isPayedLabel);
-            //payButton.setEnabled(false);
         }
         if (e.getSource() == baseFrame.backButton)
         {
