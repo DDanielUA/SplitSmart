@@ -19,7 +19,8 @@ public class SumView extends MainBase implements ActionListener
 
     }
 
-    private void ConstructLabels(){
+    private void ConstructLabels()
+    {
 
     }
 

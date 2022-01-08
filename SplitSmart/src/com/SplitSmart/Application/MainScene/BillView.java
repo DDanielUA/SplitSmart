@@ -36,31 +36,31 @@ public class BillView extends MainBase implements ActionListener
         //label for the name of the receipt
         JLabel billLabel = new JLabel("Name of receipt: " + selectedReceipt.getRecName());
         billLabel.setFont(Config._BaseFont);
-        billLabel.setBounds(20, 200, 150, 30);
+        billLabel.setBounds(20, 200, 500, 30);
         baseFrame.add(billLabel);
 
         //label for the description of the receipt
         JLabel descLabel = new JLabel("Description of receipt: " + selectedReceipt.getDescription());
         descLabel.setFont(Config._BaseFont);
-        descLabel.setBounds(20, 250, 300, 30);
+        descLabel.setBounds(20, 250, 500, 30);
         baseFrame.add(descLabel);
 
         //label for the date of purchase
         JLabel dateLabel = new JLabel("Date of purchase: " + selectedReceipt.getDate().toString());
         dateLabel.setFont(Config._BaseFont);
-        dateLabel.setBounds(20, 300, 300, 30);
+        dateLabel.setBounds(20, 300, 500, 30);
         baseFrame.add(dateLabel);
 
         //label for the total amount of purchase
         JLabel totalLabel = new JLabel("Total amount of purchase: " + selectedReceipt.getTotalCost());
         totalLabel.setFont(Config._BaseFont);
-        totalLabel.setBounds(20, 350, 300, 30);
+        totalLabel.setBounds(20, 350, 250, 30);
         baseFrame.add(totalLabel);
 
         //label for euro symbol
         JLabel eurLabel = new JLabel("€");
         eurLabel.setFont(Config._BaseFont);
-        eurLabel.setBounds(420, 350, 150, 30);
+        eurLabel.setBounds(270, 350, 150, 30);
         baseFrame.add(eurLabel);
 
         //label for participating users
@@ -70,15 +70,22 @@ public class BillView extends MainBase implements ActionListener
         }
         JLabel participantsLabel = new JLabel("Names of the people who participated: " + names);
         participantsLabel.setFont(Config._BaseFont);
-        participantsLabel.setBounds(20, 400, 350, 30);
+        participantsLabel.setBounds(20, 400, 500, 30);
         baseFrame.add(participantsLabel);
+
+        //label for showing if the bill is paid
+        JLabel isPayedLabel = new JLabel("The bill is payed");
+        isPayedLabel.setIcon(Config._CheckMark);
+        isPayedLabel.setHorizontalTextPosition(JLabel.LEFT);
+        isPayedLabel.setFont(Config._BaseFont);
+        isPayedLabel.setBounds(170, 450, 150, 30);
     }
 
     private void ConstructButtons()
     {
         //add button creation and settings
         this.payButton = new JButton();
-        payButton.setBounds(200, 300, 70, 30);
+        payButton.setBounds(200, 500, 70, 30);
         payButton.addActionListener(this);
         payButton.setText("Pay");
         payButton.setFocusable(false);
@@ -96,6 +103,8 @@ public class BillView extends MainBase implements ActionListener
         {
             baseFrame.dispose();
             observer.update(UserAction.PayDebt);
+            //baseFrame.add(isPayedLabel);
+            //payButton.setEnabled(false);
         }
         if (e.getSource() == baseFrame.backButton)
         {

@@ -15,4 +15,5 @@ public final class Config {
 
     public static final ImageIcon _Logo = new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg");
     public static final ImageIcon _SmallLogo = new ImageIcon(new ImageIcon("src/com/SplitSmart/Images/logo coloured.jpg").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+    public static final ImageIcon _CheckMark = new ImageIcon(new ImageIcon("src/com/SplitSmart/Images/checkmark.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 }

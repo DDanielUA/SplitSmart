@@ -30,7 +30,7 @@ public class MainView extends MainBase implements ActionListener
     {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Config._BackgroundColor);
-        buttonPanel.setBounds(0, 500, 500, 500);
+        buttonPanel.setBounds(100, 300, 500, 500);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));    //Vertical button layout
 
         ButtonFactory factory = new ButtonFactory();
@@ -38,7 +38,7 @@ public class MainView extends MainBase implements ActionListener
         int y = 0;
         for (Receipt receipt : receipts) {
             JButton button = factory.getButton(receipt);
-            button.setBounds(200, y, 70, 30);
+            button.setBounds(215, y, 70, 30);
             button.addActionListener(this);
             buttonPanel.add(button);
             y = y + 100;
@@ -51,7 +51,7 @@ public class MainView extends MainBase implements ActionListener
     {
         //add button creation and settings
         this.addButton = new JButton();
-        addButton.setBounds(200, 300, 70, 30);
+        addButton.setBounds(115, 200, 70, 30);
         addButton.addActionListener(this);
         addButton.setText("Add");
         addButton.setFocusable(false);
@@ -61,7 +61,7 @@ public class MainView extends MainBase implements ActionListener
 
         //die button creation and settings
         this.dieButton = new JButton();
-        dieButton.setBounds(250, 350, 70, 30);
+        dieButton.setBounds(315, 200, 70, 30);
         dieButton.addActionListener(this);
         dieButton.setText("Die");
         dieButton.setFocusable(false);
@@ -71,7 +71,7 @@ public class MainView extends MainBase implements ActionListener
 
         //sum button creation and settings
         this.sumButton = new JButton();
-        sumButton.setBounds(150, 350, 70, 30);
+        sumButton.setBounds(215, 200, 70, 30);
         sumButton.addActionListener(this);
         sumButton.setText("Sum");
         sumButton.setFocusable(false);
