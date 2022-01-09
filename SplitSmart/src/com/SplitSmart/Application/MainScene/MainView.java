@@ -36,15 +36,12 @@ public class MainView extends MainBase implements ActionListener
 
         ButtonFactory factory = new ButtonFactory();
 
-        int y = 0;
         for (Receipt receipt : receipts) {
             JButton button = factory.getButton(receipt);
-            button.setBounds(215, y, 70, 30);
             button.setMaximumSize(new Dimension(200, 30));
             button.addActionListener(this);
             buttonPanel.add(button);
             buttonPanel.add(Box.createRigidArea(new Dimension(0,20)));
-            y = y + 100;
         }
 
         baseFrame.add(buttonPanel);

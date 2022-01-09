@@ -11,11 +11,11 @@ public class ButtonFactory extends JButton
 {
     ButtonFactory(){}
 
+    //creating buttons, base for bill view list
     public JButton getButton(Receipt receipt)
     {
         JButton button = new JButton();
         button.setText(receipt.getRecName());
-        //button.setBounds(200, -50, 70, 30);
         button.setFocusable(false);
         button.setBackground(Config._ButtonColor);
         button.setBorder(Config._ButtonBorder);

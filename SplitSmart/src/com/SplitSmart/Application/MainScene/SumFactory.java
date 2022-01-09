@@ -8,6 +8,7 @@ public class SumFactory
 {
     SumFactory(){}
 
+    //creating labels for global bills
     public JLabel getLabel(String name, float money)
     {
         JLabel sumLabel = new JLabel();

@@ -19,7 +19,7 @@ public class NewView extends MainBase implements ActionListener
     private JTextField billNameField;
     private JTextField descField;
     private JTextField totalField; //DOUBLE
-    private JTextField moneyField;
+    private JTextField howMuchField;
     private JTextField participantsField;
 
     private JTextArea howMuchLabel;
@@ -82,13 +82,13 @@ public class NewView extends MainBase implements ActionListener
         baseFrame.add(participantsField);
 
         //text field for amount of money payed for each person
-        this.moneyField = new JTextField();
-        moneyField.setPreferredSize(new Dimension(350, 30));
-        moneyField.setBounds(20, 590, 350, 30);
-        moneyField.setFont(Config._BaseFont);
-        moneyField.setText("10, 14, 15.50, 16.50");
-        moneyField.setVisible(false);
-        baseFrame.add(moneyField);
+        this.howMuchField = new JTextField();
+        howMuchField.setPreferredSize(new Dimension(350, 30));
+        howMuchField.setBounds(20, 590, 350, 30);
+        howMuchField.setFont(Config._BaseFont);
+        howMuchField.setText("10, 14, 15.50, 16.50");
+        howMuchField.setVisible(false);
+        baseFrame.add(howMuchField);
     }
 
     private void ConstructLabels()
@@ -131,7 +131,7 @@ public class NewView extends MainBase implements ActionListener
         participantsLabel.setBounds(20, 380, 500, 30);
         baseFrame.add(participantsLabel);
 
-        //label for saying who payed how much
+        //label for saying who paid how much
         this.howMuchLabel = new JTextArea("How much each person payed (enter in the same order as the names, in the format below, using decimal points if needed:");
         howMuchLabel.setFont(Config._BaseFont);
         howMuchLabel.setBackground(Config._BackgroundColor);
@@ -181,7 +181,7 @@ public class NewView extends MainBase implements ActionListener
             newReceipt.setTotalCost(Float.parseFloat(totalField.getText()));
             newReceipt.setIsEqualSplit(equalCheckBox.isSelected());
 
-            NewReceiptResult result = new NewReceiptResult(newReceipt, participantsField.getText(), moneyField.getText());
+            NewReceiptResult result = new NewReceiptResult(newReceipt, participantsField.getText(), howMuchField.getText());
 
             baseFrame.dispose();
             this.observer.update(UserAction.AddReceipt, result);
@@ -194,11 +194,11 @@ public class NewView extends MainBase implements ActionListener
         if (e.getSource() == equalCheckBox)
         {
             if (equalCheckBox.isSelected()){
-                moneyField.setVisible(false);
+                howMuchField.setVisible(false);
                 howMuchLabel.setVisible(false);
             }
             else{
-                moneyField.setVisible(true);
+                howMuchField.setVisible(true);
                 howMuchLabel.setVisible(true);
             }
         }

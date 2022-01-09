@@ -35,16 +35,18 @@ public class BillView extends MainBase implements ActionListener
     }
 
     private void DecidePayedOption() {
-        if (this.isPayed){
+        if (this.isPayed)
+        {
             //label for showing if the bill is paid
-            JLabel isPayedLabel = new JLabel("The bill is payed");
+            JLabel isPayedLabel = new JLabel("The bill is payed ");
             isPayedLabel.setIcon(Config._CheckMark);
             isPayedLabel.setHorizontalTextPosition(JLabel.LEFT);
             isPayedLabel.setFont(Config._BaseFont);
             isPayedLabel.setBounds(150, 450, 200, 30);
             baseFrame.add(isPayedLabel);
         }
-        else {
+        else
+        {
             //add button creation and settings
             this.payButton = new JButton();
             payButton.setBounds(200, 500, 70, 30);

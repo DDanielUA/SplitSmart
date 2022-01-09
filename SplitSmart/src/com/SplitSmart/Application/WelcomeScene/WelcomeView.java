@@ -42,13 +42,12 @@ public class WelcomeView extends WelcomeBase implements ActionListener
         welcomeFrame.setVisible(false);
         welcomeFrame.getContentPane().setBackground(Config._BackgroundColor);
         welcomeFrame.setIconImage(Config._Logo.getImage()); //changes the image on the frame
-        //this.setLocationRelativeTo(null);
     }
 
     private void ConstructLabels()
     {
         //name label creation and settings
-        this.nameLabel = new JLabel("SplitSmart"); //, SwingConstants.CENTER
+        this.nameLabel = new JLabel("SplitSmart");
         nameLabel.setIcon(Config._Logo);
         nameLabel.setHorizontalTextPosition(JLabel.CENTER);
         nameLabel.setVerticalTextPosition(JLabel.TOP);
@@ -58,8 +57,7 @@ public class WelcomeView extends WelcomeBase implements ActionListener
         nameLabel.setFont(Config._BaseFont);
 
         //slogan label creation and settings
-        this.sloganLabel = new JLabel(); //you could just add text here
-        sloganLabel.setText("Make your friends pay!");
+        this.sloganLabel = new JLabel("Make your friends pay!");
         sloganLabel.setFont(Config._BaseFont);
     }
 
