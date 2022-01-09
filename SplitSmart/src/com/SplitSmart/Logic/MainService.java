@@ -77,7 +77,7 @@ public class MainService extends ActionChannel<UserAction> {
     }
 
     private void provideReceiptView(Receipt receipt){
-        ArrayList<Person> participants = ReceiptParticipants(receipt);
+        ArrayList<Person> participants = receiptParticipants(receipt);
         boolean isPayed = checkIfPayed(receipt);
         BillView billView = new BillView(this.observer, user, participants, receipt, isPayed);
         billView.displayView();
@@ -121,8 +121,8 @@ public class MainService extends ActionChannel<UserAction> {
         }
 
         ArrayList<Map.Entry<Person, Float>> participantsSummary = new ArrayList<>();
+        ArrayList<String> foundNames = new ArrayList<>();
         for (Person p : this.perRepo.GetAll()){
-            boolean personFound = false;
             for (int i = 0; i < names.size(); i++){
                 if (p.getName().equals(names.get(i))){
                     Map.Entry<Person, Float> entry;
@@ -133,15 +133,27 @@ public class MainService extends ActionChannel<UserAction> {
                         entry = new AbstractMap.SimpleEntry<>(p, Float.parseFloat(shares.get(i)));
                     }
                     participantsSummary.add(entry);
-                    personFound = true;
+                    foundNames.add(names.get(i));
                 }
             }
-            if (!personFound){
-                Person unknownPerson = new Person();
-                unknownPerson.setPersonId(-1);
-                unknownPerson.setName("!Unknown!");
-                Map.Entry<Person, Float> entry = new AbstractMap.SimpleEntry<>(unknownPerson, 0.0f);
-                participantsSummary.add(entry);
+        }
+
+        if (foundNames.size() != names.size()){
+            for (String name : names){
+                boolean alreadyFound = false;
+                for (String foundName : foundNames){
+                    if (name.equals(foundName)){
+                        alreadyFound = true;
+                        break;
+                    }
+                }
+                if (!alreadyFound){
+                    Person unknownPerson = new Person();
+                    unknownPerson.setPersonId(-1);
+                    unknownPerson.setName("!Unknown!");
+                    Map.Entry<Person, Float> entry = new AbstractMap.SimpleEntry<>(unknownPerson, (result.getReceipt().getTotalCost() / names.size()));
+                    participantsSummary.add(entry);
+                }
             }
         }
 
@@ -168,7 +180,7 @@ public class MainService extends ActionChannel<UserAction> {
         return false;
     }
 
-    private ArrayList<Person> ReceiptParticipants(Receipt receipt) {
+    private ArrayList<Person> receiptParticipants(Receipt receipt) {
 
         ArrayList<Person> participants = new ArrayList<>();
         int expectedParticipants = 0;
@@ -189,9 +201,10 @@ public class MainService extends ActionChannel<UserAction> {
             if (expectedParticipants > participants.size() + 1){
                 int shortage = expectedParticipants - (participants.size() + 1);
                 do {
-                    Person tmpPerson = new Person();
-                    tmpPerson.setName("DeletedUser");
-                    participants.add(tmpPerson);
+                    Person unknownPerson = new Person();
+                    unknownPerson.setPersonId(-1);
+                    unknownPerson.setName("!Unknown!");
+                    participants.add(unknownPerson);
                     shortage--;
                 } while (shortage != 0);
             }
