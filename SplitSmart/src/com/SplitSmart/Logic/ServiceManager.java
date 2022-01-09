@@ -16,22 +16,17 @@ public class ServiceManager extends ActionChannel<ServiceAction> {
     }
 
     @Override
-    public void Notify(ServiceAction happenedEvent) {
-        super.Notify(happenedEvent);
-        switch (happenedEvent){
-            case Default -> Nothing();
+    public void Notify(ServiceAction eventHappened) {
+        super.Notify(eventHappened);
+        switch (eventHappened){
             case Welcome, LoggedOut -> provideWelcomeService();
         }
     }
 
     @Override
-    public void Notify(ServiceAction happenedEvent, Object param) {
-        super.Notify(happenedEvent);
+    public void Notify(ServiceAction eventHappened, Object param) {
+        super.Notify(eventHappened);
         provideMainService(param);
-    }
-
-    private void Nothing(){
-
     }
 
     private void provideWelcomeService(){

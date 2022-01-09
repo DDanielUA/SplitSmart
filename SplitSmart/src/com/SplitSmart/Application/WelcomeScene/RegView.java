@@ -106,7 +106,7 @@ public class RegView extends WelcomeBase implements ActionListener
             user.setEmail(emailField.getText());
 
             this.baseFrame.dispose();
-            observer.update(WelcomeAction.AttemptRegister);
+            observer.update(WelcomeAction.AttemptRegister, this.user);
         }
 
         if (e.getSource() == this.baseFrame.backButton){

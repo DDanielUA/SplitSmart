@@ -2,6 +2,7 @@ package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
+import com.SplitSmart.Application.MainScene.Model.NewReceiptResult;
 import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
@@ -12,15 +13,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class NewView extends MainBase implements ActionListener
 {
     private JTextField billNameField;
     private JTextField descField;
-    private JTextField dateField; //DATE
     private JTextField totalField; //DOUBLE
     private JTextField moneyField;
+    private JTextField participantsField;
 
     private JTextArea howMuchLabel;
 
@@ -28,9 +28,9 @@ public class NewView extends MainBase implements ActionListener
 
     private JButton addButton;
 
-    public NewView(ActionAgency<UserAction> observer, Person user, ArrayList<Receipt> receipts)
+    public NewView(ActionAgency<UserAction> observer, Person user)
     {
-        super(observer, user, receipts, new BaseFrame());
+        super(observer, user, null, new BaseFrame());
 
         ConstructCheckboxes();
         ConstructFields();
@@ -57,7 +57,8 @@ public class NewView extends MainBase implements ActionListener
         baseFrame.add(descField);
 
         //text field for the date of purchase
-        this.dateField = new JTextField();
+        //DATE
+        JTextField dateField = new JTextField();
         dateField.setPreferredSize(new Dimension(250, 30));
         dateField.setBounds(210, 280, 240, 30);
         dateField.setFont(Config._BaseFont);
@@ -73,11 +74,11 @@ public class NewView extends MainBase implements ActionListener
         baseFrame.add(totalField);
 
         //text field for participating users
-        JTextField participantsField = new JTextField();
+        participantsField = new JTextField();
         participantsField.setPreferredSize(new Dimension(350, 30));
         participantsField.setBounds(20, 430, 350, 30);
         participantsField.setFont(Config._BaseFont);
-        participantsField.setText("Anna, Bob, Cedric, Dalia");
+        participantsField.setText("Bill, Bob, Jane, Dalia");
         baseFrame.add(participantsField);
 
         //text field for amount of money payed for each person
@@ -147,6 +148,7 @@ public class NewView extends MainBase implements ActionListener
         equalCheckBox.setFocusable(false);
         equalCheckBox.setFont(Config._BaseFont);
         equalCheckBox.setBounds(100, 480, 300, 30);
+        equalCheckBox.setSelected(true);
         equalCheckBox.addActionListener(this);
         baseFrame.add(equalCheckBox);
     }
@@ -171,27 +173,18 @@ public class NewView extends MainBase implements ActionListener
     {
         if(e.getSource() == addButton)
         {
-            System.out.println("adding new bill");
-            String bill = billNameField.getText();
-            String description = descField.getText();
-            try{
-                LocalDate dateVar = LocalDate.parse(dateField.getText());
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
+            Receipt newReceipt = new Receipt();
+            newReceipt.setRecName(billNameField.getText());
+            newReceipt.setDescription(descField.getText());
+            newReceipt.setPayingPersonId(this.user.getPersonId());
+            newReceipt.setDate(LocalDate.now());
+            newReceipt.setTotalCost(Float.parseFloat(totalField.getText()));
+            newReceipt.setIsEqualSplit(equalCheckBox.isSelected());
 
-            try{
-                double totalCost = Double.parseDouble(totalField.getText());
-            }
-            catch (NumberFormatException ex)
-            {
-                ex.printStackTrace();
-            }
-            boolean isEqual = equalCheckBox.isSelected();
+            NewReceiptResult result = new NewReceiptResult(newReceipt, participantsField.getText(), moneyField.getText());
 
-            baseFrame.setVisible(false);
+            baseFrame.dispose();
+            this.observer.update(UserAction.AddReceipt, result);
         }
         if (e.getSource() == baseFrame.backButton){
 
@@ -200,8 +193,14 @@ public class NewView extends MainBase implements ActionListener
         }
         if (e.getSource() == equalCheckBox)
         {
-            moneyField.setVisible(true);
-            howMuchLabel.setVisible(true);
+            if (equalCheckBox.isSelected()){
+                moneyField.setVisible(false);
+                howMuchLabel.setVisible(false);
+            }
+            else{
+                moneyField.setVisible(true);
+                howMuchLabel.setVisible(true);
+            }
         }
     }
 

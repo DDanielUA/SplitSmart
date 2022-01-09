@@ -2,7 +2,8 @@ Person:
 /1/John/john@gmail.com/205485552:1/;
 /2/Bill/bill@gmail.com/305677781:2/4/;
 /3/Jane/jane@gmail.com/704346269:3/5/;
-/4/Berta/berta@gmail.com/+36204891245:;
+/4/Ella/ella@gmail.com/+36201234567:;
+/5/Ella/ella@gmail.com/+36201234567:;
 Receipt:
 /1/Groceries/Just common stuff, nothing fancy./2021-12-25/33.6/true/1:2/3/;
 /2/Restaurant with da crew/Having some dinner after a long trip./2021-12-12/42.5/false/3:2/;

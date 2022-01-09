@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ActionAgency<T extends Enum> {
     private T event;
-    private List<ActionChannel<T>> subscribers = new ArrayList<ActionChannel<T>>();
+    private final List<ActionChannel<T>> subscribers = new ArrayList<>();
 
     public void subscribe(ActionChannel<T> subscriber){
         this.subscribers.add(subscriber);

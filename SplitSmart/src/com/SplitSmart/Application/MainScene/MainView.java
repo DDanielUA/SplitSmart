@@ -103,7 +103,7 @@ public class MainView extends MainBase implements ActionListener
         if(pressedButton.equals(addButton))
         {
             baseFrame.dispose();
-            observer.update(UserAction.AddReceipt);
+            observer.update(UserAction.NewReceipt);
         }
         else if (pressedButton.equals(dieButton))
         {

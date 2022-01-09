@@ -15,11 +15,12 @@ import com.SplitSmart.Repository.PersonRepository;
 public class WelcomeService extends ActionChannel<WelcomeAction> {
 
     private final SplitSmartContext ctx = SplitSmartContext.GetInstance();
+    private final PersonRepository perRepo = new PersonRepository(ctx);
 
     private final ActionAgency<ServiceAction> serviceObserver;
     private final ActionAgency<WelcomeAction> observer;
 
-    private Person person;
+    //Runtime specific data
     private boolean isErrorLogIn = false;
 
     public WelcomeService(ActionAgency<ServiceAction> sObserver){
@@ -31,76 +32,75 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
     }
 
     public void InitiateWelcomeService(){
-        provideView("Welcome");
+        provideWelcomeView();
     }
 
     @Override
-    public void Notify(WelcomeAction happenedEvent) {
-        super.Notify(happenedEvent);
-        switch (happenedEvent){
-            case Default -> provideView("Welcome");
-            case InitiateLogIn -> provideView("LogIn");
-            case InitiateRegister -> provideView("Register");
-            case AttemptLogIn -> logInUser();
-            case AttemptRegister -> registerUser();
-            case ProvideFeedback -> provideView("Feedback");
+    public void Notify(WelcomeAction eventHappened) {
+        super.Notify(eventHappened);
+        switch (eventHappened){
+            case Default -> provideWelcomeView();
+            case InitiateLogIn -> provideLogInView();
+            case InitiateRegister -> provideRegisterView();
         }
     }
 
-    private void provideView(String neededView){
-        switch (neededView){
-            case "Welcome" -> {
-                WelcomeView welcomeView = new WelcomeView(this.observer);
-                welcomeView.displayView();
-            }
-            case "LogIn" -> {
-                this.person = new Person();
-                LoginView loginView = new LoginView(this.observer, this.person, this.isErrorLogIn);
-                loginView.displayView();
-            }
-            case "Register" -> {
-                this.person = new Person();
-                RegView registerView = new RegView(this.observer, this.person);
-                registerView.displayView();
-            }
-            case "Feedback" -> {
-                FeedbackView feedbackView = new FeedbackView(this.observer, this.person);
-                feedbackView.displayView();
-            }
+    @Override
+    public void Notify(WelcomeAction eventHappened, Object param) {
+        super.Notify(eventHappened, param);
+        switch (eventHappened){
+            case AttemptRegister -> registerUser((Person)param);
+            case AttemptLogIn -> logInUser((Person)param);
         }
     }
 
-    private void registerUser(){
-        this.person.setPersonId(ctx.nextPersonId);
+    private void provideWelcomeView(){
+        WelcomeView welcomeView = new WelcomeView(this.observer);
+        welcomeView.displayView();
+    }
+
+    private void provideLogInView(){
+        LoginView loginView = new LoginView(this.observer, new Person(), this.isErrorLogIn);
+        loginView.displayView();
+    }
+
+    private void provideRegisterView(){
+        RegView registerView = new RegView(this.observer, new Person());
+        registerView.displayView();
+    }
+
+    private void provideFeedbackView(Person person){
+        FeedbackView feedbackView = new FeedbackView(this.observer, person);
+        feedbackView.displayView();
+    }
+
+    private void registerUser(Person person){
+        person.setPersonId(ctx.nextPersonId);
         ctx.nextPersonId++;
 
-        PersonRepository personRepo = new PersonRepository(ctx);
-        personRepo.Insert(this.person);
+        this.perRepo.Insert(person);
         ctx.SaveSets();
 
-        provideView("Feedback");
+        provideFeedbackView(person);
     }
 
-    private void logInUser(){
-        PersonRepository personRepo = new PersonRepository(ctx);
+    private void logInUser(Person person){
 
-        for (Person p : personRepo.GetAll()){
-            if (p.getPersonId() == this.person.getPersonId()) {
-                if (p.getName().equals(this.person.getName())){
-                    this.person = p;
+        for (Person p : this.perRepo.GetAll()){
+            if (p.getPersonId() == person.getPersonId()) {
+                if (p.getName().equals(person.getName())){
+                    person = p;
                     break;
                 }
             }
         }
-        // null it out if there is no match
-        if (this.person.getEmail() == null){
-            this.person = new Person();
+        if (person.getEmail() == null){
             this.isErrorLogIn = true;
 
-            provideView("LogIn");
+            provideLogInView();
         }
         else{
-            serviceObserver.update(ServiceAction.LoggedIn, this.person);
+            serviceObserver.update(ServiceAction.LoggedIn, person);
         }
     }
 }

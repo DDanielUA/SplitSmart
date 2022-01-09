@@ -110,7 +110,7 @@ public class BillView extends MainBase implements ActionListener
         if(e.getSource()== payButton)
         {
             baseFrame.dispose();
-            observer.update(UserAction.PayDebt);
+            observer.update(UserAction.PayDebt, this.selectedReceipt);
         }
         if (e.getSource() == baseFrame.backButton)
         {

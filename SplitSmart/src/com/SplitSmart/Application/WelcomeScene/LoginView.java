@@ -104,7 +104,7 @@ public class LoginView extends WelcomeBase implements ActionListener
             user.setName(nameField.getText());
 
             this.baseFrame.dispose();
-            observer.update(WelcomeAction.AttemptLogIn);
+            observer.update(WelcomeAction.AttemptLogIn, this.user);
         }
 
         if (e.getSource() == baseFrame.backButton){
