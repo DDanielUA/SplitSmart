@@ -1,33 +1,22 @@
 package com.SplitSmart.Logic;
 
+import com.SplitSmart.Logic.DataAssembler.Assembler;
 import com.SplitSmart.Model.Connector;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
-import com.SplitSmart.Repository.ConnectorRepository;
 import com.SplitSmart.Repository.Data.SplitSmartContext;
-import com.SplitSmart.Repository.PersonRepository;
-import com.SplitSmart.Repository.ReceiptRepository;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class SummaryGenerator {
-    private final PersonRepository perRepo;
-    private final ReceiptRepository recRepo;
-    private final ConnectorRepository conRepo;
+public class SummaryAssembler extends Assembler {
 
-    private Person user;
-
-    public SummaryGenerator(SplitSmartContext ctx){
-        this.perRepo = new PersonRepository(ctx);
-        this.recRepo = new ReceiptRepository(ctx);
-        this.conRepo = new ConnectorRepository(ctx);
+    public SummaryAssembler(SplitSmartContext ctx, Person user){
+        super(ctx, user);
     }
 
-    public ArrayList<Map.Entry<Person, Float>> GetSummaryFor(Person user){
-        this.user = user;
-
+    public ArrayList<Map.Entry<Person, Float>> GetSummary(){
         ArrayList<Receipt> concerningReceipts = collectReceipts();
         ArrayList<Map.Entry<Person, Float>> relations = collectRelations(concerningReceipts);
 

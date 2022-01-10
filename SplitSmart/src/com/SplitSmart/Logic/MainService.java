@@ -84,8 +84,8 @@ public class MainService extends ActionChannel<UserAction> {
     }
 
     private void provideSummaryView(){
-        SummaryGenerator sumGen = new SummaryGenerator(ctx);
-        ArrayList<Map.Entry<Person, Float>> summary = sumGen.GetSummaryFor(this.user);
+        SummaryAssembler sumAssembler = new SummaryAssembler(this.ctx, this.user);
+        ArrayList<Map.Entry<Person, Float>> summary = sumAssembler.GetSummary();
         SumView sumView = new SumView(this.observer, user, summary);
         sumView.displayView();
     }
@@ -107,65 +107,8 @@ public class MainService extends ActionChannel<UserAction> {
     }
 
     private void addReceipt(NewReceiptResult result){
-
-        result.getReceipt().setRecId(ctx.nextReceiptId);
-        this.recRepo.Insert(result.getReceipt());
-
-        List<String> names = Arrays.asList(result.getParticipants().split(","));
-        for (int i = 0; i < names.size(); i++){
-            names.set(i, names.get(i).trim());
-        }
-        List<String> shares = Arrays.asList(result.getParticipantsShares().split(","));
-        for (int i = 0; i < shares.size(); i++){
-            shares.set(i, shares.get(i).trim());
-        }
-
-        ArrayList<Map.Entry<Person, Float>> participantsSummary = new ArrayList<>();
-        ArrayList<String> foundNames = new ArrayList<>();
-        for (Person p : this.perRepo.GetAll()){
-            for (int i = 0; i < names.size(); i++){
-                if (p.getName().equals(names.get(i))){
-                    Map.Entry<Person, Float> entry;
-                    if (result.getReceipt().getIsEqualSplit()){
-                        entry = new AbstractMap.SimpleEntry<>(p, (result.getReceipt().getTotalCost() / names.size()));
-                    }
-                    else {
-                        entry = new AbstractMap.SimpleEntry<>(p, Float.parseFloat(shares.get(i)));
-                    }
-                    participantsSummary.add(entry);
-                    foundNames.add(names.get(i));
-                }
-            }
-        }
-
-        if (foundNames.size() != names.size()){
-            for (String name : names){
-                boolean alreadyFound = false;
-                for (String foundName : foundNames){
-                    if (name.equals(foundName)){
-                        alreadyFound = true;
-                        break;
-                    }
-                }
-                if (!alreadyFound){
-                    Person unknownPerson = new Person();
-                    unknownPerson.setPersonId(-1);
-                    unknownPerson.setName("!Unknown!");
-                    Map.Entry<Person, Float> entry = new AbstractMap.SimpleEntry<>(unknownPerson, (result.getReceipt().getTotalCost() / names.size()));
-                    participantsSummary.add(entry);
-                }
-            }
-        }
-
-        for (Map.Entry<Person, Float> entry : participantsSummary){
-            Connector conn = new Connector();
-            conn.setConnId(ctx.nextConnectorId);
-            conn.setPersonId(entry.getKey().getPersonId());
-            conn.setReceiptId(result.getReceipt().getRecId());
-            conn.setSubTotal(entry.getValue());
-            conn.setIsPayed(entry.getKey().getPersonId() == user.getPersonId());
-            this.conRepo.Insert(conn);
-        }
+        ReceiptAssembler recAssembler = new ReceiptAssembler(this.ctx, this.user);
+        recAssembler.CreateReceiptOf(result);
 
         provideMainView();
     }
