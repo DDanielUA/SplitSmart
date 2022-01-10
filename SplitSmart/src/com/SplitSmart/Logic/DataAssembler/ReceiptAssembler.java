@@ -1,4 +1,4 @@
-package com.SplitSmart.Logic;
+package com.SplitSmart.Logic.DataAssembler;
 
 import com.SplitSmart.Application.MainScene.Model.NewReceiptResult;
 import com.SplitSmart.Logic.DataAssembler.Assembler;

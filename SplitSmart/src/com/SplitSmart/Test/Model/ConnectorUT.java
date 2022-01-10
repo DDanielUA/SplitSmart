@@ -70,7 +70,7 @@ public class ConnectorUT extends UTBase {
         connectorUnderTest2.setIsPayed(this.testIsPayed);
 
         Assert.assertEquals(
-                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Person instance.",
+                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Connector instance.",
                 false,
                 connectorUnderTest1.equals(connectorUnderTest2));
     }
@@ -109,7 +109,7 @@ public class ConnectorUT extends UTBase {
         int actualHash = connectorUnderTest.hashCode();
 
         Assert.assertEquals(
-                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Person instance.",
+                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Connector instance.",
                 expectedHash,
                 actualHash);
     }

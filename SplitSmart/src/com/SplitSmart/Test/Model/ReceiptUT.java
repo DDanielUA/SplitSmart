@@ -84,7 +84,7 @@ public class ReceiptUT extends UTBase{
         receiptUnderTest2.setPayingPersonId(this.testPayPerId);
 
         Assert.assertEquals(
-                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Person instance.",
+                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Receipt instance.",
                 false,
                 receiptUnderTest1.equals(receiptUnderTest2));
     }
@@ -127,7 +127,7 @@ public class ReceiptUT extends UTBase{
         int actualHash = receiptUnderTest.hashCode();
 
         Assert.assertEquals(
-                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Person instance.",
+                "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Receipt instance.",
                 expectedHash,
                 actualHash);
     }

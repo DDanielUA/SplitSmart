@@ -9,6 +9,8 @@ import com.SplitSmart.Logic.ActionObserver.ActionAgency;
 import com.SplitSmart.Logic.ActionObserver.ActionChannel;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Logic.ActionObserver.ServiceAction;
+import com.SplitSmart.Logic.DataAssembler.ReceiptAssembler;
+import com.SplitSmart.Logic.DataAssembler.SummaryAssembler;
 import com.SplitSmart.Model.Connector;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;

@@ -79,7 +79,6 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
         ctx.nextPersonId++;
 
         this.perRepo.Insert(person);
-        ctx.SaveSets();
 
         provideFeedbackView(person);
     }

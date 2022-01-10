@@ -1,4 +1,4 @@
-package com.SplitSmart.Logic;
+package com.SplitSmart.Logic.DataAssembler;
 
 import com.SplitSmart.Logic.DataAssembler.Assembler;
 import com.SplitSmart.Model.Connector;
