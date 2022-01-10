@@ -114,6 +114,4 @@ public class RegView extends WelcomeBase implements ActionListener
             observer.update(WelcomeAction.Default);
         }
     }
-
-    public void displayView() { this.baseFrame.setVisible(true); }
 }

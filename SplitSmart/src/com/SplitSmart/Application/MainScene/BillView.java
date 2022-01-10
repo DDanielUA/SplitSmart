@@ -120,8 +120,4 @@ public class BillView extends MainBase implements ActionListener
             observer.update(UserAction.Default);
         }
     }
-
-    public void displayView(){
-        baseFrame.setVisible(true);
-    }
 }

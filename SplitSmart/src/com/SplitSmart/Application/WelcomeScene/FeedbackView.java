@@ -63,9 +63,4 @@ public class FeedbackView extends WelcomeBase implements ActionListener
             observer.update(WelcomeAction.InitiateLogIn);
         }
     }
-
-    public void displayView()
-    {
-        this.baseFrame.setVisible(true);
-    }
 }

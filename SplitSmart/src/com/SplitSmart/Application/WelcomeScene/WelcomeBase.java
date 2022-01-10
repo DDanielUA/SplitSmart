@@ -17,4 +17,8 @@ class WelcomeBase {
         this.observer = observer;
         this.user = user;
     }
+
+    public void displayView(){
+        this.baseFrame.setVisible(true);
+    }
 }

@@ -31,4 +31,8 @@ class MainBase {
 
         this.receipts = receipts;
     }
+
+    public void displayView(){
+        this.baseFrame.setVisible(true);
+    }
 }

@@ -115,11 +115,6 @@ public class WelcomeView extends WelcomeBase implements ActionListener
         regButton.setBorder(Config._ButtonBorder);
     }
 
-    public void displayView()
-    {
-        welcomeFrame.setVisible(true);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e)
     {

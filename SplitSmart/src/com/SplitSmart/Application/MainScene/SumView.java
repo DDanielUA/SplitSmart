@@ -48,6 +48,4 @@ public class SumView extends MainBase implements ActionListener
             baseFrame.dispose();
         }
     }
-
-    public void displayView() { baseFrame.setVisible(true); }
 }

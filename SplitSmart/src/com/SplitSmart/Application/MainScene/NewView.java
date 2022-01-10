@@ -203,6 +203,4 @@ public class NewView extends MainBase implements ActionListener
             }
         }
     }
-
-    public void displayView() { baseFrame.setVisible(true); }
 }

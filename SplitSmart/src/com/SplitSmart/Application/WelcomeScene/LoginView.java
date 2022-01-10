@@ -112,6 +112,4 @@ public class LoginView extends WelcomeBase implements ActionListener
             observer.update(WelcomeAction.Default);
         }
     }
-
-    public void displayView() { baseFrame.setVisible(true); }
 }
