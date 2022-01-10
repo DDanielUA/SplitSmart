@@ -18,11 +18,11 @@ public class SumFactory
 
         if (money < 0)
         {
-            sumLabel.setText(name + " ows you " + money + " euros.");
+            sumLabel.setText(name + " ows you " + Math.abs(money) + " euros.");
         }
         else
         {
-            sumLabel.setText("You owe " + name + " " + money + " euros.");
+            sumLabel.setText("You owe " + name + " " + Math.abs(money) + " euros.");
         }
 
         return sumLabel;
