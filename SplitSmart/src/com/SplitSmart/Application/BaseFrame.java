@@ -18,6 +18,10 @@ public class BaseFrame extends JFrame
         ConstructPanels();
     }
 
+    public void setSloganLabel(String sloganText){
+        this.sloganLabel.setText(sloganText);
+    }
+
     private void FrameSettings()
     {
         //setting basic things in the frame

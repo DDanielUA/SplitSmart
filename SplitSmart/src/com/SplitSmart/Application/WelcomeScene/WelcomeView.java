@@ -116,6 +116,12 @@ public class WelcomeView extends WelcomeBase implements ActionListener
     }
 
     @Override
+    public void displayView()
+    {
+        welcomeFrame.setVisible(true);
+    }
+
+    @Override
     public void actionPerformed(ActionEvent e)
     {
         if(e.getSource() == loginButton)

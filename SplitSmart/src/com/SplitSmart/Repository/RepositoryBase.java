@@ -34,6 +34,7 @@ public abstract class RepositoryBase<T> implements IRepositoryBase<T> {
     @Override
     public void Insert(T newEntity) {
         this.set.add(newEntity);
+        //this.ctx.SaveSets();
     }
 
     /*
@@ -44,5 +45,6 @@ public abstract class RepositoryBase<T> implements IRepositoryBase<T> {
     @Override
     public void Remove(T givenEntity) {
         this.set.remove(givenEntity);
+        //this.ctx.SaveSets();
     }
 }

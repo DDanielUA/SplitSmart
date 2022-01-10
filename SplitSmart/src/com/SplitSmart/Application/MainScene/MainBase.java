@@ -18,6 +18,7 @@ class MainBase {
 
     protected MainBase(ActionAgency<UserAction> observer, Person user, BaseFrame frame){
         this.baseFrame = frame;
+        this.baseFrame.setSloganLabel("Make your friends pay, " + user.getName() + "!");
 
         this.observer = observer;
         this.user = user;
@@ -25,6 +26,7 @@ class MainBase {
 
     protected MainBase(ActionAgency<UserAction> observer, Person user, ArrayList<Receipt> receipts, BaseFrame frame){
         this.baseFrame = frame;
+        this.baseFrame.setSloganLabel("Make your friends pay, " + user.getName() + "!");
 
         this.observer = observer;
         this.user = user;
