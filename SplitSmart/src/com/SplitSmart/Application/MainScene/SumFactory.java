@@ -12,9 +12,18 @@ public class SumFactory
     public JLabel getLabel(String name, float money)
     {
         JLabel sumLabel = new JLabel();
-        sumLabel.setText("Your money situation with " + name + " is " + money);
+
         sumLabel.setFont(Config._BaseFont);
         sumLabel.setBounds(20, 200, 500, 30);
+
+        if (money < 0)
+        {
+            sumLabel.setText(name + " ows you " + money + " euros.");
+        }
+        else
+        {
+            sumLabel.setText("You owe " + name + " " + money + " euros.");
+        }
 
         return sumLabel;
     }
