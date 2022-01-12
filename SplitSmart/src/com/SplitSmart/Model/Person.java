@@ -1,42 +1,46 @@
 package com.SplitSmart.Model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Person implements IPerson
 {
-    public Person()
-    {
+    public Person(){}
 
+    public Person(int personId, String name, String phone, String email)
+    {
+        this.personId = personId;
+        this.name = name;
+        this.phone= phone;
+        this.email = email;
     }
 
-    private int PersonId;
-    private String Name;
-    private String Phone;
-    private String Email;
+    private int personId;
+    private String name;
+    private String phone;
+    private String email;
 
-    public int getPersonId() { return PersonId; }
-    public void setPersonId(int personId) { this.PersonId = personId; }
+    public int getPersonId() { return personId; }
+    public void setPersonId(int personId) { this.personId = personId; }
 
-    public String getName() { return Name; }
-    public void setName(String name) { this.Name = name; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getPhone() { return Phone; }
-    public void setPhone(String phone) { this.Phone = phone; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-    public String getEmail() { return  Email; }
-    public void setEmail(String email) { this.Email = email; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     public ArrayList<Connector> Connections = new ArrayList<>();
 
     @Override
     public String toString() {
         return "Information about this person:{" +
-                "Id number: " + PersonId +
-                ", Name: '" + Name + '\'' +
-                ", Phone number: " + Phone + '\'' +
-                ", Email: " + Email + '\'' +
+                "Id number: " + personId +
+                ", Name: '" + name + '\'' +
+                ", Phone number: " + phone + '\'' +
+                ", Email: " + email + '\'' +
                 '}';
     }
 
@@ -45,11 +49,11 @@ public class Person implements IPerson
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return PersonId == person.PersonId && Name.equals(person.Name) && Phone.equals(person.Phone) && Objects.equals(Email, person.Email);
+        return personId == person.personId && name.equals(person.name) && phone.equals(person.phone) && Objects.equals(email, person.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(PersonId, Name, Phone, Email);
+        return Objects.hash(personId, name, phone, email);
     }
 }

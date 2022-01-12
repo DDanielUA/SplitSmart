@@ -29,12 +29,13 @@ public class ConnectorUT extends UTBase {
     @Test
     @Override
     public void t_testToString(){
-        Connector connectorUnderTest = new Connector();
-        connectorUnderTest.setConnId(this.testId);
-        connectorUnderTest.setReceiptId(this.testRecId);
-        connectorUnderTest.setPersonId(this.testPerId);
-        connectorUnderTest.setSubTotal(this.testSubTot);
-        connectorUnderTest.setIsPayed(this.testIsPayed);
+        Connector connectorUnderTest = new Connector(
+                this.testId,
+                this.testRecId,
+                this.testPerId,
+                this.testSubTot,
+                testIsPayed
+        );
 
         String expectedResult = "This connection has{" +
                 "Id number: " + this.testId +
@@ -54,20 +55,21 @@ public class ConnectorUT extends UTBase {
 
     @Test
     public void t_testEqualsWithConnector(){
-        Connector connectorUnderTest1 = new Connector();
-        connectorUnderTest1.setConnId(this.testId);
-        connectorUnderTest1.setReceiptId(this.testRecId);
-        connectorUnderTest1.setPersonId(this.testPerId);
-        connectorUnderTest1.setSubTotal(this.testSubTot);
-        connectorUnderTest1.setIsPayed(this.testIsPayed);
+        Connector connectorUnderTest1 = new Connector(
+                this.testId,
+                this.testRecId,
+                this.testPerId,
+                this.testSubTot,
+                testIsPayed
+        );
 
-
-        Connector connectorUnderTest2 = new Connector();
-        connectorUnderTest2.setConnId(this.testId++);
-        connectorUnderTest2.setReceiptId(this.testRecId--);
-        connectorUnderTest2.setPersonId(this.testPerId++);
-        connectorUnderTest2.setSubTotal(33.1f);
-        connectorUnderTest2.setIsPayed(this.testIsPayed);
+        Connector connectorUnderTest2 = new Connector(
+                this.testId++,
+                this.testRecId--,
+                this.testPerId++,
+                33.1f,
+                testIsPayed
+        );
 
         Assert.assertEquals(
                 "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Connector instance.",
@@ -78,12 +80,13 @@ public class ConnectorUT extends UTBase {
     @Test
     @Override
     public void t_testEqualsWithObject(){
-        Connector connectorUnderTest = new Connector();
-        connectorUnderTest.setConnId(this.testId);
-        connectorUnderTest.setReceiptId(this.testRecId);
-        connectorUnderTest.setPersonId(this.testPerId);
-        connectorUnderTest.setSubTotal(this.testSubTot);
-        connectorUnderTest.setIsPayed(this.testIsPayed);
+        Connector connectorUnderTest = new Connector(
+                this.testId,
+                this.testRecId,
+                this.testPerId,
+                this.testSubTot,
+                testIsPayed
+        );
 
         String mrMischief = "ops";
 
@@ -97,12 +100,13 @@ public class ConnectorUT extends UTBase {
     @Test
     @Override
     public void t_testHashCode(){
-        Connector connectorUnderTest = new Connector();
-        connectorUnderTest.setConnId(this.testId);
-        connectorUnderTest.setReceiptId(this.testRecId);
-        connectorUnderTest.setPersonId(this.testPerId);
-        connectorUnderTest.setSubTotal(this.testSubTot);
-        connectorUnderTest.setIsPayed(this.testIsPayed);
+        Connector connectorUnderTest = new Connector(
+                this.testId,
+                this.testRecId,
+                this.testPerId,
+                this.testSubTot,
+                testIsPayed
+        );
 
         int expectedHash = Objects.hash(this.testId, this.testRecId, this.testPerId, this.testSubTot, this.testIsPayed);
 

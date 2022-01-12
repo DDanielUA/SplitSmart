@@ -1,8 +1,7 @@
 package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
-import com.SplitSmart.Application.Main;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
@@ -12,11 +11,11 @@ import java.util.ArrayList;
 class MainBase {
     protected BaseFrame baseFrame;
 
-    protected ActionAgency<UserAction> observer;
+    protected ActionAgent<UserAction> observer;
     protected Person user;
     protected ArrayList<Receipt> receipts;
 
-    protected MainBase(ActionAgency<UserAction> observer, Person user, BaseFrame frame){
+    protected MainBase(ActionAgent<UserAction> observer, Person user, BaseFrame frame){
         this.baseFrame = frame;
         this.baseFrame.setSloganLabel("Make your friends pay, " + user.getName() + "!");
 
@@ -24,7 +23,7 @@ class MainBase {
         this.user = user;
     }
 
-    protected MainBase(ActionAgency<UserAction> observer, Person user, ArrayList<Receipt> receipts, BaseFrame frame){
+    protected MainBase(ActionAgent<UserAction> observer, Person user, ArrayList<Receipt> receipts, BaseFrame frame){
         this.baseFrame = frame;
         this.baseFrame.setSloganLabel("Make your friends pay, " + user.getName() + "!");
 

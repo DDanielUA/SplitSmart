@@ -2,7 +2,7 @@ package com.SplitSmart.Application.WelcomeScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
 
@@ -19,7 +19,7 @@ public class RegView extends WelcomeBase implements ActionListener
 
     private JButton regButton;
 
-    public RegView(ActionAgency<WelcomeAction> observer, Person user)
+    public RegView(ActionAgent<WelcomeAction> observer, Person user)
     {
         super(observer, user, new BaseFrame());
 

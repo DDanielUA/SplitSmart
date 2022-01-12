@@ -16,7 +16,7 @@ public class SumFactory
         sumLabel.setFont(Config._BaseFont);
         sumLabel.setBounds(20, 200, 500, 30);
 
-        if (money < 0)
+        if (money > 0)
         {
             sumLabel.setText(name + " ows you " + Math.abs(money) + " euros.");
         }

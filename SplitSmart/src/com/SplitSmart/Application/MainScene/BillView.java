@@ -2,7 +2,7 @@ package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
@@ -16,12 +16,12 @@ public class BillView extends MainBase implements ActionListener
 {
     private JButton payButton;
 
-    private final ActionAgency<UserAction> observer;
+    private final ActionAgent<UserAction> observer;
     private final ArrayList<Person> participants;
     private final Receipt selectedReceipt;
     private final boolean isPayed;
 
-    public BillView(ActionAgency<UserAction> observer, Person user, ArrayList<Person> participants, Receipt receipt, boolean isPayed)
+    public BillView(ActionAgent<UserAction> observer, Person user, ArrayList<Person> participants, Receipt receipt, boolean isPayed)
     {
         super(observer, user, new BaseFrame());
         this.observer = observer;

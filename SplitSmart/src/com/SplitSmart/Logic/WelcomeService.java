@@ -4,29 +4,29 @@ import com.SplitSmart.Application.WelcomeScene.FeedbackView;
 import com.SplitSmart.Application.WelcomeScene.LoginView;
 import com.SplitSmart.Application.WelcomeScene.RegView;
 import com.SplitSmart.Application.WelcomeScene.WelcomeView;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
-import com.SplitSmart.Logic.ActionObserver.ActionChannel;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
+import com.SplitSmart.Logic.ActionObserver.ActionListener;
 import com.SplitSmart.Logic.ActionObserver.ServiceAction;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Repository.Data.SplitSmartContext;
 import com.SplitSmart.Repository.PersonRepository;
 
-public class WelcomeService extends ActionChannel<WelcomeAction> {
+public class WelcomeService extends ActionListener<WelcomeAction> {
 
     private final SplitSmartContext ctx = SplitSmartContext.GetInstance();
     private final PersonRepository perRepo = new PersonRepository(ctx);
 
-    private final ActionAgency<ServiceAction> serviceObserver;
-    private final ActionAgency<WelcomeAction> observer;
+    private final ActionAgent<ServiceAction> serviceObserver;
+    private final ActionAgent<WelcomeAction> observer;
 
     //Runtime specific data
     private boolean isErrorLogIn = false;
 
-    public WelcomeService(ActionAgency<ServiceAction> sObserver){
+    public WelcomeService(ActionAgent<ServiceAction> sObserver){
         this.serviceObserver = sObserver;
 
-        this.observer = new ActionAgency<>();
+        this.observer = new ActionAgent<>();
         observer.subscribe(this);
 
     }
@@ -75,8 +75,8 @@ public class WelcomeService extends ActionChannel<WelcomeAction> {
     }
 
     private void registerUser(Person person){
-        person.setPersonId(ctx.nextPersonId);
-        ctx.nextPersonId++;
+        person.setPersonId(ctx.NextPersonId);
+        ctx.NextPersonId++;
 
         this.perRepo.Insert(person);
 

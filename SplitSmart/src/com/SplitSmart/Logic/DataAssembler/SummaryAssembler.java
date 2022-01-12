@@ -1,6 +1,5 @@
 package com.SplitSmart.Logic.DataAssembler;
 
-import com.SplitSmart.Logic.DataAssembler.Assembler;
 import com.SplitSmart.Model.Connector;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
@@ -24,13 +23,13 @@ public class SummaryAssembler extends Assembler {
     }
 
     /*
-    We collect integers of those receipts that has anything to do with
+    We collect ids of those receipts that has anything to do with
     the given user. Afterwards we look up the corresponding receipts
     and return an arraylist of those.
      */
     private ArrayList<Receipt> collectReceipts(){
         ArrayList<Integer> concerningReceiptIds = new ArrayList<>();
-        for (Connector c : this.conRepo.GetAll()){
+        for (Connector c : this.connRepo.GetAll()){
             if (c.getPersonId() == this.user.getPersonId()){
                 concerningReceiptIds.add(c.getReceiptId());
             }
@@ -51,12 +50,12 @@ public class SummaryAssembler extends Assembler {
     /*
     We collect 'id-amount' pairs for each person that is somehow related to
     any of the receipts. Afterwards we look up the found ids and return a
-    'Person-value' collection accordingly.
+    'Person-amount' collection accordingly.
      */
     private ArrayList<Map.Entry<Person, Float>> collectRelations(ArrayList<Receipt> receipts){
         ArrayList<Map.Entry<Integer, Float>> idRelations = new ArrayList<>();
         for (Receipt r : receipts){
-            for (Connector c : conRepo.GetAll()){
+            for (Connector c : connRepo.GetAll()){
                 // If it is a connector that concerns us based on the concerning receipts.
                 if (r.getRecId() == c.getReceiptId()){
                     // If people owe to the user

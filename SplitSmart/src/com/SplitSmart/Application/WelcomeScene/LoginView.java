@@ -2,7 +2,7 @@ package com.SplitSmart.Application.WelcomeScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
 
@@ -20,7 +20,7 @@ public class LoginView extends WelcomeBase implements ActionListener
 
     private final boolean isError;
 
-    public LoginView(ActionAgency<WelcomeAction> observer, Person user, boolean isError)
+    public LoginView(ActionAgent<WelcomeAction> observer, Person user, boolean isError)
     {
         super(observer, user, new BaseFrame());
         this.isError = isError;

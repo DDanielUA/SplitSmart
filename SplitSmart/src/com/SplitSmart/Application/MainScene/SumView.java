@@ -2,7 +2,7 @@ package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 
@@ -16,7 +16,7 @@ public class SumView extends MainBase implements ActionListener
 {
     ArrayList<Map.Entry<Person, Float>> summary;
 
-    public SumView(ActionAgency<UserAction> observer, Person user, ArrayList<Map.Entry<Person, Float>> summary)
+    public SumView(ActionAgent<UserAction> observer, Person user, ArrayList<Map.Entry<Person, Float>> summary)
     {
         super(observer, user, new BaseFrame());
 

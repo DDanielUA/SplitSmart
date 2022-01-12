@@ -16,12 +16,13 @@ public class MainIT {
     }
     @Test
     public void t_testPayDebt(){
-        Connector testConnector = new Connector();
-        testConnector.setConnId(9999);
-        testConnector.setPersonId(9999);
-        testConnector.setReceiptId(9999);
-        testConnector.setSubTotal(9999.9f);
-        testConnector.setIsPayed(false);
+        Connector testConnector = new Connector(
+                9999,
+                9999,
+                9999,
+                9999.9f,
+                false
+        );
         SplitSmartContext.GetInstance().ConnectorSet.add(testConnector);
 
         Person testPerson = new Person();

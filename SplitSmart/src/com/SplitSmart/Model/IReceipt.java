@@ -4,17 +4,24 @@ import java.time.LocalDate;
 
 public interface IReceipt
 {
-    public int getRecId();
+    int getRecId();
+    void setRecId(int recId);
 
-    public String getRecName();
+    String getRecName();
+    void setRecName(String recName);
 
-    public String getDescription();
+    String getDescription();
+    void setDescription(String description);
 
-    public LocalDate getDate();
+    LocalDate getDate();
+    void setDate(LocalDate date);
 
-    public float getTotalCost();
+    float getTotalCost();
+    void setTotalCost(float totalCost);
 
-    public boolean getIsEqualSplit();
+    boolean getIsEqualSplit();
+    void setIsEqualSplit(boolean isEqualSplit);
 
-    public int getPayingPersonId();
+    int getPayingPersonId();
+    void setPayingPersonId(int payingPersonId);
 }

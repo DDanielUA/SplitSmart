@@ -2,7 +2,7 @@ package com.SplitSmart.Application.MainScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
@@ -19,7 +19,7 @@ public class MainView extends MainBase implements ActionListener
     private JButton dieButton;
     private JButton sumButton;
 
-    public MainView(ActionAgency<UserAction> observer, Person user, ArrayList<Receipt> receipts)
+    public MainView(ActionAgent<UserAction> observer, Person user, ArrayList<Receipt> receipts)
     {
         super(observer, user, receipts, new BaseFrame());
 
@@ -36,7 +36,7 @@ public class MainView extends MainBase implements ActionListener
 
         ButtonFactory factory = new ButtonFactory();
 
-        for (Receipt receipt : receipts) {
+        for (Receipt receipt : this.receipts) {
             JButton button = factory.getButton(receipt);
             button.setMaximumSize(new Dimension(200, 30));
             button.addActionListener(this);

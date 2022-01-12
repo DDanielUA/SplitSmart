@@ -3,28 +3,28 @@ package com.SplitSmart.Logic.ActionObserver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActionAgency<T extends Enum> {
+public class ActionAgent<T extends Enum> {
     private T event;
-    private final List<ActionChannel<T>> subscribers = new ArrayList<>();
+    private final List<ActionListener<T>> subscribers = new ArrayList<>();
 
-    public void subscribe(ActionChannel<T> subscriber){
+    public void subscribe(ActionListener<T> subscriber){
         this.subscribers.add(subscriber);
     }
 
-    public void unsubscribe(ActionChannel<T> unsubscriber){
+    public void unsubscribe(ActionListener<T> unsubscriber){
         this.subscribers.remove(unsubscriber);
     }
 
     public void update(T eventHappened){
         this.event = eventHappened;
-        for (ActionChannel<T> subscriber : subscribers){
+        for (ActionListener<T> subscriber : subscribers){
             subscriber.Notify(this.event);
         }
     }
 
     public void update(T eventHappened, Object param){
         this.event = eventHappened;
-        for (ActionChannel<T> subscriber : subscribers){
+        for (ActionListener<T> subscriber : subscribers){
             subscriber.Notify(this.event, param);
         }
     }

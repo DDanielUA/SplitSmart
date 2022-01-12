@@ -1,7 +1,6 @@
 package com.SplitSmart.Logic.DataAssembler;
 
 import com.SplitSmart.Application.MainScene.Model.NewReceiptResult;
-import com.SplitSmart.Logic.DataAssembler.Assembler;
 import com.SplitSmart.Model.Connector;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Repository.Data.SplitSmartContext;
@@ -20,12 +19,12 @@ public class ReceiptAssembler extends Assembler {
     public void CreateReceiptOf(NewReceiptResult result){
         this.result = result;
 
-        formatResult();
-        ArrayList<Map.Entry<Person, Float>> participantsSummary = organizeResult();
-        handleRepositories(participantsSummary);
+        FormatResult();
+        ArrayList<Map.Entry<Person, Float>> participantsSummary = OrganizeResult();
+        HandleRepositories(participantsSummary);
     }
 
-    private void formatResult(){
+    private void FormatResult(){
         List<String> names = Arrays.asList(this.result.getParticipants().split(","));
         for (int i = 0; i < names.size(); i++){
             names.set(i, names.get(i).trim());
@@ -39,13 +38,13 @@ public class ReceiptAssembler extends Assembler {
         this.resultShares = shares;
     }
 
-    private ArrayList<Map.Entry<Person, Float>> organizeResult(){
+    private ArrayList<Map.Entry<Person, Float>> OrganizeResult(){
         ArrayList<Map.Entry<Person, Float>> participantsSummary = new ArrayList<>();
         ArrayList<String> foundNames = new ArrayList<>();
         for (Person p : this.perRepo.GetAll()){
             for (int i = 0; i < this.resultNames.size(); i++){
                 if (p.getName().equals(this.resultNames.get(i))){
-                    summaryFactory(participantsSummary, p, i);
+                    SummaryFactory(participantsSummary, p, i);
                     foundNames.add(this.resultNames.get(i));
                 }
             }
@@ -66,7 +65,7 @@ public class ReceiptAssembler extends Assembler {
                     unknownPerson.setPersonId(-1);
                     unknownPerson.setName("!Unknown!");
 
-                    summaryFactory(participantsSummary, unknownPerson, index);
+                    SummaryFactory(participantsSummary, unknownPerson, index);
                 }
                 index++;
             }
@@ -75,7 +74,7 @@ public class ReceiptAssembler extends Assembler {
         return participantsSummary;
     }
 
-    private void summaryFactory(ArrayList<Map.Entry<Person, Float>> participantsSummary, Person p, int i) {
+    private void SummaryFactory(ArrayList<Map.Entry<Person, Float>> participantsSummary, Person p, int i) {
         Map.Entry<Person, Float> entry;
         if (this.result.getReceipt().getIsEqualSplit()){
             entry = new AbstractMap.SimpleEntry<>(p, (this.result.getReceipt().getTotalCost() / this.resultNames.size()));
@@ -86,20 +85,21 @@ public class ReceiptAssembler extends Assembler {
         participantsSummary.add(entry);
     }
 
-    private void handleRepositories(ArrayList<Map.Entry<Person, Float>> participantsSummary){
-        this.result.getReceipt().setRecId(ctx.nextReceiptId);
-        ctx.nextReceiptId++;
+    private void HandleRepositories(ArrayList<Map.Entry<Person, Float>> participantsSummary){
+        this.result.getReceipt().setRecId(ctx.NextReceiptId);
+        ctx.NextReceiptId++;
 
         for (Map.Entry<Person, Float> entry : participantsSummary){
             //Create connector
-            Connector conn = new Connector();
-            conn.setConnId(ctx.nextConnectorId);
-            conn.setPersonId(entry.getKey().getPersonId());
-            conn.setReceiptId(result.getReceipt().getRecId());
-            conn.setSubTotal(entry.getValue());
-            conn.setIsPayed(entry.getKey().getPersonId() == this.user.getPersonId());
-            this.conRepo.Insert(conn);
-            ctx.nextConnectorId++;
+            Connector conn = new Connector(
+                    ctx.NextConnectorId,
+                    result.getReceipt().getRecId(),
+                    entry.getKey().getPersonId(),
+                    entry.getValue(),
+                    entry.getKey().getPersonId() == this.user.getPersonId()
+            );
+            this.connRepo.Insert(conn);
+            ctx.NextConnectorId++;
 
             this.result.getReceipt().People.add(entry.getKey());
         }

@@ -6,11 +6,11 @@ import com.SplitSmart.Repository.Data.SplitSmartContext;
 import com.SplitSmart.Repository.PersonRepository;
 import com.SplitSmart.Repository.ReceiptRepository;
 
-public class Assembler {
+public abstract class Assembler {
     protected final SplitSmartContext ctx;
     protected final PersonRepository perRepo;
     protected final ReceiptRepository recRepo;
-    protected final ConnectorRepository conRepo;
+    protected final ConnectorRepository connRepo;
 
     protected final Person user;
 
@@ -18,7 +18,7 @@ public class Assembler {
         this.ctx = ctx;
         this.perRepo = new PersonRepository(ctx);
         this.recRepo = new ReceiptRepository(ctx);
-        this.conRepo = new ConnectorRepository(ctx);
+        this.connRepo = new ConnectorRepository(ctx);
 
         this.user = user;
     }

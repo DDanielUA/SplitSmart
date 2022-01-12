@@ -30,11 +30,12 @@ public class PersonUT extends UTBase {
     @Test
     @Override
     public void t_testToString(){
-        Person personUnderTest = new Person();
-        personUnderTest.setPersonId(this.testId);
-        personUnderTest.setName(this.testName);
-        personUnderTest.setEmail(this.testEmail);
-        personUnderTest.setPhone(this.testPhone);
+        Person personUnderTest = new Person(
+                this.testId,
+                this.testName,
+                this.testEmail,
+                this.testEmail
+        );
 
         String expectedResult = "Information about this person:{" +
                 "Id number: " + this.testId +
@@ -53,17 +54,18 @@ public class PersonUT extends UTBase {
 
     @Test
     public void t_testEqualsWithPerson(){
-        Person personUnderTest1 = new Person();
-        personUnderTest1.setPersonId(this.testId);
-        personUnderTest1.setName(this.testName);
-        personUnderTest1.setEmail(this.testEmail);
-        personUnderTest1.setPhone(this.testPhone);
-
-        Person personUnderTest2 = new Person();
-        personUnderTest2.setPersonId(this.testId++);
-        personUnderTest2.setName(this.testName + "Test");
-        personUnderTest2.setEmail(this.testEmail);
-        personUnderTest2.setPhone(this.testPhone);
+        Person personUnderTest1 = new Person(
+                this.testId,
+                this.testName,
+                this.testEmail,
+                this.testEmail
+        );
+        Person personUnderTest2 = new Person(
+                this.testId++,
+                this.testName + "Test",
+                this.testEmail,
+                this.testEmail
+        );
 
         Assert.assertEquals(
                 "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Person instance.",
@@ -74,11 +76,12 @@ public class PersonUT extends UTBase {
     @Test
     @Override
     public void t_testEqualsWithObject(){
-        Person personUnderTest = new Person();
-        personUnderTest.setPersonId(this.testId);
-        personUnderTest.setName(this.testName);
-        personUnderTest.setEmail(this.testEmail);
-        personUnderTest.setPhone(this.testPhone);
+        Person personUnderTest = new Person(
+                this.testId,
+                this.testName,
+                this.testEmail,
+                this.testEmail
+        );
 
         String mrMischief = "ops";
 
@@ -92,11 +95,12 @@ public class PersonUT extends UTBase {
     @Test
     @Override
     public void t_testHashCode(){
-        Person personUnderTest = new Person();
-        personUnderTest.setPersonId(this.testId);
-        personUnderTest.setName(this.testName);
-        personUnderTest.setEmail(this.testEmail);
-        personUnderTest.setPhone(this.testPhone);
+        Person personUnderTest = new Person(
+                this.testId,
+                this.testName,
+                this.testEmail,
+                this.testEmail
+        );
 
         int expectedHash = Objects.hash(this.testId, this.testName, this.testPhone, this.testEmail);
 

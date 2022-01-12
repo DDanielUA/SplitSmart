@@ -2,7 +2,7 @@ package com.SplitSmart.Application.WelcomeScene;
 
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Model.Person;
 
@@ -14,7 +14,7 @@ public class FeedbackView extends WelcomeBase implements ActionListener
 {
     private JButton loginButton;
 
-    public FeedbackView(ActionAgency<WelcomeAction> observer, Person user)
+    public FeedbackView(ActionAgent<WelcomeAction> observer, Person user)
     {
         super(observer, user, new BaseFrame());
 

@@ -25,7 +25,7 @@ public class SSML {
     private SSML(){
     }
 
-    //Public acces point of the Singleton instance.
+    //Public access point of the Singleton instance.
     public static SSML GetInstance(){
         if (instance == null) {
             instance = new SSML();
@@ -59,7 +59,7 @@ public class SSML {
     //This function will read in an @EXTENSION file that should follow
     //the syntax introduced in the 'FormatLine(<<>>)' function.
     //Note for myself: Raw ArrayList is ugly and unsafe, should use a generic approach somehow.
-    public ArrayList<ArrayList> ReadFileToSet(){
+    public ArrayList<ArrayList> ReadFileToSets(){
         try{
             //File handlers
             FileReader fr = new FileReader(FILENAME + EXTENSION);
@@ -152,17 +152,18 @@ public class SSML {
     private Object DeformatLine(String line, String classType){
         switch (classType){
             case "Person" -> {
-                Person person = new Person();
                 String[] allValues = line.split(ENDOFSINGLEVALUESCHAR);
                 //Handling the simple values
                 String[] simpleValues = allValues[0].split(DIVIDERCHAR);
                 simpleValues[simpleValues.length - 1] = simpleValues[simpleValues.length - 1].replaceFirst(ENDOFSINGLEVALUESCHAR, "");
-                person.setPersonId(Integer.parseInt(simpleValues[1]));
-                person.setName(simpleValues[2]);
-                person.setEmail(simpleValues[3]);
-                person.setPhone(simpleValues[4]);
+
                 //Handling collection values is outsourced. (this.ConnectEntities())
-                return person;
+                return new Person(
+                        Integer.parseInt(simpleValues[1]),
+                        simpleValues[2],
+                        simpleValues[3],
+                        simpleValues[4]
+                );
             }
             case "Receipt" -> {
                 Receipt receipt = new Receipt();
@@ -181,15 +182,17 @@ public class SSML {
                 return receipt;
             }
             case "Connector" -> {
-                Connector connector = new Connector();
                 String[] allValues = line.split(DIVIDERCHAR);
                 allValues[allValues.length - 1] = allValues[allValues.length - 1].replaceFirst(ENDOFSINGLEVALUESCHAR, "");
 
-                connector.setConnId(Integer.parseInt(allValues[1]));
-                connector.setReceiptId(Integer.parseInt(allValues[2]));
-                connector.setPersonId(Integer.parseInt(allValues[3]));
-                connector.setSubTotal(Float.parseFloat(allValues[4]));
-                connector.setIsPayed(Boolean.parseBoolean(allValues[5]));
+                Connector connector = new Connector(
+                        Integer.parseInt(allValues[1]),
+                        Integer.parseInt(allValues[2]),
+                        Integer.parseInt(allValues[3]),
+                        Float.parseFloat(allValues[4]),
+                        Boolean.parseBoolean(allValues[5])
+                );
+
                 return connector;
             }
         }

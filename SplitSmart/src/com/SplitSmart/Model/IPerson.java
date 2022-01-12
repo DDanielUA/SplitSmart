@@ -1,15 +1,16 @@
 package com.SplitSmart.Model;
 
-import java.util.ArrayList;
-
 public interface IPerson
 {
-    public int getPersonId();
+    int getPersonId();
+    void setPersonId(int personId);
 
-    public String getName();
+    String getName();
+    void setName(String name);
 
-    public String getPhone();
+    String getPhone();
+    void setPhone(String phone);
 
-    public String getEmail();
-
+    String getEmail();
+    void setEmail(String email);
 }

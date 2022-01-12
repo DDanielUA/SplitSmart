@@ -2,13 +2,18 @@ package com.SplitSmart.Model;
 
 public interface IConnector
 {
-    public int getConnId();
+    int getConnId();
+    void setConnId(int connId);
 
-    public int getReceiptId();
+    int getReceiptId();
+    void setReceiptId(int receiptId);
 
-    public int getPersonId();
+    int getPersonId();
+    void setPersonId(int personId);
 
-    public float getSubTotal();
+    float getSubTotal();
+    void setSubTotal(float subTotal);
 
-    public boolean getIsPayed();
+    boolean getIsPayed();
+    void setIsPayed(boolean isPayed);
 }

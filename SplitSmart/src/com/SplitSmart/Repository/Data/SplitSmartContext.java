@@ -12,9 +12,9 @@ public class SplitSmartContext {
     private static SplitSmartContext instance = null;
 
     private SplitSmartContext(){
-        //SeedContainers();
-        LoadSets();
-        //SaveSets();
+        SeedContainers();
+        //LoadSets();
+        SaveSets();
     }
 
     public static SplitSmartContext GetInstance(){
@@ -24,109 +24,14 @@ public class SplitSmartContext {
         return instance;
     }
 
-    public int nextPersonId;
+    public int NextPersonId;
     public ArrayList<Person> PersonSet = new ArrayList<Person>();
 
-    public int nextReceiptId;
+    public int NextReceiptId;
     public ArrayList<Receipt> ReceiptSet = new ArrayList<Receipt>();
 
-    public int nextConnectorId;
+    public int NextConnectorId;
     public ArrayList<Connector> ConnectorSet = new ArrayList<Connector>();
-
-    private void SeedContainers(){
-        // Person seed
-        Person john = new Person();
-        john.setPersonId(1);
-        john.setName("John");
-        john.setPhone("205485552");
-        john.setEmail("john@gmail.com");
-        PersonSet.add(john);
-        Person bill = new Person();
-        bill.setPersonId(2);
-        bill.setName("Bill");
-        bill.setPhone("305677781");
-        bill.setEmail("bill@gmail.com");
-        PersonSet.add(bill);
-        Person jane = new Person();
-        jane.setPersonId(3);
-        jane.setName("Jane");
-        jane.setPhone("704346269");
-        jane.setEmail("jane@gmail.com");
-        PersonSet.add(jane);
-        this.nextPersonId = 4;
-
-        //Receipt seed
-        Receipt groceries = new Receipt();
-        groceries.setRecId(1);
-        groceries.setRecName("Groceries");
-        groceries.setDescription("Just common stuff, nothing fancy.");
-        groceries.setDate(LocalDate.now().minusDays(14));
-        groceries.setTotalCost(30.0f);
-        groceries.setIsEqualSplit(true);
-        groceries.setPayingPersonId(1);
-        groceries.People.add(john);
-        groceries.People.add(bill);
-        groceries.People.add(jane);
-        ReceiptSet.add(groceries);
-        Receipt restaurant = new Receipt();
-        restaurant.setRecId(2);
-        restaurant.setRecName("Restaurant with da crew");
-        restaurant.setDescription("Having some dinner after a long trip.");
-        restaurant.setDate(LocalDate.now().minusDays(27));
-        restaurant.setTotalCost(30.0f);
-        restaurant.setIsEqualSplit(false);
-        restaurant.setPayingPersonId(3);
-        restaurant.People.add(bill);
-        restaurant.People.add(jane);
-        ReceiptSet.add(restaurant);
-        this.nextReceiptId = 3;
-
-        //---Connector seed
-        //-----Groceries connector
-        Connector conn1 = new Connector();
-        conn1.setConnId(1);
-        conn1.setReceiptId(1);
-        conn1.setPersonId(1);
-        conn1.setSubTotal(30.0f/3);
-        conn1.setIsPayed(true);
-        john.Connections.add(conn1);
-        ConnectorSet.add(conn1);
-        Connector conn2 = new Connector();
-        conn2.setConnId(2);
-        conn2.setReceiptId(1);
-        conn2.setPersonId(2);
-        conn2.setSubTotal(30.0f/3);
-        conn2.setIsPayed(false);
-        bill.Connections.add(conn2);
-        ConnectorSet.add(conn2);
-        Connector conn3 = new Connector();
-        conn3.setConnId(3);
-        conn3.setReceiptId(1);
-        conn3.setPersonId(3);
-        conn3.setSubTotal(30.0f/3);
-        conn3.setIsPayed(false);
-        jane.Connections.add(conn3);
-        ConnectorSet.add(conn3);
-
-        //-----Restaurant connector
-        Connector conn4 = new Connector();
-        conn4.setConnId(4);
-        conn4.setReceiptId(2);
-        conn4.setPersonId(2);
-        conn4.setSubTotal(20.0f);
-        conn4.setIsPayed(false);
-        bill.Connections.add(conn4);
-        ConnectorSet.add(conn4);
-        Connector conn5 = new Connector();
-        conn5.setConnId(5);
-        conn5.setReceiptId(2);
-        conn5.setPersonId(3);
-        conn5.setSubTotal(10.0f);
-        conn5.setIsPayed(true);
-        jane.Connections.add(conn5);
-        ConnectorSet.add(conn5);
-        this.nextConnectorId = 6;
-    }
 
     public void SaveSets(){
         ArrayList<ArrayList> sets = new ArrayList<ArrayList>();
@@ -138,15 +43,96 @@ public class SplitSmartContext {
         ssml.WriteSetsToFile(sets);
     }
 
-    public void LoadSets(){
+    private void LoadSets(){
         SSML ssml = SSML.GetInstance();
-        ArrayList<ArrayList> sets = ssml.ReadFileToSet();
+        ArrayList<ArrayList> sets = ssml.ReadFileToSets();
 
         this.PersonSet = sets.get(0);
-        this.nextPersonId = sets.get(0).size() + 1;
+        this.NextPersonId = sets.get(0).size() + 1;
         this.ReceiptSet = sets.get(1);
-        this.nextReceiptId = sets.get(1).size() + 1;
+        this.NextReceiptId = sets.get(1).size() + 1;
         this.ConnectorSet = sets.get(2);
-        this.nextConnectorId = sets.get(2).size() + 1;
+        this.NextConnectorId = sets.get(2).size() + 1;
+    }
+
+    private void SeedContainers(){
+        // Person seed
+        Person john = new Person(
+                1,
+                "John",
+                "205485552",
+                "john@gmail.com"
+        );
+        PersonSet.add(john);
+
+        Person bill = new Person(
+                2,
+                "Bill",
+                "305677781",
+                "bill@gmail.com"
+        );
+        PersonSet.add(bill);
+
+        Person jane = new Person(
+                3,
+                "Jane",
+                "704346269",
+                "jane@gmail.com"
+        );
+        PersonSet.add(jane);
+        this.NextPersonId = 4;
+
+        //Receipt seed
+        Receipt groceries = new Receipt(
+                1,
+                "Groceries",
+                "Just some common stuff, nothing fancy.",
+                LocalDate.now().minusDays(14),
+                30.0f,
+                true,
+                1
+        );
+        groceries.People.add(john);
+        groceries.People.add(bill);
+        groceries.People.add(jane);
+        ReceiptSet.add(groceries);
+
+        Receipt restaurant = new Receipt(
+                2,
+                "Restaurant with da crew",
+                "Having som dinner after a long trip.",
+                LocalDate.now().minusDays(27),
+                30.0f,
+                false,
+                3
+        );
+        restaurant.People.add(bill);
+        restaurant.People.add(jane);
+        ReceiptSet.add(restaurant);
+        this.NextReceiptId = 3;
+
+        //---Connector seed
+        //-----Groceries connector
+        Connector conn1 = new Connector(1, 1, 1, (30.0f/3), true);
+        john.Connections.add(conn1);
+        ConnectorSet.add(conn1);
+
+        Connector conn2 = new Connector(2, 1, 2, (30.0f/3), false);
+        bill.Connections.add(conn2);
+        ConnectorSet.add(conn2);
+
+        Connector conn3 = new Connector(3, 1, 3, (30.0f/3), false);
+        jane.Connections.add(conn3);
+        ConnectorSet.add(conn3);
+
+        //-----Restaurant connector
+        Connector conn4 = new Connector(4, 2, 2, 20.0f, false);
+        bill.Connections.add(conn4);
+        ConnectorSet.add(conn4);
+
+        Connector conn5 = new Connector(5, 2, 3, 10.0f, true);
+        jane.Connections.add(conn5);
+        ConnectorSet.add(conn5);
+        this.NextConnectorId = 6;
     }
 }

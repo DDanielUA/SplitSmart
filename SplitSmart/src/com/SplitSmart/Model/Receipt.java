@@ -7,11 +7,6 @@ import java.util.Objects;
 
 public class Receipt implements IReceipt
 {
-    public Receipt()
-    {
-
-    }
-
     private int RecId;
     private String RecName;
     private String Description;
@@ -20,17 +15,18 @@ public class Receipt implements IReceipt
     private boolean IsEqualSplit; //true if split is equal
     private int PayingPersonId;
 
-    public Receipt(int recId, String recName, LocalDate date, float totalCost, boolean isEqualSplit, int payingPersonId)
+    public Receipt(){}
+
+    public Receipt(int recId, String recName, String description, LocalDate date, float totalCost, boolean isEqualSplit, int payingPersonId)
     {
         this.RecId = recId;
         this.RecName = recName;
+        this.Description = description;
         this.Date = date;
         this.TotalCost = totalCost;
         this.IsEqualSplit = isEqualSplit;
         this.PayingPersonId = payingPersonId;
     }
-
-
 
     public int getRecId() { return RecId; }
     public void setRecId(int id) { this.RecId = id; }
@@ -80,17 +76,4 @@ public class Receipt implements IReceipt
     public int hashCode() {
         return Objects.hash(RecId, RecName, Description, Date, TotalCost, IsEqualSplit, PayingPersonId);
     }
-
-    /*
-    public Receipt()
-    {
-        this.Connectors = new HashSet<Connector>();
-        this.People = new HashSet<Person>();
-    }
-
-
-    public virtual ArrayList<Connector> Connectors;
-
-    public virtual ArrayList<Person> People { get; }
-    */
 }

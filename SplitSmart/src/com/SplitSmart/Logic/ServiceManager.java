@@ -1,16 +1,16 @@
 package com.SplitSmart.Logic;
 
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
-import com.SplitSmart.Logic.ActionObserver.ActionChannel;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
+import com.SplitSmart.Logic.ActionObserver.ActionListener;
 import com.SplitSmart.Logic.ActionObserver.ServiceAction;
 import com.SplitSmart.Model.Person;
 
-public class ServiceManager extends ActionChannel<ServiceAction> {
+public class ServiceManager extends ActionListener<ServiceAction> {
 
-    private final ActionAgency<ServiceAction> serviceObserver;
+    private final ActionAgent<ServiceAction> serviceObserver;
 
     public ServiceManager(){
-        this.serviceObserver = new ActionAgency<>();
+        this.serviceObserver = new ActionAgent<>();
         serviceObserver.subscribe(this);
         this.serviceObserver.update(ServiceAction.Welcome);
     }

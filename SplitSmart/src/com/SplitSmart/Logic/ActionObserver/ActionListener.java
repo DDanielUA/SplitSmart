@@ -1,6 +1,6 @@
 package com.SplitSmart.Logic.ActionObserver;
 
-public class ActionChannel<T extends Enum> {
+public class ActionListener<T extends Enum> {
     private T event;
 
     public T getEvent(){

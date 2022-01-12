@@ -1,6 +1,5 @@
 package com.SplitSmart.Test.Integration;
 
-import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 import com.SplitSmart.Logic.WelcomeService;
 import com.SplitSmart.Model.Person;
@@ -27,7 +26,7 @@ public class WelcomeIT {
         welService.Notify(WelcomeAction.AttemptRegister, testPerson);
 
         SplitSmartContext ctx = SplitSmartContext.GetInstance();
-        Person actualPerson = ctx.PersonSet.get((ctx.nextPersonId-2));
+        Person actualPerson = ctx.PersonSet.get((ctx.NextPersonId -2));
 
         Assert.assertEquals("Test if the person is correctly registrated.",
                 true,

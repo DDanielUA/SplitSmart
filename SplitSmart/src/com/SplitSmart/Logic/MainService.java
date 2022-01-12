@@ -5,8 +5,8 @@ import com.SplitSmart.Application.MainScene.MainView;
 import com.SplitSmart.Application.MainScene.Model.NewReceiptResult;
 import com.SplitSmart.Application.MainScene.NewView;
 import com.SplitSmart.Application.MainScene.SumView;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
-import com.SplitSmart.Logic.ActionObserver.ActionChannel;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
+import com.SplitSmart.Logic.ActionObserver.ActionListener;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Logic.ActionObserver.ServiceAction;
 import com.SplitSmart.Logic.DataAssembler.ReceiptAssembler;
@@ -21,21 +21,21 @@ import com.SplitSmart.Repository.ReceiptRepository;
 
 import java.util.*;
 
-public class MainService extends ActionChannel<UserAction> {
+public class MainService extends ActionListener<UserAction> {
     private final SplitSmartContext ctx = SplitSmartContext.GetInstance();
     private final PersonRepository perRepo = new PersonRepository(ctx);
     private final ReceiptRepository recRepo = new ReceiptRepository(ctx);
-    private final ConnectorRepository conRepo = new ConnectorRepository(ctx);
+    private final ConnectorRepository connRepo = new ConnectorRepository(ctx);
 
-    private final ActionAgency<ServiceAction> serviceObserver;
-    private final ActionAgency<UserAction> observer;
+    private final ActionAgent<ServiceAction> serviceObserver;
+    private final ActionAgent<UserAction> observer;
 
     //Runtime specific data
     private final Person user;
 
-    public MainService(ActionAgency<ServiceAction> sObserver, Person user){
+    public MainService(ActionAgent<ServiceAction> sObserver, Person user){
         this.serviceObserver = sObserver;
-        this.observer = new ActionAgency<>();
+        this.observer = new ActionAgent<>();
         observer.subscribe(this);
 
         this.user = user;
@@ -95,7 +95,7 @@ public class MainService extends ActionChannel<UserAction> {
     private ArrayList<Receipt> collectReceipts(){
         ArrayList<Receipt> allReceipts = new ArrayList<>();
 
-        for (Connector c : this.conRepo.GetAll()){
+        for (Connector c : this.connRepo.GetAll()){
             if (c.getPersonId() == this.user.getPersonId()){
                 for (Receipt r : this.recRepo.GetAll()){
                     if (r.getRecId() == c.getReceiptId()){
@@ -116,7 +116,7 @@ public class MainService extends ActionChannel<UserAction> {
     }
 
     private boolean checkIfPayed(Receipt receipt) {
-        for (Connector c : this.conRepo.GetAll()){
+        for (Connector c : this.connRepo.GetAll()){
             if (c.getReceiptId() == receipt.getRecId() &&
                 c.getPersonId() == this.user.getPersonId()){
                 return c.getIsPayed();
@@ -129,7 +129,7 @@ public class MainService extends ActionChannel<UserAction> {
 
         ArrayList<Person> participants = new ArrayList<>();
         int expectedParticipants = 0;
-        for (Connector c : this.conRepo.GetAll()){
+        for (Connector c : this.connRepo.GetAll()){
             if (c.getReceiptId() == receipt.getRecId()){
                 expectedParticipants++;
                 for (Person p : this.perRepo.GetAll()){
@@ -158,7 +158,7 @@ public class MainService extends ActionChannel<UserAction> {
     }
 
     private void payDebt(Receipt receipt) {
-        for (Connector c : this.conRepo.GetAll()){
+        for (Connector c : this.connRepo.GetAll()){
             if (c.getReceiptId() == receipt.getRecId() && c.getPersonId() == this.user.getPersonId()){
                 c.setIsPayed(true);
                 break;

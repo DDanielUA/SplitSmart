@@ -1,7 +1,7 @@
 package com.SplitSmart.Application.WelcomeScene;
 
 import com.SplitSmart.Application.Config;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.WelcomeAction;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class WelcomeView extends WelcomeBase implements ActionListener
     private JButton loginButton;
 
 
-    public WelcomeView(ActionAgency<WelcomeAction> observer)
+    public WelcomeView(ActionAgent<WelcomeAction> observer)
     {
         super(observer, null, null);
 

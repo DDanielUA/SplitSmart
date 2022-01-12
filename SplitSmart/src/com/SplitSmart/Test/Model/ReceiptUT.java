@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ReceiptUT extends UTBase{
@@ -36,14 +37,15 @@ public class ReceiptUT extends UTBase{
     @Test
     @Override
     public void t_testToString(){
-        Receipt receiptUnderTest = new Receipt();
-        receiptUnderTest.setRecId(this.testId);
-        receiptUnderTest.setRecName(this.testRecName);
-        receiptUnderTest.setDescription(this.testRecDesc);
-        receiptUnderTest.setDate(this.testDate);
-        receiptUnderTest.setTotalCost(this.testTotCost);
-        receiptUnderTest.setIsEqualSplit(this.testIsEqualSplit);
-        receiptUnderTest.setPayingPersonId(this.testPayPerId);
+        Receipt receiptUnderTest = new Receipt(
+                this.testId,
+                this.testRecName,
+                this.testRecDesc,
+                this.testDate,
+                this.testTotCost,
+                this.testIsEqualSplit,
+                this.testPayPerId
+        );
 
         String expectedResult = "Here are the details of your receipt{" +
                 "Id: " + this.testId +
@@ -65,23 +67,25 @@ public class ReceiptUT extends UTBase{
 
     @Test
     public void t_testEqualsWithReceipt(){
-        Receipt receiptUnderTest1 = new Receipt();
-        receiptUnderTest1.setRecId(this.testId);
-        receiptUnderTest1.setRecName(this.testRecName);
-        receiptUnderTest1.setDescription(this.testRecDesc);
-        receiptUnderTest1.setDate(this.testDate);
-        receiptUnderTest1.setTotalCost(this.testTotCost);
-        receiptUnderTest1.setIsEqualSplit(this.testIsEqualSplit);
-        receiptUnderTest1.setPayingPersonId(this.testPayPerId);
+        Receipt receiptUnderTest1 = new Receipt(
+                this.testId,
+                this.testRecName,
+                this.testRecDesc,
+                this.testDate,
+                this.testTotCost,
+                this.testIsEqualSplit,
+                this.testPayPerId
+        );
 
-        Receipt receiptUnderTest2 = new Receipt();
-        receiptUnderTest2.setRecId(this.testId++);
-        receiptUnderTest2.setRecName("Domino's");
-        receiptUnderTest2.setDescription(this.testRecDesc);
-        receiptUnderTest2.setDate(this.testDate);
-        receiptUnderTest2.setTotalCost(this.testTotCost * 2);
-        receiptUnderTest2.setIsEqualSplit(this.testIsEqualSplit);
-        receiptUnderTest2.setPayingPersonId(this.testPayPerId);
+        Receipt receiptUnderTest2 = new Receipt(
+                this.testId++,
+                "Domino's",
+                this.testRecDesc,
+                this.testDate,
+                this.testTotCost * 2,
+                this.testIsEqualSplit,
+                this.testPayPerId
+        );
 
         Assert.assertEquals(
                 "Testing whether the .equals(Object o) evaluates the comparison the right way if it receives a Receipt instance.",
@@ -92,14 +96,15 @@ public class ReceiptUT extends UTBase{
     @Test
     @Override
     public void t_testEqualsWithObject(){
-        Receipt receiptUnderTest = new Receipt();
-        receiptUnderTest.setRecId(this.testId);
-        receiptUnderTest.setRecName(this.testRecName);
-        receiptUnderTest.setDescription(this.testRecDesc);
-        receiptUnderTest.setDate(this.testDate);
-        receiptUnderTest.setTotalCost(this.testTotCost);
-        receiptUnderTest.setIsEqualSplit(this.testIsEqualSplit);
-        receiptUnderTest.setPayingPersonId(this.testPayPerId);
+        Receipt receiptUnderTest = new Receipt(
+                this.testId,
+                this.testRecName,
+                this.testRecDesc,
+                this.testDate,
+                this.testTotCost,
+                this.testIsEqualSplit,
+                this.testPayPerId
+        );
 
         String mrMischief = "ops";
 
@@ -113,14 +118,15 @@ public class ReceiptUT extends UTBase{
     @Test
     @Override
     public void t_testHashCode(){
-        Receipt receiptUnderTest = new Receipt();
-        receiptUnderTest.setRecId(this.testId);
-        receiptUnderTest.setRecName(this.testRecName);
-        receiptUnderTest.setDescription(this.testRecDesc);
-        receiptUnderTest.setDate(this.testDate);
-        receiptUnderTest.setTotalCost(this.testTotCost);
-        receiptUnderTest.setIsEqualSplit(this.testIsEqualSplit);
-        receiptUnderTest.setPayingPersonId(this.testPayPerId);
+        Receipt receiptUnderTest = new Receipt(
+                this.testId,
+                this.testRecName,
+                this.testRecDesc,
+                this.testDate,
+                this.testTotCost,
+                this.testIsEqualSplit,
+                this.testPayPerId
+        );
 
         int expectedHash = Objects.hash(this.testId, this.testRecName, this.testRecDesc, this.testDate, this.testTotCost, this.testIsEqualSplit, this.testPayPerId);
 

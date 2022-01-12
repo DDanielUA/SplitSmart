@@ -3,7 +3,7 @@ package com.SplitSmart.Application.MainScene;
 import com.SplitSmart.Application.BaseFrame;
 import com.SplitSmart.Application.Config;
 import com.SplitSmart.Application.MainScene.Model.NewReceiptResult;
-import com.SplitSmart.Logic.ActionObserver.ActionAgency;
+import com.SplitSmart.Logic.ActionObserver.ActionAgent;
 import com.SplitSmart.Logic.ActionObserver.UserAction;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
@@ -28,7 +28,7 @@ public class NewView extends MainBase implements ActionListener
 
     private JButton addButton;
 
-    public NewView(ActionAgency<UserAction> observer, Person user)
+    public NewView(ActionAgent<UserAction> observer, Person user)
     {
         super(observer, user, null, new BaseFrame());
 
@@ -173,13 +173,15 @@ public class NewView extends MainBase implements ActionListener
     {
         if(e.getSource() == addButton)
         {
-            Receipt newReceipt = new Receipt();
-            newReceipt.setRecName(billNameField.getText());
-            newReceipt.setDescription(descField.getText());
-            newReceipt.setPayingPersonId(this.user.getPersonId());
-            newReceipt.setDate(LocalDate.now());
-            newReceipt.setTotalCost(Float.parseFloat(totalField.getText()));
-            newReceipt.setIsEqualSplit(equalCheckBox.isSelected());
+            Receipt newReceipt = new Receipt(
+                    -1,
+                    billNameField.getText(),
+                    descField.getText(),
+                    LocalDate.now(),
+                    Float.parseFloat(totalField.getText()),
+                    equalCheckBox.isSelected(),
+                    this.user.getPersonId()
+            );
 
             NewReceiptResult result = new NewReceiptResult(newReceipt, participantsField.getText(), howMuchField.getText());
 
