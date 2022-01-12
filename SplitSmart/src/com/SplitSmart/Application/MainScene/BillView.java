@@ -97,9 +97,15 @@ public class BillView extends MainBase implements ActionListener
 
         //label for participating users
         StringBuilder names = new StringBuilder();
-        for (Person p : participants){
-            names.append(p.getName()).append(", ");
+        for (int i = 0; i < participants.size(); i++){
+            if (i < participants.size() -1 ){
+                names.append(participants.get(i).getName()).append(", ");
+            }
+            else{
+                names.append(participants.get(i).getName());
+            }
         }
+        int j = 6;
         JLabel participantsLabel = new JLabel("Names of the people who participated: " + names);
         participantsLabel.setFont(Config._BaseFont);
         participantsLabel.setBounds(20, 400, 500, 30);
