@@ -5,6 +5,7 @@ import com.SplitSmart.Model.Connector;
 import com.SplitSmart.Model.Person;
 import com.SplitSmart.Repository.Data.SplitSmartContext;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ReceiptAssembler extends Assembler {
@@ -25,10 +26,16 @@ public class ReceiptAssembler extends Assembler {
     }
 
     private void FormatResult(){
-        List<String> names = Arrays.asList(this.result.getParticipants().split(","));
+        ArrayList<String> names = new ArrayList<>(Arrays.asList(this.result.getParticipants().split(",")));
+        boolean containsUser = false;
         for (int i = 0; i < names.size(); i++){
             names.set(i, names.get(i).trim());
+            if (names.get(i) == this.user.getName()){
+                containsUser = true;
+            }
         }
+        if (!containsUser) names.add(this.user.getName());
+
         this.resultNames = names;
 
         List<String> shares = Arrays.asList(this.result.getParticipantsShares().split(","));
