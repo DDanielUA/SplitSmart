@@ -30,7 +30,7 @@ public class ReceiptAssembler extends Assembler {
         boolean containsUser = false;
         for (int i = 0; i < names.size(); i++){
             names.set(i, names.get(i).trim());
-            if (names.get(i) == this.user.getName()){
+            if (Objects.equals(names.get(i), this.user.getName())){
                 containsUser = true;
             }
         }
