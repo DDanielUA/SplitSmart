@@ -105,7 +105,6 @@ public class BillView extends MainBase implements ActionListener
                 names.append(participants.get(i).getName());
             }
         }
-        int j = 6;
         JTextArea participantsLabel = new JTextArea("Names of the people who participated: " + names);
         participantsLabel.setFont(Config._BaseFont);
         participantsLabel.setBounds(20, 400, 450, 30);
