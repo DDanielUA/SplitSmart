@@ -161,6 +161,9 @@ public class MainService extends ActionListener<UserAction> {
         for (Connector c : this.connRepo.GetAll()){
             if (c.getReceiptId() == receipt.getRecId() && c.getPersonId() == this.user.getPersonId()){
                 c.setIsPayed(true);
+                Connector newConnector = c;
+                this.connRepo.Remove(c);
+                this.connRepo.Insert(newConnector);
                 break;
             }
         }

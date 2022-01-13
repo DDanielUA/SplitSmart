@@ -12,9 +12,7 @@ public class SplitSmartContext {
     private static SplitSmartContext instance = null;
 
     private SplitSmartContext(){
-        SeedContainers();
-        //LoadSets();
-        SaveSets();
+        LoadSets();
     }
 
     public static SplitSmartContext GetInstance(){
@@ -47,12 +45,17 @@ public class SplitSmartContext {
         SSML ssml = SSML.GetInstance();
         ArrayList<ArrayList> sets = ssml.ReadFileToSets();
 
-        this.PersonSet = sets.get(0);
-        this.NextPersonId = sets.get(0).size() + 1;
-        this.ReceiptSet = sets.get(1);
-        this.NextReceiptId = sets.get(1).size() + 1;
-        this.ConnectorSet = sets.get(2);
-        this.NextConnectorId = sets.get(2).size() + 1;
+        if(sets == null || sets.isEmpty()){
+            SeedContainers();
+            SaveSets();
+        }else{
+            this.PersonSet = sets.get(0);
+            this.NextPersonId = sets.get(0).size() + 1;
+            this.ReceiptSet = sets.get(1);
+            this.NextReceiptId = sets.get(1).size() + 1;
+            this.ConnectorSet = sets.get(2);
+            this.NextConnectorId = sets.get(2).size() + 1;
+        }
     }
 
     private void SeedContainers(){

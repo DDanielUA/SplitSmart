@@ -5,6 +5,7 @@ import com.SplitSmart.Model.Person;
 import com.SplitSmart.Model.Receipt;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
@@ -62,6 +63,11 @@ public class SSML {
     public ArrayList<ArrayList> ReadFileToSets(){
         try{
             //File handlers
+            try {
+                FileReader fr = new FileReader(FILENAME + EXTENSION);
+            }catch (FileNotFoundException e){
+                return null;
+            }
             FileReader fr = new FileReader(FILENAME + EXTENSION);
             BufferedReader br = new BufferedReader(fr);
 
