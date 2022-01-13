@@ -4,19 +4,11 @@ Person:
 /3/Jane/jane@gmail.com/704346269:3/5/;
 /4/Ella/ella@gmail.com/+36201234567:;
 Receipt:
-/1/Groceries/Just some common stuff, nothing fancy./2021-12-28/30.0/true/1:1/2/3/;
-/2/Restaurant with da crew/Having som dinner after a long trip./2021-12-15/30.0/false/3:2/3/;
-/3/LIDL/Groceries from LIDL in Antwerp/2022-01-11/45.69/false/2:2/3/-1/;
-/4/Chocolate Factory/nyam/2022-01-11/33.0/true/2:2/3/4/;
+/1/Groceries/Just some common stuff, nothing fancy./2021-12-30/30.0/true/1:1/2/3/;
+/2/Restaurant with da crew/Having som dinner after a long trip./2021-12-17/30.0/false/3:2/3/;
 Connector:
 /1/1/1/10.0/true:
 /2/1/2/10.0/false:
 /3/1/3/10.0/false:
 /4/2/2/20.0/false:
 /5/2/3/10.0/true:
-/6/3/2/10.0/true:
-/7/3/3/25.69/false:
-/8/3/-1/10.0/false:
-/9/4/2/11.0/true:
-/10/4/3/11.0/false:
-/11/4/4/11.0/false:

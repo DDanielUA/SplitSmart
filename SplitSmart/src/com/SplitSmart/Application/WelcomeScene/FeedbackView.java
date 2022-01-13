@@ -43,7 +43,7 @@ public class FeedbackView extends WelcomeBase implements ActionListener
     {
         //login button creation and settings
         loginButton = new JButton();
-        loginButton.setBounds(150, 400, 150, 50);
+        loginButton.setBounds(215, 320, 70, 30);
         loginButton.addActionListener(this);
         loginButton.setText("LogIn");
         loginButton.setFocusable(false);
