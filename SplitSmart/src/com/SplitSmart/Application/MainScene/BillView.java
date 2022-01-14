@@ -42,14 +42,14 @@ public class BillView extends MainBase implements ActionListener
             isPayedLabel.setIcon(Config._CheckMark);
             isPayedLabel.setHorizontalTextPosition(JLabel.LEFT);
             isPayedLabel.setFont(Config._BaseFont);
-            isPayedLabel.setBounds(150, 450, 200, 30);
+            isPayedLabel.setBounds(150, 500, 200, 30);
             baseFrame.add(isPayedLabel);
         }
         else
         {
             //add button creation and settings
             this.payButton = new JButton();
-            payButton.setBounds(200, 500, 70, 30);
+            payButton.setBounds(200, 550, 70, 30);
             payButton.addActionListener(this);
             payButton.setText("Pay");
             payButton.setFocusable(false);
@@ -112,6 +112,23 @@ public class BillView extends MainBase implements ActionListener
         participantsLabel.setEditable(false);
         participantsLabel.setBackground(Config._BackgroundColor);
         baseFrame.add(participantsLabel);
+
+        String payingPerson = "Me";
+        for (int i = 0; i < participants.size(); i++)
+        {
+            if (participants.get(i).getPersonId() == this.selectedReceipt.getPayingPersonId())
+            {
+                payingPerson = participants.get(i).getName();
+                break;
+            }
+        }
+        JTextArea payingPersonLabel = new JTextArea("Who payed for this receipt: " + payingPerson);
+        payingPersonLabel.setFont(Config._BaseFont);
+        payingPersonLabel.setBounds(20, 450, 450, 30);
+        payingPersonLabel.setLineWrap(true);
+        payingPersonLabel.setEditable(false);
+        payingPersonLabel.setBackground(Config._BackgroundColor);
+        baseFrame.add(payingPersonLabel);
     }
 
     @Override
