@@ -34,6 +34,13 @@ public class Person implements IPerson
 
     public ArrayList<Connector> Connections = new ArrayList<>();
 
+    public void markAsUnknown(){
+        this.personId = -1;
+        this.name = "!Unknown!";
+        this.email = "";
+        this.phone = "";
+    }
+
     @Override
     public String toString() {
         return "Information about this person:{" +

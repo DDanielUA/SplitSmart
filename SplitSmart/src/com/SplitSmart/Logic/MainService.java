@@ -147,8 +147,7 @@ public class MainService extends ActionListener<UserAction> {
                 int shortage = expectedParticipants - (participants.size() + 1);
                 do {
                     Person unknownPerson = new Person();
-                    unknownPerson.setPersonId(-1);
-                    unknownPerson.setName("!Unknown!");
+                    unknownPerson.markAsUnknown();
                     participants.add(unknownPerson);
                     shortage--;
                 } while (shortage != 0);

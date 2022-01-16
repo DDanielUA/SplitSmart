@@ -209,7 +209,8 @@ public class SSML {
     private ArrayList<ArrayList> ConnectEntities(ArrayList<ArrayList> sets){
         for (Connector c : (ArrayList<Connector>)sets.get(2)){
             int lookForPerson = c.getPersonId();
-            Person foundPerson = null;
+            Person foundPerson = new Person();
+            foundPerson.markAsUnknown();;
             for (Person p : (ArrayList<Person>)sets.get(0)) {
                 if (p.getPersonId() == lookForPerson){
                     p.Connections.add(c);

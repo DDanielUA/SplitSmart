@@ -69,8 +69,7 @@ public class ReceiptAssembler extends Assembler {
                 }
                 if (!alreadyFound){
                     Person unknownPerson = new Person();
-                    unknownPerson.setPersonId(-1);
-                    unknownPerson.setName("!Unknown!");
+                    unknownPerson.markAsUnknown();
 
                     SummaryFactory(participantsSummary, unknownPerson, index);
                 }
